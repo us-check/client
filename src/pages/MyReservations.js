@@ -186,7 +186,15 @@ function MyReservations() {
                       <TravelName>{item.name}</TravelName>
                       <TravelDesc>{item.description}</TravelDesc>
                       <TravelPrice>
-                        {item.price === 0
+                        {/* 인원수 반영 가격 표시 */}
+                        {["restaurant", "accommodation"].includes(type) &&
+                        item.count > 1
+                          ? `${(
+                              item.price * item.count
+                            ).toLocaleString()}원 (${item.price.toLocaleString()}원 × ${
+                              item.count
+                            }명)`
+                          : item.price === 0
                           ? "무료"
                           : `${item.price.toLocaleString()}원`}
                       </TravelPrice>
