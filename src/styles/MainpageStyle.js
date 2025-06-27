@@ -1,21 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Hakgyoansim+Dunggeunmiso+OTF:wght@400&display=swap');
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    line-height: normal;
-    font-family: 'Hakgyoansim Dunggeunmiso OTF', sans-serif;
-  }
-`;
-
 export const FrameWrapper = styled.div`
   width: 100%;
   position: relative;
