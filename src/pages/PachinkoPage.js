@@ -63,36 +63,44 @@ const sampleData = {
       name: "의성 조문국사적지",
       price: 3000,
       description: "고대 조문국의 역사를 만날 수 있는 곳",
+      overview: "의성 조문국사적지는 고대 조문국의 역사와 문화를 만날 수 있는 대표적인 유적지입니다. 다양한 유물과 전시관, 아름다운 자연경관이 어우러져 있습니다.",
       image: "/placeholder.svg",
       type: "attraction",
       emoji: "🏛️",
+      position: { lat: 36.352, lng: 128.697 },
     },
     {
       id: "a2",
       name: "의성 빙계계곡",
       price: 0,
       description: "여름에도 시원한 천연 에어컨",
+      overview: "빙계계곡은 여름에도 얼음이 녹지 않는 신비로운 계곡으로, 맑은 물과 시원한 바람이 특징입니다.",
       image: "/placeholder.svg",
       type: "attraction",
       emoji: "🏔️",
+      position: { lat: 36.420, lng: 128.680 },
     },
     {
       id: "a3",
       name: "의성 산수유마을",
       price: 2000,
       description: "봄에는 노란 꽃, 가을에는 빨간 열매",
+      overview: "산수유마을은 봄에는 노란 산수유꽃, 가을에는 붉은 열매로 유명한 아름다운 마을입니다.",
       image: "/placeholder.svg",
       type: "attraction",
       emoji: "🌸",
+      position: { lat: 36.370, lng: 128.710 },
     },
     {
       id: "a4",
       name: "의성 고운사",
       price: 1500,
       description: "천년고찰의 아름다운 풍경",
+      overview: "고운사는 천년의 역사를 지닌 고찰로, 아름다운 자연과 고즈넉한 분위기가 인상적입니다.",
       image: "/placeholder.svg",
       type: "attraction",
       emoji: "⛩️",
+      position: { lat: 36.400, lng: 128.650 },
     },
   ],
   restaurant: [
@@ -101,36 +109,44 @@ const sampleData = {
       name: "의성마늘한우",
       price: 35000,
       description: "의성 특산 마늘과 한우의 만남",
+      overview: "의성마늘한우는 신선한 한우와 의성 특산 마늘을 함께 즐길 수 있는 고급 레스토랑입니다.",
       image: "/placeholder.svg",
       type: "restaurant",
       emoji: "🥩",
+      position: { lat: 36.355, lng: 128.700 },
     },
     {
       id: "r2",
       name: "전통 손두부집",
       price: 12000,
       description: "직접 만든 순두부찌개",
+      overview: "전통 손두부집은 직접 만든 신선한 두부로 다양한 한식을 제공하는 맛집입니다.",
       image: "/placeholder.svg",
       type: "restaurant",
       emoji: "🍲",
+      position: { lat: 36.360, lng: 128.705 },
     },
     {
       id: "r3",
       name: "의성 마늘치킨",
       price: 18000,
       description: "마늘의 고장 의성만의 특별한 치킨",
+      overview: "의성 마늘치킨은 마늘을 듬뿍 사용한 의성만의 특별한 치킨을 맛볼 수 있습니다.",
       image: "/placeholder.svg",
       type: "restaurant",
       emoji: "🍗",
+      position: { lat: 36.365, lng: 128.710 },
     },
     {
       id: "r4",
       name: "산채비빔밥집",
       price: 15000,
       description: "신선한 산나물로 만든 건강한 한 끼",
+      overview: "산채비빔밥집은 신선한 산나물과 다양한 재료로 건강한 한 끼를 제공합니다.",
       image: "/placeholder.svg",
       type: "restaurant",
       emoji: "🍚",
+      position: { lat: 36.370, lng: 128.715 },
     },
   ],
   accommodation: [
@@ -139,27 +155,33 @@ const sampleData = {
       name: "의성 힐링펜션",
       price: 80000,
       description: "자연 속에서 힐링하는 펜션",
+      overview: "의성 힐링펜션은 자연 속에서 편안한 휴식을 취할 수 있는 펜션입니다.",
       image: "/placeholder.svg",
       type: "accommodation",
       emoji: "🏡",
+      position: { lat: 36.375, lng: 128.720 },
     },
     {
       id: "h2",
       name: "전통한옥스테이",
       price: 120000,
       description: "한국의 전통미를 느낄 수 있는 한옥",
+      overview: "전통한옥스테이는 한국의 전통미와 현대적 편의시설을 모두 갖춘 숙박시설입니다.",
       image: "/placeholder.svg",
       type: "accommodation",
       emoji: "🏯",
+      position: { lat: 36.380, lng: 128.725 },
     },
     {
       id: "h3",
       name: "의성 글램핑장",
       price: 95000,
       description: "자연과 함께하는 럭셔리 캠핑",
+      overview: "의성 글램핑장은 자연과 함께하는 럭셔리한 캠핑 경험을 제공합니다.",
       image: "/placeholder.svg",
       type: "accommodation",
       emoji: "⛺",
+      position: { lat: 36.385, lng: 128.730 },
     },
   ],
 }
@@ -171,6 +193,7 @@ function PachinkoPage() {
   const [isAutoSpinning, setIsAutoSpinning] = useState(false)
   const [showResults, setShowResults] = useState(false)
   const [openModal, setOpenModal] = useState(null)
+  const [detailModal, setDetailModal] = useState({ open: false, item: null }) // 상세 정보 모달 상태
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -438,7 +461,7 @@ function PachinkoPage() {
                             })}
                           </SpinningContent>
                         ) : showResults && item ? (
-                          <ResultContent>
+                          <ResultContent onClick={() => setDetailModal({ open: true, item })} style={{ cursor: 'pointer' }}>
                             <ResultEmoji>{item.emoji}</ResultEmoji>
                             <ResultTitle>{item.name}</ResultTitle>
                             <ResultDescription>{item.description}</ResultDescription>
@@ -546,6 +569,37 @@ function PachinkoPage() {
                   </OptionCard>
                 ))}
               </ModalGrid>
+            </ModalContent>
+          </Modal>
+        </ModalOverlay>
+      )}
+
+      {/* 상세 정보 모달 */}
+      {detailModal.open && detailModal.item && (
+        <ModalOverlay onClick={() => setDetailModal({ open: false, item: null })}>
+          <Modal onClick={e => e.stopPropagation()}>
+            <ModalContent>
+              <ModalHeader>
+                <ModalTitle>
+                  {detailModal.item.emoji} {detailModal.item.name}
+                </ModalTitle>
+              </ModalHeader>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+                <img src={detailModal.item.image || '/placeholder.svg'} alt={detailModal.item.name} style={{ width: 240, borderRadius: 12 }} />
+                <div style={{ fontWeight: 500, fontSize: 18, margin: '8px 0' }}>{detailModal.item.overview}</div>
+                {/* 지도 표시 */}
+                <div style={{ width: 320, height: 200, margin: '12px 0' }}>
+                  <iframe
+                    title="지도"
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    style={{ border: 0, borderRadius: 8 }}
+                    src={`https://maps.google.com/maps?q=${detailModal.item.position.lat},${detailModal.item.position.lng}&z=15&output=embed`}
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
             </ModalContent>
           </Modal>
         </ModalOverlay>
