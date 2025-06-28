@@ -71,7 +71,7 @@ function PaymentPage() {
       localStorage.setItem("travelQR", qrCode);
 
       setTimeout(() => {
-        navigate("/mypage");
+        navigate("/myreservation");
       }, 3000);
     }, 3000);
   };

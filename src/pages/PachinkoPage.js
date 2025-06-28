@@ -415,18 +415,18 @@ function PachinkoPage() {
     <PageWrapper>
       <Header>
         <LogoSection>
-          <LogoIcon>🏠</LogoIcon>
-          <LogoText>의성제크</LogoText>
+          <LogoIcon></LogoIcon>
+          <LogoText></LogoText>
         </LogoSection>
-        <MenuButton>☰</MenuButton>
+        <MenuButton></MenuButton>
       </Header>
 
       <Container>
-        <Title>맞춤 여행 코스</Title>
+        <Title>AI 추천 코스</Title>
         {isAutoSpinning ? (
           <Subtitle isAnimated>✨ AI가 맞춤 여행 코스를 생성하고 있습니다... ✨</Subtitle>
         ) : (
-          <Subtitle>완벽한 여행 코스를 만들어보세요!</Subtitle>
+          <Subtitle>룰렛을 돌려 완벽한 여행 코스를 만들어보세요!</Subtitle>
         )}
 
         <SlotMachineCard>
@@ -477,7 +477,7 @@ function PachinkoPage() {
 
                       <ReelControls>
                         <SpinButton onClick={() => spinMachine(type)} disabled={spinning || isAutoSpinning}>
-                          🔄 {spinning ? "돌리는중" : "다시"}
+                           {spinning ? "돌아가는 중" : "다시"}
                         </SpinButton>
                         <MoreButton onClick={() => setOpenModal(type)} disabled={isAutoSpinning}>
                           ⋯
@@ -492,7 +492,7 @@ function PachinkoPage() {
                 onClick={spinAllMachines}
                 disabled={Object.values(isSpinning).some(Boolean) || isAutoSpinning}
               >
-                ⚡ {Object.values(isSpinning).some(Boolean) || isAutoSpinning ? "스핀 중..." : "🎰 전체 스핀 🎰"}
+              {Object.values(isSpinning).some(Boolean) || isAutoSpinning ? "돌아가는 중..." : "전부 다시 돌리기"}
               </MainSpinButton>
             </SlotMachineScreen>
 
@@ -520,7 +520,7 @@ function PachinkoPage() {
                   }}
                   disabled={isAutoSpinning}
                 >
-                  🛒 이 코스로 결정하기! ✨
+                  이 코스로 결정하기!
                 </DecisionButton>
               </PriceSection>
             )}
@@ -528,7 +528,7 @@ function PachinkoPage() {
         </SlotMachineCard>
 
         <BottomInfo>
-          <p>🍀 완벽한 여행 코스가 나올 때까지 스핀해보세요! 🍀</p>
+          <p></p>
         </BottomInfo>
       </Container>
 

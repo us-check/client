@@ -32,7 +32,13 @@ const pulse = keyframes`
 
 export const PageWrapper = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, #f0fdff 0%, #e6ffff 25%, #ccfeff 75%, #b3fdff 100%);
+    background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f3ffff 27%,
+    #e9feff 71%,
+    #c6fdff 100%
+  );
 `;
 
 export const Header = styled.header`
@@ -51,7 +57,6 @@ export const LogoSection = styled.div`
 export const LogoIcon = styled.div`
   width: 32px;
   height: 32px;
-  background: #06b6d4;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -102,9 +107,8 @@ export const SlotMachineCard = styled.div`
   margin: 0 auto 32px;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(4px);
-  border: 2px solid #a5f3fc;
   border-radius: 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 `;
 
 export const SlotMachineContent = styled.div`
@@ -150,7 +154,7 @@ export const ReelScreen = styled.div`
   border-radius: 12px;
   height: 192px;
   overflow: hidden;
-  border: 2px solid #a5f3fc;
+  border: 2px solid #E5E7EB;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
   display: flex;
@@ -256,7 +260,7 @@ export const ReelControls = styled.div`
 
 export const SpinButton = styled.button`
   flex: 1;
-  background: #06b6d4;
+  background: #009499;
   color: white;
   border: none;
   border-radius: 6px;
@@ -267,7 +271,7 @@ export const SpinButton = styled.button`
   transition: background-color 0.2s;
   
   &:hover:not(:disabled) {
-    background: #0891b2;
+    background: #00797e;
   }
   
   &:disabled {
@@ -279,7 +283,7 @@ export const SpinButton = styled.button`
 export const MoreButton = styled.button`
   background: transparent;
   color: #0891b2;
-  border: 1px solid #a5f3fc;
+  border: 1px solid #009499;
   border-radius: 6px;
   padding: 8px 12px;
   font-size: 12px;
@@ -297,7 +301,7 @@ export const MoreButton = styled.button`
 `;
 
 export const MainSpinButton = styled.button`
-  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  background: linear-gradient(135deg, #009499 0%, #007c81 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -311,7 +315,7 @@ export const MainSpinButton = styled.button`
   margin: 0 auto;
   
   &:hover:not(:disabled) {
-    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+    background: linear-gradient(135deg, #007c81 0%, #006669 100%);
     transform: translateY(-1px);
   }
   
@@ -323,7 +327,7 @@ export const MainSpinButton = styled.button`
 `;
 
 export const PriceSection = styled.div`
-  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  background: linear-gradient(135deg, #009499 0%, #007c81 100%);
   border-radius: 12px;
   padding: 24px;
   color: white;
