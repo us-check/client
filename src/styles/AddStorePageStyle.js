@@ -587,3 +587,140 @@ export const StoreFooter = styled.footer`
   color: #6b7280;
   line-height: 1.4;
 `;
+
+// PachinkoPage 상세정보 모달 스타일 (클래스 기반)
+export const DetailModalOverlay = styled.div`
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DetailModalRoot = styled.div`
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  width: auto;
+  height: auto;
+`;
+
+export const DetailModalCard = styled.div`
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 480px;
+  min-width: 360px;
+  width: 90vw;
+  max-height: 85vh;
+  position: relative;
+  animation: modalSlideIn 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const DetailModalClose = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background: #fff;
+    transform: scale(1.1);
+  }
+`;
+
+export const DetailModalHeader = styled.div`
+  padding: 24px 24px 16px 24px;
+  color: #222;
+  background: none;
+  h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.3;
+  }
+`;
+
+export const DetailModalImage = styled.div`
+  width: 100%;
+  height: 240px;
+  background: #f8f9fa;
+  overflow: hidden;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+`;
+
+export const DetailModalDesc = styled.div`
+  padding: 24px;
+  background: #fff;
+  p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+  }
+`;
+
+export const DetailModalMap = styled.div`
+  width: 100%;
+  height: 200px;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+`;
+
+export const DetailModalAction = styled.div`
+  padding: 20px 24px;
+  background: #fff;
+  border-top: 1px solid #e9ecef;
+`;
+
+export const DetailModalMapBtn = styled.button`
+  width: 100%;
+  background: linear-gradient(135deg, #4ECDC4, #45B7D1dd);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+`;
