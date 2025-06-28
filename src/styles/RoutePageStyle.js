@@ -201,9 +201,7 @@ export const PaymentButton = styled.button`
   gap: 6px;
 
   background: ${(props) =>
-    props.kakao
-      ? "#fee500"
-      : "#2563eb"};
+    props.kakao ? "#fee500" : "#2563eb"};
   color: ${(props) => (props.kakao ? "#000" : "#fff")};
   border: none;
   border-radius: 8px;
@@ -213,10 +211,6 @@ export const PaymentButton = styled.button`
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    background: ${(props) => (props.kakao ? "#fde047" : "#006669")};
-  }
 
   img {
     display: inline-block;
