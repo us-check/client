@@ -69,11 +69,17 @@ function AddStorePage() {
   ];
 
   const handleFindNearby = () => {
-    // 실제 위치 대신 예시 데이터 사용
-    setNearbyStores(exampleStores);
-    setError("");
-    setLoading(false);
+    if (nearbyStores.length > 0) {
+      // 이미 목록이 있는 경우 -> 초기화(숨김)
+      setNearbyStores([]);
+    } else {
+      // 목록이 없는 경우 -> 예시 데이터로 표시
+      setNearbyStores(exampleStores);
+      setError("");
+      setLoading(false);
+    }
   };
+
 
   const handleSelectStore = (store) => {
     setForm((f) => ({
