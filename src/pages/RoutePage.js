@@ -17,11 +17,6 @@ import {
   MapHeader,
   MapTitle,
   MapContent,
-  MapSimulation,
-  MapOverlay,
-  MapIcon,
-  MapText,
-  MapSubtext,
   ItemsList,
   SectionTitle,
   ItemCard,
@@ -41,6 +36,7 @@ import {
   CountButton,
   CountText
 } from "../styles/RoutePageStyle";
+import GoogleMapComponent from "./GoogleMapComponent"; // 구글 맵 컴포넌트 임포트
 
 function RoutePage() {
   const [selectedItems, setSelectedItems] = useState({});
@@ -143,13 +139,20 @@ function RoutePage() {
               <MapTitle>여행 경로 지도</MapTitle>
             </MapHeader>
             <MapContent>
-              <MapSimulation>
-                <MapOverlay>
-                  <MapIcon>📍</MapIcon>
-                  <MapText>의성군 여행 경로</MapText>
-                  <MapSubtext>최적화된 경로로 안내됩니다</MapSubtext>
-                </MapOverlay>
-              </MapSimulation>
+              <div style={{ width: "100%", height: 400, marginBottom: 16 }}>
+                <GoogleMapComponent
+                  markers={Object.values(selectedItems).map((item, idx) => ({
+                    id: item.id || item.name || idx,
+                    name: item.name,
+                    position: item.position
+                      ? item.position
+                      : item.mapy && item.mapx
+                      ? { lat: Number(item.mapy), lng: Number(item.mapx) }
+                      : { lat: 0, lng: 0 },
+                    address: item.address || "",
+                  }))}
+                />
+              </div>
             </MapContent>
           </MapCard>
 

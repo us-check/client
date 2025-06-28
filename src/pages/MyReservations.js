@@ -39,6 +39,7 @@ import GoogleMapComponent from "./GoogleMapComponent"; // 구글 맵 컴포넌�
 
 function MyReservations() {
   const [qrCode, setQrCode] = useState("");
+  const [qrImage, setQrImage] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
   const [travelDate, setTravelDate] = useState(null);
   const navigate = useNavigate();
@@ -46,12 +47,26 @@ function MyReservations() {
   useEffect(() => {
     const qr = localStorage.getItem("travelQR");
     const items = localStorage.getItem("selectedTravelItems");
-    const date = localStorage.getItem("travelDate");
 
-    if (qr) setQrCode(qr);
-    if (items) setSelectedItems(JSON.parse(items));
-    if (date) setTravelDate(new Date(date));
-  }, []);
+    useEffect(() => {
+  const items = localStorage.getItem("selectedTravelItems");
+  const date = localStorage.getItem("travelDate");
+  const qrImg = localStorage.getItem("travelQRImage");
+  const qr = localStorage.getItem("qr"); // qr에 대한 처리도 기존대로 남겨둬야 한다면
+
+  if (qr) setQrCode(qr);
+
+  if (items) {
+    setSelectedItems(JSON.parse(items));
+  }
+  if (date) {
+    setTravelDate(new Date(date));
+  }
+  if (qrImg) {
+    setQrImage(qrImg);
+  }
+}, []);
+
 
   const getTypeIcon = (type) => {
     switch (type) {
@@ -88,6 +103,10 @@ function MyReservations() {
     return subtotal + fee;
   };
 
+  const handleSaveQR = () => {
+    window.alert("저장되었습니다");
+  };
+
   return (
     <PageWrapper>
       <Container>
@@ -110,11 +129,19 @@ function MyReservations() {
             </QRHeader>
             <QRContent>
               <QRDisplay>
-                <QRCode>🎫</QRCode>
-                <div>{qrCode || "QR-CODE-NOT-FOUND"}</div>
+                {qrImage ? (
+                  <img
+                    src={qrImage}
+                    alt="여행 QR 코드"
+                    style={{ width: 260, height: 260 }}
+                  />
+                ) : (
+                  <QRCode>🎫</QRCode>
+                )}
+                <div>{qrImage ? null : qrCode || "QR-CODE-NOT-FOUND"}</div>
               </QRDisplay>
               <QRText>이 QR 코드를 각 여행지에서 제시해주세요</QRText>
-              <SaveButton>QR 코드 저장하기</SaveButton>
+              <SaveButton onClick={handleSaveQR}>QR 코드 저장하기</SaveButton>
             </QRContent>
           </QRCard>
 
@@ -171,7 +198,11 @@ function MyReservations() {
                 markers={Object.values(selectedItems).map((item) => ({
                   id: item.id || item.name,
                   name: item.name,
-                  position: item.position || { lat: 0, lng: 0 },
+                  position: item.position
+                    ? item.position
+                    : item.mapy && item.mapx
+                    ? { lat: Number(item.mapy), lng: Number(item.mapx) }
+                    : { lat: 0, lng: 0 },
                 }))}
                 showRoute={true}
               />

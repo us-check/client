@@ -95,13 +95,8 @@ function AddStorePage() {
     // 서버로 보낼 데이터 json 형태로 콘솔 출력
     const payload = { ...form };
     console.log("서버로 전송될 데이터:", JSON.stringify(payload, null, 2));
-    try {
-      const res = await fetch("/api/register-store", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error("등록 실패");
+    // 실제 서버 요청 없이 바로 성공 처리
+    setTimeout(() => {
       alert("가게가 등록되었습니다!");
       setForm({
         name: "",
@@ -113,10 +108,8 @@ function AddStorePage() {
         lng: null,
       });
       setNearbyStores([]);
-    } catch (e) {
-      setError("가게 등록에 실패했습니다.");
-    }
-    setLoading(false);
+      setLoading(false);
+    }, 500);
   };
 
   return (

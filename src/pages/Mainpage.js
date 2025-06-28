@@ -26,32 +26,10 @@ function Mainpage() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const navigate = useNavigate();
 
-  const handleSearch = async () => {
+  const handleSearch = () => {
     if (!searchText.trim()) return;
-
     localStorage.setItem("searchText", searchText);
-
-    // API에 POST 요청
-    try {
-      const res = await fetch("http://192.168.0.48/api/query/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query: searchText }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        localStorage.setItem("pachinkoData", JSON.stringify(data));
-      }
-    } catch (e) {
-      console.error(e);
-    }
-
     navigate("/loading");
-    setTimeout(() => {
-      navigate("/pachinko");
-    }, 2000);
   };
 
   const handleKeyDown = (e) => {
