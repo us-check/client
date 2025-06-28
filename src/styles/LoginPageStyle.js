@@ -3,27 +3,39 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: #ffffff;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f3ffff 27%,
+    #e9feff 71%,
+    #c6fdff 100%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-family: 'Pretendard', sans-serif;
-  position: relative;
-  padding: 20px;
-  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 export const Card = styled.div`
-  background: #fdfdfd;
+  background: rgba(255, 255, 255, 0.95);
   width: 100%;
   max-width: 420px;
   padding: 60px 40px 40px;
-  border-radius: 16px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
   text-align: center;
   position: relative;
   z-index: 1;
+  margin-top: 250px;
+`;
+
+export const StoreHeader = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px 60px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const LogoWrapper = styled.div`
@@ -81,10 +93,34 @@ export const LoginButtonWrapper = styled.button`
 
 export const BackIcon = styled.img`
   position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 30px;
-  height: 30px;
+  top: 23px;
+  left: 23px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 10;
+`;
+
+export const StoreLogoGroup = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const StoreLogoImage = styled.img`
+  width: 50px;
+  height: auto;
+  margin-right: 8px;
+`;
+
+export const StoreLogoText = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+`;
+
+export const StoreMenuIcon = styled.img`
+  width: 50px;
+  height: 50px;
   cursor: pointer;
 `;
 
