@@ -1,4 +1,4 @@
-import styled, { keyframes, createGlobalStyle } from 'styled-components';
+import styled, { keyframes, createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Hakgyoansim+Dunggeunmiso+OTF:wght@400&display=swap');
@@ -97,7 +97,9 @@ export const Subtitle = styled.p`
   color: #6b7280;
   text-align: center;
   margin-bottom: 32px;
-  ${props => props.isAnimated && `
+  ${(props) =>
+    props.isAnimated &&
+    `
     animation: ${pulse} 2s infinite;
   `}
 `;
@@ -152,9 +154,10 @@ export const ReelHeaderContent = styled.div`
 export const ReelScreen = styled.div`
   background: white;
   border-radius: 12px;
-  height: 192px;
-  overflow: hidden;
-  border: 2px solid #E5E7EB;
+  min-height: 220px;
+  height: auto;
+  overflow: visible;
+  border: 2px solid #e5e7eb;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
   display: flex;
@@ -180,12 +183,12 @@ export const SpinItem = styled.div`
   border-bottom: 1px solid #f3f4f6;
   background: white;
   text-align: center;
-  
+
   div:first-child {
     font-size: 48px;
     margin-bottom: 4px;
   }
-  
+
   div:last-child {
     font-size: 12px;
     font-weight: 500;
@@ -195,12 +198,14 @@ export const SpinItem = styled.div`
 
 export const ResultContent = styled.div`
   padding: 16px;
-  height: 100%;
+  min-height: 220px; /* 세로 길이 늘림 */
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  word-break: break-word;
 `;
 
 export const ResultEmoji = styled.div`
@@ -238,14 +243,14 @@ export const WaitingContent = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  
+
   div {
     font-size: 64px;
     margin-bottom: 8px;
     color: #d1d5db;
     animation: ${pulse} 2s infinite;
   }
-  
+
   p {
     font-size: 14px;
     color: #6b7280;
@@ -269,11 +274,11 @@ export const SpinButton = styled.button`
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
-  
+
   &:hover:not(:disabled) {
     background: #00797e;
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -289,11 +294,11 @@ export const MoreButton = styled.button`
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  
+
   &:hover:not(:disabled) {
     background: #ecfeff;
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -313,12 +318,12 @@ export const MainSpinButton = styled.button`
   transition: all 0.2s;
   display: block;
   margin: 0 auto;
-  
+
   &:hover:not(:disabled) {
     background: linear-gradient(135deg, #007c81 0%, #006669 100%);
     transform: translateY(-1px);
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -350,7 +355,7 @@ export const PriceLabel = styled.p`
 `;
 
 export const PriceValue = styled.p`
-  font-size: ${props => props.$isTotal ? '32px' : '18px'};
+  font-size: ${(props) => (props.$isTotal ? "32px" : "18px")};
   font-weight: bold;
 `;
 
@@ -365,11 +370,11 @@ export const DecisionButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
-  
+
   &:hover:not(:disabled) {
     background: #f9fafb;
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -433,7 +438,7 @@ export const OptionCard = styled.div`
   border-radius: 8px;
   padding: 16px;
   transition: all 0.2s;
-  
+
   &:hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     border-color: #a5f3fc;
@@ -449,7 +454,7 @@ export const OptionImage = styled.div`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  
+
   img {
     width: 100%;
     height: 100%;
@@ -505,7 +510,7 @@ export const SelectButton = styled.button`
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
-  
+
   &:hover {
     background: #0891b2;
   }
