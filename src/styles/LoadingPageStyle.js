@@ -13,7 +13,13 @@ const spin = keyframes`
 export const LoadingWrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(180deg, #e0f7fa 0%, #c6fdff 100%);
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f3ffff 27%,
+    #e9feff 71%,
+    #c6fdff 100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;

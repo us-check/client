@@ -526,7 +526,7 @@ function PachinkoPage() {
                             transition: "all 0.2s",
                           }}
                         >
-                          {spinning ? "돌아가는 중" : "재추첨"}
+                          {spinning ? "돌아가는 중" : "리셋"}
                         </SpinButton>
                         <MoreButton
                           onClick={() => setOpenModal(type)}
@@ -582,7 +582,7 @@ function PachinkoPage() {
               >
                 {Object.values(isSpinning).some(Boolean) || isAutoSpinning
                   ? "돌아가는 중..."
-                  : "전부 재추첨"}
+                  : "전체 리셋"}
               </MainSpinButton>
             </SlotMachineScreen>
 
