@@ -109,27 +109,40 @@ function AddStorePage() {
       formData.append("price", form.price);
       formData.append("overview", form.overview);
       formData.append("image", form.image || "");
-      await fetch(`${process.env.REACT_APP_API_URL}/api/store`, {
-        method: "POST",
-        body: formData,
-      });
-      alert("가게가 등록되었습니다!");
-      setForm({
-        name: "",
-        type: "accommodation",
-        address: "",
-        price: "",
-        businessNumber: "",
-        overview: "",
-        image: null,
-        lat: null,
-        lng: null,
-      });
-      setNearbyStores([]);
-      setLoading(false);
-      navigate("/");
+      console.log("요청 보냄:", formData);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/business/`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      console.log("응답 status:", response.status);
+      let responseText = "";
+      try {
+        responseText = await response.text();
+        console.log("응답 body:", responseText);
+      } catch (e) {
+        console.log("응답 body 파싱 실패");
+      }
+      if (response.ok) {
+        alert("가게가 등록되었습니다!");
+        setForm({
+          name: "",
+          address: "",
+          price: "",
+          overview: "",
+          image: "",
+        });
+        setNearbyStores([]);
+        setLoading(false);
+        navigate("/");
+      } else {
+        alert("등록에 실패했습니다.");
+        setLoading(false);
+      }
     } catch (err) {
-      setError("등록에 실패했습니다.");
+      setError("오류 발생");
       setLoading(false);
     }
   };
