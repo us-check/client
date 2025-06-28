@@ -1,4 +1,3 @@
-// src/components/MainpageModal.js
 import React, { useState } from 'react';
 import {
   Overlay,
@@ -20,19 +19,13 @@ const MainpageModal = ({
   onStoreRegisterClick,
 }) => {
   const [isClosing, setIsClosing] = useState(false);
-
-  // 오버레이 클릭 → 닫힘 애니메이션 시작
   const handleOverlayClick = () => setIsClosing(true);
-
-  // 패널 내부 클릭은 버블링 방지
   const stopPropagation = (e) => e.stopPropagation();
 
-  // 애니메이션 끝나면 실제로 닫기
   const handleAnimationEnd = () => {
     if (isClosing) onClose?.();
   };
 
-  // 메뉴 클릭 시 실행 → 닫힘 애니메이션 시작
   const closeAnd = (fn) => {
     fn?.();
     setIsClosing(true);
@@ -48,7 +41,6 @@ const MainpageModal = ({
         <MenuTitle>메뉴</MenuTitle>
         <Divider />
 
-        {/* ───────── 로그인 전 ───────── */}
         {!isLoggedIn ? (
           <>
             <MenuItem onClick={() => closeAnd(onLoginClick)}>
@@ -62,7 +54,7 @@ const MainpageModal = ({
             </MenuItem>
           </>
         ) : (
-          /* ───────── 로그인 후 ───────── */
+
           <>
             <MenuItem onClick={() => closeAnd(onMyPageClick)}>
               <MenuLabel>내 정보</MenuLabel>
