@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   FrameWrapper,
-  TopBar,
-  LogoSection,
+  Header,
+  LogoGroup,
   LogoImage,
   LogoText,
   MenuIcon,
+  MainContent,
+  TitleText,
+  SearchBox,
+  SearchInnerBox,
   GarlicIcon,
-  SearchInputWrapper,
+  SearchInput,
   SearchIcon,
-  SearchInput
+  FooterContainer,
+  FooterTextWrapper,
+  FooterText,
 } from '../styles/MainpageStyle';
 
 function Mainpage() {
@@ -38,30 +44,47 @@ function Mainpage() {
 
   return (
     <FrameWrapper>
-      <TopBar>
-        <GarlicIcon src="그라디언트마늘 1.svg" alt="마늘" />
-        <SearchInputWrapper>
-          <SearchInput
-            type="text"
-            placeholder="검색어를 입력하세요"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <SearchIcon
-            src="돋보기.svg"
-            alt="돋보기"
-            onClick={handleSearch}
-            style={{ cursor: 'pointer' }}
-          />
-        </SearchInputWrapper>
-      </TopBar>
-
-      <LogoSection>
-        <LogoImage src="로고마늘.svg" alt="로고마늘" />
-        <LogoText>의성:Check</LogoText>
+      <Header>
+        <LogoGroup>
+          <LogoImage src="로고마늘.svg" alt="로고마늘" />
+          <LogoText>의성:Check</LogoText>
+        </LogoGroup>
         <MenuIcon src="menu.svg" alt="메뉴" />
-      </LogoSection>
+      </Header>
+
+      <MainContent>
+        <TitleText>어떤 여행을 원하시나요?</TitleText>
+
+        <SearchBox>
+          <SearchInnerBox>
+            <GarlicIcon src="그라디언트마늘 1.svg" alt="마늘" />
+            <SearchInput
+              type="text"
+              placeholder="AI가 맞춤 코스를 추천해드려요."
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={handleKeyDown}
+              color='#b5b5b5'
+            />
+            <SearchIcon
+              src={
+                searchText.trim()
+                  ? '/검정돋보기.svg'
+                  : '/돋보기.svg'
+              }
+              alt="돋보기"
+              onClick={handleSearch}
+            />
+          </SearchInnerBox>
+        </SearchBox>
+      </MainContent>
+
+      <FooterContainer>
+        <FooterTextWrapper>
+          <FooterText>2025, in 의성 Us:Code 해커톤</FooterText>
+          <FooterText>Us:Code Hackathon 2025, Uiseong</FooterText>
+        </FooterTextWrapper>
+      </FooterContainer>
     </FrameWrapper>
   );
 }
