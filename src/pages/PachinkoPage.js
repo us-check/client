@@ -452,7 +452,7 @@ function PachinkoPage() {
                               );
                             })}
                           </SpinningContent>
-                        ) : showResults && item ? (
+                        ) : item ? (
                           <ResultContent
                             onClick={() => setDetailModal({ open: true, item })}
                             style={{ cursor: "pointer" }}
@@ -502,12 +502,7 @@ function PachinkoPage() {
                               })()}
                             </ResultBadge>
                           </ResultContent>
-                        ) : (
-                          <WaitingContent>
-                            <div>🎰</div>
-                            <p>결과를 기다리는 중...</p>
-                          </WaitingContent>
-                        )}
+                        ) : null}
                       </ReelScreen>
 
                       <ReelControls>

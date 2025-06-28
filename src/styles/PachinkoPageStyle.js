@@ -30,6 +30,20 @@ const pulse = keyframes`
   50% { opacity: 0.5; }
 `;
 
+const bounceIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
 export const PageWrapper = styled.div`
   min-height: 100vh;
   background: linear-gradient(
@@ -209,7 +223,7 @@ export const SpinItem = styled.div`
 
 export const ResultContent = styled.div`
   padding: 16px;
-  min-height: 220px; /* 세로 길이 늘림 */
+  min-height: 220px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -217,6 +231,7 @@ export const ResultContent = styled.div`
   align-items: center;
   text-align: center;
   word-break: break-word;
+  animation: ${bounceIn} 0.5s ease-out;
 `;
 
 export const ResultEmoji = styled.div`
