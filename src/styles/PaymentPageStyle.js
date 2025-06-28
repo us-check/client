@@ -155,7 +155,13 @@ export const InfoText = styled.div`
 // 완료 화면 스타일
 export const CompletedWrapper = styled.div`
   min-height: 100vh;
-  background: #f0fdf4;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f3ffff 27%,
+    #e9feff 71%,
+    #c6fdff 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
