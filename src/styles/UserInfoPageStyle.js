@@ -1,21 +1,47 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+/* export const Container = styled.div`
   min-height: 100vh;
   background-color: #fff;
   font-family: "Pretendard", sans-serif;
   padding: 40px 20px;
   box-sizing: border-box;
   position: relative;
+`; */
+
+export const StorePageWrapper = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f3ffff 27%,
+    #e9feff 71%,
+    #c6fdff 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+`;
+
+export const StoreHeader = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px 60px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const BackIcon = styled.img`
   position: absolute;
-  top: 24px;
-  left: 24px;
+  top: 23px;
+  left: 23px;
   width: 32px;
   height: 32px;
   cursor: pointer;
+  z-index: 10;
 `;
 
 export const ContentWrapper = styled.div`
@@ -23,6 +49,29 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 8px;
+`;
+
+export const StoreLogoGroup = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const StoreLogoImage = styled.img`
+  width: 50px;
+  height: auto;
+  margin-right: 8px;
+`;
+
+export const StoreLogoText = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+`;
+
+export const StoreMenuIcon = styled.img`
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
 `;
 
 export const LogoBox = styled.div`
@@ -46,12 +95,13 @@ export const LogoText = styled.div`
 `;
 
 export const InfoCard = styled.div`
-  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  margin-top: 70px;
   width: 443px;
   height: 600px;
-  border-radius: 8px;
+  border-radius: 1.25rem;
   border: 1px solid #fff;
-  box-shadow: 0 0.5px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
