@@ -46,6 +46,7 @@ export const LogoText = styled.div`
 export const MenuIcon = styled.img`
   width: 50px;
   height: 50px;
+  cursor: pointer;
 `;
 
 export const MainContent = styled.div`

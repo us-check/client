@@ -556,7 +556,7 @@ function PachinkoPage() {
                           onClick={() => spinMachine(type)}
                           disabled={spinning || isAutoSpinning}
                         >
-                          🔄 {spinning ? "돌아가는 중" : "다시"}
+                        {spinning ? "돌아가는 중" : "다시"}
                         </SpinButton>
                         <MoreButton
                           onClick={() => setOpenModal(type)}
@@ -576,7 +576,7 @@ function PachinkoPage() {
                   Object.values(isSpinning).some(Boolean) || isAutoSpinning
                 }
               >
-                ⚡{" "}
+                {" "}
                 {Object.values(isSpinning).some(Boolean) || isAutoSpinning
                   ? "돌아가는 중..."
                   : "전부 다시 돌리기"}

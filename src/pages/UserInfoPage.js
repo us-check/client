@@ -26,10 +26,10 @@ import {
 } from '../styles/UserInfoPageStyle';
 
 const UserInfoPage = () => {
-    const navigate = useNavigate(); // 👈 훅 호출
+    const navigate = useNavigate(); // 훅 호출
 
     const handleGoHome = () => {
-        navigate('/'); // 👈 홈으로 이동
+        navigate('/'); // 홈으로 이동
     };
 
     return (
