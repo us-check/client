@@ -18,7 +18,7 @@ function LoadingPage() {
     }
     (async () => {
       try {
-        const res = await fetch("http://192.168.0.21:8000/api/query/", {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/query/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ query: searchText }),

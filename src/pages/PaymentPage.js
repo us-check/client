@@ -49,13 +49,16 @@ function PaymentPage() {
     const items = localStorage.getItem("selectedTravelItems");
     if (items) {
       const selectedItems = JSON.parse(items);
-      const subtotal = Object.entries(selectedItems).reduce((sum, [type, item]) => {
-        const price = Number(item.price) || 0;
-        if (["restaurant", "accommodation"].includes(type)) {
-          return sum + price * (item.count || 1);
-        }
-        return sum + price;
-      }, 0);
+      const subtotal = Object.entries(selectedItems).reduce(
+        (sum, [type, item]) => {
+          const price = Number(item.price) || 0;
+          if (["restaurant", "accommodation"].includes(type)) {
+            return sum + price * (item.count || 1);
+          }
+          return sum + price;
+        },
+        0
+      );
       const fee = Math.floor(subtotal * 0.05);
       setTotalAmount(subtotal + fee);
     }
@@ -68,18 +71,20 @@ function PaymentPage() {
       setIsProcessing(false);
       setIsCompleted(true);
 
-      const qrCode = `UISEONG-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const qrCode = `UISEONG-${Date.now()}-${Math.random()
+        .toString(36)
+        .substr(2, 9)}`;
       localStorage.setItem("travelQR", qrCode);
 
       try {
-        const res = await fetch("http://192.168.0.48:8000/api/qr/");
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/qr/`);
         if (res.ok) {
           const data = await res.json();
           if (data && data.qr_code) {
             localStorage.setItem("travelQRImage", data.qr_code);
           }
         }
-      } catch (e) { }
+      } catch (e) {}
     }, 100);
   };
 
@@ -93,15 +98,15 @@ function PaymentPage() {
         <CompletedCard>
           <CheckIcon>✅</CheckIcon>
           <CompletedTitle>결제 완료!</CompletedTitle>
-          <CompletedMessage>의성군 여행 패키지 결제가 완료되었습니다.</CompletedMessage>
+          <CompletedMessage>
+            의성군 여행 패키지 결제가 완료되었습니다.
+          </CompletedMessage>
           <CompletedPrice>
             <p>결제 금액</p>
             <p>{totalAmount.toLocaleString()}원</p>
           </CompletedPrice>
           <CompletedNote>아래 버튼을 눌러 QR을 확인하세요.</CompletedNote>
-          <PayButton onClick={() => setShowQR(true)}>
-            QR 확인하기
-          </PayButton>
+          <PayButton onClick={() => setShowQR(true)}>QR 확인하기</PayButton>
         </CompletedCard>
       </CompletedWrapper>
     );
@@ -110,15 +115,17 @@ function PaymentPage() {
   return (
     <PageWrapper>
       <Container>
-          <BackIcon
-            src={process.env.PUBLIC_URL + "/뒤로가는화살표.svg"}
-            alt="뒤로가기"
-            onClick={() => navigate(-1)}
-          />
+        <BackIcon
+          src={process.env.PUBLIC_URL + "/뒤로가는화살표.svg"}
+          alt="뒤로가기"
+          onClick={() => navigate(-1)}
+        />
 
         <PaymentCard>
           <CardHeader>
-            <CardTitle>💳 {paymentMethod === "kakao" ? "카카오페이" : "토스페이"} 결제</CardTitle>
+            <CardTitle>
+              💳 {paymentMethod === "kakao" ? "카카오페이" : "토스페이"} 결제
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <PriceDisplay>
@@ -129,9 +136,22 @@ function PaymentPage() {
             </PriceDisplay>
 
             {travelDate && (
-              <div style={{ background: "#f0fdf4", padding: "12px 16px", borderRadius: "8px", fontSize: "14px", color: "#065f46", marginTop: "-8px" }}>
+              <div
+                style={{
+                  background: "#f0fdf4",
+                  padding: "12px 16px",
+                  borderRadius: "8px",
+                  fontSize: "14px",
+                  color: "#065f46",
+                  marginTop: "-8px",
+                }}
+              >
                 <p style={{ margin: 0, fontWeight: 500 }}>여행 예정일</p>
-                <strong style={{ fontSize: "16px", color: "#047857" }}>{`${travelDate.getFullYear()}년 ${travelDate.getMonth() + 1}월 ${travelDate.getDate()}일`}</strong>
+                <strong
+                  style={{ fontSize: "16px", color: "#047857" }}
+                >{`${travelDate.getFullYear()}년 ${
+                  travelDate.getMonth() + 1
+                }월 ${travelDate.getDate()}일`}</strong>
               </div>
             )}
 
@@ -153,7 +173,11 @@ function PaymentPage() {
             </FormSection>
 
             <PayButton onClick={handlePayment} disabled={isProcessing}>
-              {isProcessing ? <>결제 처리중...</> : <>{totalAmount.toLocaleString()}원 결제하기</>}
+              {isProcessing ? (
+                <>결제 처리중...</>
+              ) : (
+                <>{totalAmount.toLocaleString()}원 결제하기</>
+              )}
             </PayButton>
           </CardContent>
         </PaymentCard>

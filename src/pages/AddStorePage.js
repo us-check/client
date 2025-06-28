@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import MainpageModal from "../components/MainpageModal";
 import { useNavigate } from "react-router-dom";
 import {
@@ -29,10 +29,12 @@ import {
 function AddStorePage() {
   const [form, setForm] = useState({
     name: "",
-    type: "restaurant",
+    type: "accommodation", // 숙박시설이 기본값
     address: "",
     price: "",
     businessNumber: "",
+    overview: "",
+    image: null,
     lat: null,
     lng: null,
   });
@@ -78,7 +80,6 @@ function AddStorePage() {
     }
   };
 
-
   const handleSelectStore = (store) => {
     setForm((f) => ({
       ...f,
@@ -90,27 +91,49 @@ function AddStorePage() {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
+    const { name, value, type, files } = e.target;
+    if (name === "image" && files && files[0]) {
+      setForm((f) => ({ ...f, image: files[0] }));
+    } else {
+      setForm((f) => ({ ...f, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-    alert("가게가 등록되었습니다!");
-    setForm({
-      name: "",
-      type: "restaurant",
-      address: "",
-      price: "",
-      businessNumber: "",
-      lat: null,
-      lng: null,
-    });
-    setNearbyStores([]);
-    setLoading(false);
-    navigate("/");
+    try {
+      const formData = new FormData();
+      formData.append("name", form.name);
+      formData.append("address", form.address);
+      formData.append("price", form.price);
+      formData.append("overview", form.overview);
+      formData.append("image", form.image || "");
+      // 실제 서버 요청 예시
+      await fetch(`${process.env.REACT_APP_API_URL}/api/store`, {
+        method: "POST",
+        body: formData,
+      });
+      alert("가게가 등록되었습니다!");
+      setForm({
+        name: "",
+        type: "accommodation",
+        address: "",
+        price: "",
+        businessNumber: "",
+        overview: "",
+        image: null,
+        lat: null,
+        lng: null,
+      });
+      setNearbyStores([]);
+      setLoading(false);
+      navigate("/");
+    } catch (err) {
+      setError("등록에 실패했습니다.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -216,9 +239,42 @@ function AddStorePage() {
                   onChange={handleChange}
                   style={{ border: "none", background: "transparent" }}
                 >
-                  <option value="restaurant">🍽️ 음식점</option>
                   <option value="accommodation">🏨 숙박시설</option>
+                  <option value="restaurant">🍽️ 음식점</option>
                 </StoreSelect>
+              </GradientInnerBox>
+            </GradientWrapper>
+          </StoreFormGroup>
+
+          <StoreFormGroup>
+            <StoreLabel htmlFor="overview">한줄소개</StoreLabel>
+            <GradientWrapper>
+              <GradientInnerBox>
+                <StoreInput
+                  id="overview"
+                  name="overview"
+                  value={form.overview}
+                  onChange={handleChange}
+                  placeholder="한줄소개를 입력하세요"
+                  required
+                  style={{ border: "none", background: "transparent" }}
+                />
+              </GradientInnerBox>
+            </GradientWrapper>
+          </StoreFormGroup>
+
+          <StoreFormGroup>
+            <StoreLabel htmlFor="image">가게 이미지</StoreLabel>
+            <GradientWrapper>
+              <GradientInnerBox>
+                <StoreInput
+                  id="image"
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleChange}
+                  style={{ border: "none", background: "transparent" }}
+                />
               </GradientInnerBox>
             </GradientWrapper>
           </StoreFormGroup>
@@ -258,7 +314,6 @@ function AddStorePage() {
             </GradientWrapper>
           </StoreFormGroup>
 
-
           <StoreButton
             type="submit"
             disabled={loading}
@@ -267,7 +322,6 @@ function AddStorePage() {
             {loading ? "등록 중..." : "✅ 가게 등록하기"}
           </StoreButton>
         </StoreForm>
-
       </StoreFormCard>
       <StoreFooter>
         <p>2025, in 의성 Us:Code 해커톤</p>
