@@ -122,7 +122,7 @@ export const Input = styled.input`
 
 export const PayButton = styled.button`
   width: 100%;
-  background: #06b6d4;
+  background: #009499;
   color: white;
   border: none;
   border-radius: 8px;

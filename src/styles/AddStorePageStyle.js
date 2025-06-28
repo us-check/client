@@ -462,7 +462,7 @@ export const StoreInput = styled.input`
     color: #9ca3af;
   }
   &:focus {
-    border-color: #06b6d4;
+    border-color:rgb(99, 182, 196);
     background: white;
     box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
   }
@@ -496,12 +496,12 @@ export const StoreButton = styled.button`
   cursor: pointer;
   transition: all 0.2s ease;
   outline: none;
-  background: linear-gradient(90deg, #06b6d4, #3b82f6);
+  background: linear-gradient(135deg, #009499 0%, #007c81 100%);
   color: white;
   box-shadow: 0 4px 14px 0 rgba(6, 182, 212, 0.3);
   margin-top: 0.5rem;
   &:hover:not(:disabled) {
-    background: linear-gradient(90deg, #0891b2, #2563eb);
+    background: linear-gradient(135deg, #007c81 0%, #006669 100%);
     transform: translateY(-1px);
     box-shadow: 0 6px 20px 0 rgba(6, 182, 212, 0.4);
   }

@@ -22,11 +22,11 @@ import {
 } from "../styles/UserInfoPageStyle";
 
 const UserInfoPage = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate(); // 훅 호출
 
-  const handleGoHome = () => {
-    navigate("/");
-  };
+    const handleGoHome = () => {
+        navigate('/'); // 홈으로 이동
+    };
 
   return (
     <Container>

@@ -430,7 +430,7 @@ export const ModalHeader = styled.div`
 `;
 
 export const ModalTitle = styled.h2`
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
   display: flex;
   align-items: center;
