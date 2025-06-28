@@ -369,7 +369,7 @@ export const StorePageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 // 헤더
@@ -594,7 +594,10 @@ export const DetailModalOverlay = styled.div`
   backdrop-filter: blur(8px);
   z-index: 1000;
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -709,7 +712,7 @@ export const DetailModalAction = styled.div`
 
 export const DetailModalMapBtn = styled.button`
   width: 100%;
-  background: linear-gradient(135deg, #4ECDC4, #45B7D1dd);
+  background: linear-gradient(135deg, #4ecdc4, #45b7d1dd);
   color: white;
   border: none;
   border-radius: 12px;

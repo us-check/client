@@ -90,10 +90,11 @@ function RoutePage() {
     const subtotal = Object.entries(selectedItems).reduce(
       (sum, [type, item]) => {
         if (!item) return sum;
+        const price = Number(item.price) || 0;
         if (["restaurant", "accommodation"].includes(type)) {
-          return sum + item.price * (item.count || 1);
+          return sum + price * (item.count || 1);
         }
-        return sum + item.price;
+        return sum + price;
       },
       0
     );

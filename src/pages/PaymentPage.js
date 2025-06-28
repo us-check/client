@@ -46,10 +46,11 @@ function PaymentPage() {
       // 인원수(count) 반영하여 계산
       const subtotal = Object.entries(selectedItems).reduce(
         (sum, [type, item]) => {
+          const price = Number(item.price) || 0;
           if (["restaurant", "accommodation"].includes(type)) {
-            return sum + item.price * (item.count || 1);
+            return sum + price * (item.count || 1);
           }
-          return sum + item.price;
+          return sum + price;
         },
         0
       );

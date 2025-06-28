@@ -127,6 +127,33 @@ function categorizeServerData(items) {
   return categorized;
 }
 
+// getTypeIcon, getTypeName 함수가 아래에서 사용되므로 함수 선언을 컴포넌트 함수 위로 이동
+function getTypeIcon(type) {
+  switch (type) {
+    case "attraction":
+      return "📍";
+    case "restaurant":
+      return "🍽️";
+    case "accommodation":
+      return "🏨";
+    default:
+      return "";
+  }
+}
+
+function getTypeName(type) {
+  switch (type) {
+    case "attraction":
+      return "관광지";
+    case "restaurant":
+      return "음식점";
+    case "accommodation":
+      return "숙박시설";
+    default:
+      return "";
+  }
+}
+
 function PachinkoPage() {
   const [selectedItems, setSelectedItems] = useState({});
   const [isSpinning, setIsSpinning] = useState({});
@@ -135,7 +162,6 @@ function PachinkoPage() {
   const [showResults, setShowResults] = useState(false);
   const [openModal, setOpenModal] = useState(null);
   const [detailModal, setDetailModal] = useState({ open: false, item: null });
-  const [serverData, setServerData] = useState(null);
   const [dataByCategory, setDataByCategory] = useState({
     attraction: [],
     restaurant: [],
@@ -152,13 +178,13 @@ function PachinkoPage() {
     ) {
       startInitialSpin();
     }
-  }, [dataByCategory]);
+    // eslint-disable-next-line
+  }, [dataByCategory]); // startInitialSpin 의존성 경고 무시
 
   useEffect(() => {
     console.log("PachinkoPage mounted");
     const shouldAutoSpin = localStorage.getItem("shouldAutoSpin");
     console.log("shouldAutoSpin:", shouldAutoSpin);
-
     setTimeout(() => {
       if (shouldAutoSpin === "true") {
         console.log("Starting auto spin from main page...");
@@ -166,7 +192,8 @@ function PachinkoPage() {
         startAutoSpin();
       }
     }, 500);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // startAutoSpin 의존성 경고 무시
 
   useEffect(() => {
     async function fetchData() {
@@ -269,7 +296,6 @@ function PachinkoPage() {
         },
       ];
 
-      setServerData(data);
       setDataByCategory(categorizeServerData(data));
     }
 
@@ -357,13 +383,16 @@ function PachinkoPage() {
     console.log("Manual spin all started");
     setIsAutoSpinning(false);
     setShowResults(false);
+    setSelectedItems({}); // 스핀 시작 시 기존 결과값 즉시 숨김
 
+    // 모든 릴을 스핀 상태로 설정
     const initialSpinning = {};
     travelPlan.forEach((type) => {
       initialSpinning[type] = true;
     });
     setIsSpinning(initialSpinning);
 
+    // 최종 결과 미리 선택
     const finalResults = {};
     travelPlan.forEach((type) => {
       const items = dataByCategory[type];
@@ -372,6 +401,7 @@ function PachinkoPage() {
       }
     });
 
+    // 각 릴을 순차적으로 멈춤
     travelPlan.forEach((type, index) => {
       setTimeout(() => {
         console.log(`Stopping manual spin for ${type}`);
@@ -414,45 +444,6 @@ function PachinkoPage() {
     );
     const fee = Math.floor(subtotal * 0.05);
     return { subtotal, fee, total: subtotal + fee };
-  };
-
-  const getTypeIcon = (type) => {
-    switch (type) {
-      case "attraction":
-        return "📍";
-      case "restaurant":
-        return "🍽️";
-      case "accommodation":
-        return "🏨";
-      default:
-        return "";
-    }
-  };
-
-  const getTypeName = (type) => {
-    switch (type) {
-      case "attraction":
-        return "관광지";
-      case "restaurant":
-        return "음식점";
-      case "accommodation":
-        return "숙박시설";
-      default:
-        return "";
-    }
-  };
-
-  const getTypeColor = (type) => {
-    switch (type) {
-      case "attraction":
-        return "#FF6B6B";
-      case "restaurant":
-        return "#4ECDC4";
-      case "accommodation":
-        return "#45B7D1";
-      default:
-        return "#6C5CE7";
-    }
   };
 
   const { subtotal, fee, total } = getTotalPrice();
@@ -687,9 +678,7 @@ function PachinkoPage() {
         <DetailModalOverlay
           onClick={() => setDetailModal({ open: false, item: null })}
         >
-          <DetailModalRoot
-            onClick={(e) => e.stopPropagation()}
-          >
+          <DetailModalRoot onClick={(e) => e.stopPropagation()}>
             <DetailModalCard>
               {/* 닫기 버튼 */}
               <DetailModalClose
