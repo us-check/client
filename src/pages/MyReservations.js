@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   PageWrapper,
   Container,
   Header,
-  BackButton,
   Title,
   ContentGrid,
   QRCard,
@@ -45,7 +43,6 @@ function MyReservations() {
   const [selectedItems, setSelectedItems] = useState({});
   const [travelDate, setTravelDate] = useState(null);
   const [focusMarkerId, setFocusMarkerId] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const items = localStorage.getItem("selectedTravelItems");
@@ -103,14 +100,6 @@ function MyReservations() {
     <PageWrapper>
       <Container>
         <Header>
-          <BackButton onClick={() => navigate("/")}>
-            <img
-              src="/뒤로가는화살표.svg"
-              alt="뒤로가기"
-              style={{ width: "32px", height: "32px" }}
-            />
-          </BackButton>
-
           <Title>🧾 예매내역</Title>
         </Header>
 

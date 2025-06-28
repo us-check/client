@@ -4,9 +4,7 @@ import QRAssembly from "./qrtest";
 import {
   PageWrapper,
   Container,
-  Header,
-  BackButton,
-  Title,
+  BackIcon,
   PaymentCard,
   CardHeader,
   CardTitle,
@@ -81,7 +79,7 @@ function PaymentPage() {
             localStorage.setItem("travelQRImage", data.qr_code);
           }
         }
-      } catch (e) {}
+      } catch (e) { }
     }, 100);
   };
 
@@ -112,10 +110,11 @@ function PaymentPage() {
   return (
     <PageWrapper>
       <Container>
-        <Header>
-          <BackButton onClick={() => navigate(-1)}>← 뒤로가기</BackButton>
-          <Title>결제하기</Title>
-        </Header>
+          <BackIcon
+            src={process.env.PUBLIC_URL + "/뒤로가는화살표.svg"}
+            alt="뒤로가기"
+            onClick={() => navigate(-1)}
+          />
 
         <PaymentCard>
           <CardHeader>

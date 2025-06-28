@@ -461,7 +461,7 @@ export const StoreLabel = styled.label`
 `;
 
 export const StoreInput = styled.input`
-  width: 94%;
+  width: 95%;
   padding: 1rem;
   border: 2px solid #a5f3fc;
   border-radius: 1rem;

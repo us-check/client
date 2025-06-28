@@ -18,6 +18,16 @@ export const Header = styled.div`
   margin-bottom: 24px;
 `;
 
+export const BackIcon = styled.img`
+  position: absolute;
+  top: 23px;
+  left: 23px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 10;
+`;
+
 export const BackButton = styled.button`
   background: none;
   border: none;
@@ -43,6 +53,7 @@ export const PaymentCard = styled.div`
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   margin-bottom: 24px;
+  margin-top: 100px;
   overflow: hidden;
 `;
 
