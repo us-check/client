@@ -1,14 +1,5 @@
 import styled from "styled-components";
 
-/* export const Container = styled.div`
-  min-height: 100vh;
-  background-color: #fff;
-  font-family: "Pretendard", sans-serif;
-  padding: 40px 20px;
-  box-sizing: border-box;
-  position: relative;
-`; */
-
 export const StorePageWrapper = styled.div`
   width: 100%;
   min-height: 100vh;

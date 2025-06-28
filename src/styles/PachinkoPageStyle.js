@@ -1,21 +1,5 @@
 import styled, { keyframes, createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Hakgyoansim+Dunggeunmiso+OTF:wght@400&display=swap');
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    line-height: normal;
-    font-family: 'Hakgyoansim Dunggeunmiso OTF', sans-serif;
-  }
-`;
-
 const slotRoll = keyframes`
   from { 
     transform: translateY(-100%); 
@@ -437,7 +421,6 @@ export const BottomInfo = styled.div`
   font-size: 14px;
 `;
 
-// 모달 스타일
 export const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
