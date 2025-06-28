@@ -154,10 +154,11 @@ export const ReelHeaderContent = styled.div`
 export const ReelScreen = styled.div`
   background: white;
   border-radius: 12px;
-  height: ${({ $spinning, $showResults }) => $spinning ? '192px' : ($showResults ? 'auto' : '192px')};
+  height: ${({ $spinning, $showResults }) =>
+    $spinning ? "192px" : $showResults ? "auto" : "192px"};
   min-height: 192px;
-  overflow: ${({ $spinning }) => $spinning ? 'hidden' : 'visible'};
-  border: 2px solid #E5E7EB;
+  overflow: ${({ $spinning }) => ($spinning ? "hidden" : "visible")};
+  border: 2px solid #e5e7eb;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
   display: flex;
