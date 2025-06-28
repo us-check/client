@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// 전체 배경 그라데이션 (RoutePage와 통일)
 export const PageWrapper = styled.div`
   min-height: 100vh;
   background: #f9fafb;

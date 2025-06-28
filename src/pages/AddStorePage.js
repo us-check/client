@@ -70,10 +70,8 @@ function AddStorePage() {
 
   const handleFindNearby = () => {
     if (nearbyStores.length > 0) {
-      // 이미 목록이 있는 경우 -> 초기화(숨김)
       setNearbyStores([]);
     } else {
-      // 목록이 없는 경우 -> 예시 데이터로 표시
       setNearbyStores(exampleStores);
       setError("");
       setLoading(false);
@@ -140,7 +138,6 @@ function AddStorePage() {
         <StoreTitle>가게를 등록하시나요?</StoreTitle>
         <StoreDesc>새로운 가게 정보를 추가해보세요</StoreDesc>
         <StoreForm onSubmit={handleSubmit}>
-          {/* 내 위치로 등록 먼저! */}
           <StoreButton
             type="button"
             onClick={handleFindNearby}
@@ -173,7 +170,7 @@ function AddStorePage() {
             </>
           )}
 
-          {/* 아래는 수동 입력 폼 (가게가 자동으로 안 채워졌을 경우 입력) */}
+          {/*입력 폼 */}
           <StoreFormGroup>
             <StoreLabel htmlFor="name">가게 이름</StoreLabel>
             <GradientWrapper>

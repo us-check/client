@@ -415,7 +415,6 @@ export const StoreMenuIcon = styled.img`
   cursor: pointer;
 `;
 
-// Card for the form
 export const StoreFormCard = styled.div`
   background: rgba(255, 255, 255, 0.95);
   border-radius: 1.25rem;
@@ -617,7 +616,7 @@ export const StoreFooter = styled.footer`
   line-height: 1.4;
 `;
 
-// PachinkoPage 상세정보 모달 스타일 (클래스 기반)
+// PachinkoPage 상세정보 모달
 export const DetailModalOverlay = styled.div`
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);

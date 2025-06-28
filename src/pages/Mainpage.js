@@ -115,7 +115,6 @@ function Mainpage() {
         </FooterTextWrapper>
       </FooterContainer>
 
-      {/* 메뉴 모달 */}
       {isMenuOpen && (
         <MainpageModal
           isLoggedIn={isLoggedIn}

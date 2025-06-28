@@ -127,16 +127,12 @@ function categorizeServerData(items) {
   return categorized;
 }
 
-// 서버 응답에서 recommended_spots만 추출해서 기존 데이터 변환 함수에 넘기도록 분기 추가
 function categorizeServerDataFromServerResponse(serverResponse) {
-  // 서버 응답에서 recommended_spots만 추출해서 기존 구조로 변환
-  console.log("서버 응답:", serverResponse);
   if (!serverResponse || !Array.isArray(serverResponse.recommended_spots))
     return { attraction: [], restaurant: [], accommodation: [] };
   return categorizeServerData(serverResponse.recommended_spots);
 }
 
-// getTypeIcon, getTypeName 함수가 아래에서 사용되므로 함수 선언을 컴포넌트 함수 위로 이동
 function getTypeIcon(type) {
   switch (type) {
     case "attraction":
@@ -187,30 +183,23 @@ function PachinkoPage() {
     ) {
       startInitialSpin();
     }
-    // eslint-disable-next-line
-  }, [dataByCategory]); // startInitialSpin 의존성 경고 무시
+  }, [dataByCategory]);
 
   useEffect(() => {
-    console.log("PachinkoPage mounted");
     const shouldAutoSpin = localStorage.getItem("shouldAutoSpin");
-    console.log("shouldAutoSpin:", shouldAutoSpin);
     setTimeout(() => {
       if (shouldAutoSpin === "true") {
-        console.log("Starting auto spin from main page...");
         localStorage.removeItem("shouldAutoSpin");
         startAutoSpin();
       }
     }, 500);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // startAutoSpin 의존성 경고 무시
+  }, []);
 
   useEffect(() => {
-    // localStorage에서 pachinkoData를 불러와서 사용
     const localData = localStorage.getItem("pachinkoData");
     if (localData) {
       try {
         const parsed = JSON.parse(localData);
-        // 서버 응답 형태면 recommended_spots만 추출해서 변환
         if (parsed.recommended_spots) {
           setDataByCategory(categorizeServerDataFromServerResponse(parsed));
         } else if (Array.isArray(parsed)) {
@@ -236,7 +225,6 @@ function PachinkoPage() {
   }, []);
 
   const startInitialSpin = () => {
-    console.log("Initial spin started");
     setIsAutoSpinning(false);
     setShowResults(false);
     setSelectedItems({});
@@ -255,17 +243,13 @@ function PachinkoPage() {
       }
     });
 
-    console.log("Final results for initial spin:", finalResults);
-
     travelPlan.forEach((type, index) => {
       setTimeout(() => {
-        console.log(`Stopping initial spin for ${type}`);
         setSelectedItems((prev) => ({ ...prev, [type]: finalResults[type] }));
         setIsSpinning((prev) => ({ ...prev, [type]: false }));
 
         if (index === travelPlan.length - 1) {
           setTimeout(() => {
-            console.log("Initial spin completed");
             setShowResults(true);
           }, 100);
         }
@@ -274,7 +258,6 @@ function PachinkoPage() {
   };
 
   const startAutoSpin = () => {
-    console.log("Auto spin started");
     setIsAutoSpinning(true);
     setShowResults(false);
     setSelectedItems({});
@@ -293,17 +276,13 @@ function PachinkoPage() {
       }
     });
 
-    console.log("Final results for auto spin:", finalResults);
-
     travelPlan.forEach((type, index) => {
       setTimeout(() => {
-        console.log(`Stopping spin for ${type}`);
         setSelectedItems((prev) => ({ ...prev, [type]: finalResults[type] }));
         setIsSpinning((prev) => ({ ...prev, [type]: false }));
 
         if (index === travelPlan.length - 1) {
           setTimeout(() => {
-            console.log("Auto spin completed");
             setIsAutoSpinning(false);
             setShowResults(true);
           }, 100);
@@ -313,7 +292,6 @@ function PachinkoPage() {
   };
 
   const spinAllMachines = () => {
-    console.log("Manual spin all started");
     setIsAutoSpinning(false);
     setShowResults(false);
     setSelectedItems({}); // 스핀 시작 시 기존 결과값 즉시 숨김
@@ -325,7 +303,6 @@ function PachinkoPage() {
     });
     setIsSpinning(initialSpinning);
 
-    // 최종 결과 미리 선택
     const finalResults = {};
     travelPlan.forEach((type) => {
       const items = dataByCategory[type];

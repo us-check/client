@@ -336,8 +336,8 @@ export const MainSpinButton = styled.button`
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 0 32px; /* 좌우 여백 */
-  height: 44px; /* 고정 높이로 균형 잡기 */
+  padding: 0 32px;
+  height: 44px;
 
   font-size: 18px;
   font-weight: 600;
@@ -348,9 +348,9 @@ export const MainSpinButton = styled.button`
 
   display: flex;
   align-items: center;
-  justify-content: center; /* 중앙 정렬 */
+  justify-content: center;
 
-  margin: 0 auto; /* 가운데 배치 */
+  margin: 0 auto;
 
   &:hover:not(:disabled) {
     background: linear-gradient(135deg, #007c81 0%, #006669 100%);

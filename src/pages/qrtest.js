@@ -1,10 +1,7 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom";
 
-// QR 코드 패턴 (21x21 그리드의 간단한 패턴)
 const QR_PATTERN = [
   [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
@@ -29,15 +26,15 @@ const QR_PATTERN = [
   [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
 ]
 
- const containerStyle = {
-   minHeight: "100vh",
-   background: " rgba(0, 0, 0, 0.7)",
-   display: "flex",
-   flexDirection: "column",
-   alignItems: "center",
-   justifyContent: "center",
-   padding: "2rem",
- }
+const containerStyle = {
+  minHeight: "100vh",
+  background: " rgba(0, 0, 0, 0.7)",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "2rem",
+}
 
 
 
@@ -106,7 +103,7 @@ export default function QRAssembly() {
   const [showGrid, setShowGrid] = useState(false)
   const navigate = useNavigate();
 
-useEffect(() => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
       navigate("/myreservation");
     }, 6000);
@@ -120,7 +117,6 @@ useEffect(() => {
     QR_PATTERN.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
         if (cell === 1) {
-          // 화면 사방에서 랜덤한 시작 위치 생성
           const side = Math.floor(Math.random() * 4) // 0: 위, 1: 오른쪽, 2: 아래, 3: 왼쪽
           let startX, startY
 
@@ -179,11 +175,11 @@ useEffect(() => {
   }, [])
 
   return (
-    <motion.div 
-        style={containerStyle}
-        initial={{ backgroundColor: "rgba(0,0,0,0)" }}
-        animate={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-        transition={{ duration: 1.2 }}
+    <motion.div
+      style={containerStyle}
+      initial={{ backgroundColor: "rgba(0,0,0,0)" }}
+      animate={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+      transition={{ duration: 1.2 }}
     >
       <div style={{ position: "relative" }}>
         {/* QR 코드 그리드 배경 */}
@@ -207,7 +203,7 @@ useEffect(() => {
               key={square.id}
               style={squareStyle}
               initial={{
-                x: square.startX - 210, // 중앙 기준으로 조정
+                x: square.startX - 210,
                 y: square.startY - 210,
                 scale: 0.3,
                 opacity: 1,
@@ -216,12 +212,12 @@ useEffect(() => {
               animate={
                 isAnimating
                   ? {
-                      x: square.col * 20,
-                      y: square.row * 20,
-                      scale: 1,
-                      opacity: 1,
-                      rotate: 0,
-                    }
+                    x: square.col * 20,
+                    y: square.row * 20,
+                    scale: 1,
+                    opacity: 1,
+                    rotate: 0,
+                  }
                   : {}
               }
               transition={{

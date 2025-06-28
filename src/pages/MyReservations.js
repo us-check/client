@@ -209,8 +209,8 @@ function MyReservations() {
                       position: item.position
                         ? item.position
                         : item.mapy && item.mapx
-                        ? { lat: Number(item.mapy), lng: Number(item.mapx) }
-                        : null,
+                          ? { lat: Number(item.mapy), lng: Number(item.mapx) }
+                          : null,
                       address: item.address || "",
                     }))
                     .filter(
@@ -251,11 +251,11 @@ function MyReservations() {
                       <TravelDesc>{item.description}</TravelDesc>
                       <TravelPrice>
                         {["restaurant", "accommodation"].includes(type) &&
-                        item.count > 1
+                          item.count > 1
                           ? `${(item.price * item.count).toLocaleString()}원 `
                           : item.price === 0
-                          ? "무료"
-                          : `${item.price.toLocaleString()}원`}
+                            ? "무료"
+                            : `${item.price.toLocaleString()}원`}
                         {/* 인원수 표시 */}
                         {["restaurant", "accommodation"].includes(type) &&
                           item.count > 1 && <span>({item.count}명)</span>}

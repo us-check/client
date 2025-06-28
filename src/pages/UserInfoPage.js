@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MainpageModal from "../components/MainpageModal"; // ✅ 모달 컴포넌트 import
+import MainpageModal from "../components/MainpageModal";
 
 import {
   BackIcon,
@@ -94,7 +94,7 @@ const UserInfoPage = () => {
         </InfoCard>
       </ContentWrapper>
 
-      {/* ✅ 메뉴 모달 열림 */}
+      {/* 메뉴 모달 열림 */}
       {isOpen && (
         <MainpageModal
           isLoggedIn={isLoggedIn}

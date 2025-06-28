@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-// 로딩 스피너 애니메이션 정의
+//애니메이션 정의
 const spin = keyframes`
   0% {
     transform: rotate(0deg);

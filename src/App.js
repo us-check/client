@@ -8,7 +8,6 @@ import RoutePage from "./pages/RoutePage";
 import PaymentPage from "./pages/PaymentPage";
 import MyReservations from "./pages/MyReservations";
 import AddStorePage from "./pages/AddStorePage";
-import Qrtest from "./pages/qrtest";
 
 function App() {
   return (

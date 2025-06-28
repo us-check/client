@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// 전체 배경 그라데이션 (PachinkoPage와 통일)
 export const PageWrapper = styled.div`
   min-height: 100vh;
   background: #f9fafb;
@@ -45,7 +44,6 @@ export const ContentGrid = styled.div`
   }
 `;
 
-// 카드류 스타일: 투명도, 그림자, radius 등 PachinkoPage와 통일
 export const MapCard = styled.div`
   background: rgba(255, 255, 255, 0.85);
   border-radius: 16px;
@@ -97,7 +95,6 @@ export const ItemContent = styled.div`
   border-left: 5px solid #e5e7eb;
 `;
 
-// 동적 borderLeft를 위한 ItemContentWithBorder
 export const ItemContentWithBorder = styled(ItemContent)`
   border-left: 5px solid ${({ bordercolor }) => bordercolor || "#e5e7eb"};
   min-height: 90px;
@@ -283,7 +280,6 @@ export const ViewOnMapButton = styled.button`
   }
 `;
 
-// DatePicker 커스텀 버튼
 export const DatePickerButton = styled.button`
   background: #f3f4f6;
   border: 1px solid #d1d5db;
@@ -332,7 +328,6 @@ export const ModalButton = styled.button`
   cursor: pointer;
 `;
 
-// TossPay 아이콘 스타일
 export const TossPayIcon = styled.img`
   width: 20px;
   height: 20px;
@@ -343,7 +338,6 @@ export const TossPayIcon = styled.img`
   vertical-align: middle;
 `;
 
-// Map 영역 스타일
 export const MapArea = styled.div`
   width: 100%;
   height: 520px;
@@ -354,7 +348,6 @@ export const MapArea = styled.div`
   background: #f8fafc;
 `;
 
-// 상단 flex row
 export const FlexRowBetween = styled.div`
   display: flex;
   justify-content: space-between;

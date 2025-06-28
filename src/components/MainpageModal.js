@@ -1,5 +1,14 @@
+// src/components/MainpageModal.js
 import React, { useState } from 'react';
-import styles from './MainpageModal.module.css';
+import {
+  Overlay,
+  Panel,
+  MenuTitle,
+  Divider,
+  MenuItem,
+  MenuLabel,
+  ChevronRightIcon,
+} from './MainpageModalStyle';
 
 const MainpageModal = ({
   onClose,
@@ -12,64 +21,72 @@ const MainpageModal = ({
 }) => {
   const [isClosing, setIsClosing] = useState(false);
 
+  // 오버레이 클릭 → 닫힘 애니메이션 시작
   const handleOverlayClick = () => setIsClosing(true);
+
+  // 패널 내부 클릭은 버블링 방지
   const stopPropagation = (e) => e.stopPropagation();
+
+  // 애니메이션 끝나면 실제로 닫기
   const handleAnimationEnd = () => {
-    if (isClosing) onClose();
+    if (isClosing) onClose?.();
   };
 
+  // 메뉴 클릭 시 실행 → 닫힘 애니메이션 시작
   const closeAnd = (fn) => {
     fn?.();
     setIsClosing(true);
   };
 
   return (
-    <div className={styles.overlay} onClick={handleOverlayClick}>
-      <div
-        className={`${styles.panel} ${isClosing ? styles.slideOut : styles.slideIn}`}
+    <Overlay onClick={handleOverlayClick}>
+      <Panel
+        isClosing={isClosing}
         onClick={stopPropagation}
         onAnimationEnd={handleAnimationEnd}
       >
-        <div className={styles.menuTitle}>메뉴</div>
-        <div className={styles.divider} />
+        <MenuTitle>메뉴</MenuTitle>
+        <Divider />
 
+        {/* ───────── 로그인 전 ───────── */}
         {!isLoggedIn ? (
           <>
-            <div className={styles.menuItemLogin} onClick={() => closeAnd(onLoginClick)}>
-              <div className={styles.menuLabel}>로그인</div>
-              <img className={styles.chevronRightIcon} alt="" src="오른화살표.svg" />
-            </div>
+            <MenuItem onClick={() => closeAnd(onLoginClick)}>
+              <MenuLabel>로그인</MenuLabel>
+              <ChevronRightIcon src="오른화살표.svg" alt=">" />
+            </MenuItem>
 
-            <div className={styles.menuItemLang} onClick={() => closeAnd(onLangClick)}>
-              <div className={styles.menuLabel}>언어 변경</div>
-              <img className={styles.chevronRightIcon} alt="" src="오른화살표.svg" />
-            </div>
+            <MenuItem onClick={() => closeAnd(onLangClick)}>
+              <MenuLabel>언어 변경</MenuLabel>
+              <ChevronRightIcon src="오른화살표.svg" alt=">" />
+            </MenuItem>
           </>
         ) : (
+          /* ───────── 로그인 후 ───────── */
           <>
-            <div className={styles.menuItemLogin} onClick={() => closeAnd(onMyPageClick)}>
-              <div className={styles.menuLabel}>내 정보</div>
-              <img className={styles.chevronRightIcon} alt="" src="오른화살표.svg" />
-            </div>
+            <MenuItem onClick={() => closeAnd(onMyPageClick)}>
+              <MenuLabel>내 정보</MenuLabel>
+              <ChevronRightIcon src="오른화살표.svg" alt=">" />
+            </MenuItem>
 
-            <div className={styles.menuItemLogin} onClick={() => closeAnd(onStoreRegisterClick)}>
-              <div className={styles.menuLabel}>가게 등록</div>
-              <img className={styles.chevronRightIcon} alt="" src="오른화살표.svg" />
-            </div>
+            <MenuItem onClick={() => closeAnd(onStoreRegisterClick)}>
+              <MenuLabel>가게 등록</MenuLabel>
+              <ChevronRightIcon src="오른화살표.svg" alt=">" />
+            </MenuItem>
 
-            <div className={styles.menuItemLang} onClick={() => closeAnd(onLangClick)}>
-              <div className={styles.menuLabel}>언어 변경</div>
-              <img className={styles.chevronRightIcon} alt="" src="오른화살표.svg" />
-            </div>
+            <MenuItem onClick={() => closeAnd(onLangClick)}>
+              <MenuLabel>언어 변경</MenuLabel>
+              <ChevronRightIcon src="오른화살표.svg" alt=">" />
+            </MenuItem>
 
-            <div className={styles.menuItemLang} onClick={() => closeAnd(onLogoutClick)}>
-              <div className={styles.menuLabel}>로그아웃</div>
-              <img className={styles.chevronRightIcon} alt="" src="오른화살표.svg" />
-            </div>
+            <MenuItem onClick={() => closeAnd(onLogoutClick)}>
+              <MenuLabel>로그아웃</MenuLabel>
+              <ChevronRightIcon src="오른화살표.svg" alt=">" />
+            </MenuItem>
           </>
         )}
-      </div>
-    </div>
+      </Panel>
+    </Overlay>
   );
 };
 

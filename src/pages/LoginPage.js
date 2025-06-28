@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
-import MainpageModal from "../components/MainpageModal"; // ✅ 모달 컴포넌트 import
+import MainpageModal from "../components/MainpageModal";
 import {
   Container,
   StoreHeader,
@@ -27,8 +27,8 @@ import {
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false); // ✅ 메뉴 상태
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -104,7 +104,6 @@ const LoginPage = () => {
         </InUscodeContainer>
       </Footer>
 
-      {/* ✅ MainpageModal 조건부 렌더링 */}
       {isOpen && (
         <MainpageModal
           isLoggedIn={isLoggedIn}
