@@ -265,7 +265,8 @@ export const NewTripSection = styled.div`
 `;
 
 export const NewTripButton = styled.button`
-  background: linear-gradient(135deg, #10b981 0%, #2563eb 100%);
+  //background: linear-gradient(135deg, #10b981 0%, #2563eb 100%);
+  background-color: #009499;
   color: white;
   border: none;
   border-radius: 8px;
@@ -276,7 +277,8 @@ export const NewTripButton = styled.button`
   transition: all 0.2s;
   
   &:hover {
-    background: linear-gradient(135deg, #059669 0%, #1d4ed8 100%);
+    //background: linear-gradient(135deg, #059669 0%, #1d4ed8 100%);
+    background-color: #009499;
     transform: translateY(-1px);
   }
 `;
