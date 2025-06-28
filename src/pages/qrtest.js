@@ -28,7 +28,7 @@ const QR_PATTERN = [
 
 const containerStyle = {
   minHeight: "100vh",
-  background: " rgba(0, 0, 0, 0.7)",
+  background: " rgba(0, 0, 0, 1)",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -178,11 +178,10 @@ export default function QRAssembly() {
     <motion.div
       style={containerStyle}
       initial={{ backgroundColor: "rgba(0,0,0,0)" }}
-      animate={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+      animate={{ backgroundColor: "rgba(0,0,0,1)" }}
       transition={{ duration: 1.2 }}
     >
       <div style={{ position: "relative" }}>
-        {/* QR 코드 그리드 배경 */}
         {showGrid && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -196,7 +195,7 @@ export default function QRAssembly() {
           </motion.div>
         )}
 
-        {/* 날아오는 네모들 */}
+        {/* 날아오는 네모 */}
         <div style={qrContainerStyle}>
           {squares.map((square, index) => (
             <motion.div
@@ -235,12 +234,12 @@ export default function QRAssembly() {
           ))}
         </div>
 
-        {/* 완성된 QR 코드 글로우 효과 */}
+        {/* 글로우 효과 */}
         {showGrid && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 1, delay: 1.5 }}
             style={glowStyle}
           />
         )}
