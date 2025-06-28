@@ -138,6 +138,6 @@ export const FooterTextWrapper = styled.div`
 
 export const FooterText = styled.p`
   font-size: 14px;
-  color: #b5b5b5;
+  color: #6b7280;
   margin: 0;
 `;
