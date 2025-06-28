@@ -1,4 +1,3 @@
-// src/styles/MainpageModalStyle.js
 import styled, { keyframes } from 'styled-components';
 
 const slideIn = keyframes`
@@ -13,7 +12,7 @@ const slideOut = keyframes`
 
 export const Overlay = styled.div`
   position: fixed;
-  inset: 0;                    /* top/right/bottom/left: 0 */
+  inset: 0;
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
@@ -31,8 +30,6 @@ export const Panel = styled.div`
   padding: 32px 24px;
   box-sizing: border-box;
   z-index: 1000;
-
-  /* 모달 열고 닫힐 때 애니메이션 */
   animation: ${({ isClosing }) => (isClosing ? slideOut : slideIn)} 0.3s forwards;
 `;
 
