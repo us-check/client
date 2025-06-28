@@ -27,7 +27,6 @@ import {
   ResultTitle,
   ResultDescription,
   ResultBadge,
-  WaitingContent,
   ReelControls,
   SpinButton,
   MoreButton,
@@ -440,8 +439,8 @@ function PachinkoPage() {
                                     src={spinItem.image || "/placeholder.svg"}
                                     alt={spinItem.name}
                                     style={{
-                                      width: 36,
-                                      height: 36,
+                                      width: 60,
+                                      height: 45,
                                       borderRadius: 8,
                                       objectFit: "cover",
                                       marginBottom: 4,
@@ -469,9 +468,9 @@ function PachinkoPage() {
                                 src={item.image || "/placeholder.svg"}
                                 alt={item.name}
                                 style={{
-                                  width: 80,
-                                  height: 80,
-                                  borderRadius: 12,
+                                  width: 300,
+                                  height: 268,
+                                  borderRadius: 15,
                                   objectFit: "cover",
                                 }}
                               />
