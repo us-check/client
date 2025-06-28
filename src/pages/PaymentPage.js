@@ -32,6 +32,7 @@ function PaymentPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [travelDate, setTravelDate] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -40,10 +41,15 @@ function PaymentPage() {
     const method = params.get("method") || "kakao";
     setPaymentMethod(method);
 
+    // ✅ 여행 날짜는 항상 시도해서 불러오기
+    const storedDate = localStorage.getItem("travelDate");
+    if (storedDate) {
+      setTravelDate(new Date(storedDate));
+    }
+
     const items = localStorage.getItem("selectedTravelItems");
     if (items) {
       const selectedItems = JSON.parse(items);
-      // 인원수(count) 반영하여 계산
       const subtotal = Object.entries(selectedItems).reduce(
         (sum, [type, item]) => {
           const price = Number(item.price) || 0;
@@ -60,6 +66,7 @@ function PaymentPage() {
   }, [location]);
 
   const handlePayment = async () => {
+
     setIsProcessing(true);
 
     setTimeout(() => {
@@ -72,7 +79,7 @@ function PaymentPage() {
       localStorage.setItem("travelQR", qrCode);
 
       setTimeout(() => {
-        navigate("/mypage");
+        navigate("/myreservation");
       }, 3000);
     }, 3000);
   };
@@ -117,6 +124,25 @@ function PaymentPage() {
                 <span>{totalAmount.toLocaleString()}원</span>
               </PriceInfo>
             </PriceDisplay>
+
+            {travelDate && (
+              <div
+                style={{
+                  background: "#f0fdf4",
+                  padding: "12px 16px",
+                  borderRadius: "8px",
+                  fontSize: "14px",
+                  color: "#065f46",
+                  marginTop: "-8px",
+                }}
+              >
+                <p style={{ margin: 0, fontWeight: 500 }}>여행 예정일</p>
+                <strong style={{ fontSize: "16px", color: "#047857" }}>
+                  {`${travelDate.getFullYear()}년 ${travelDate.getMonth() + 1}월 ${travelDate.getDate()}일`}
+                </strong>
+              </div>
+            )}
+
 
             <FormSection>
               <FormGroup>

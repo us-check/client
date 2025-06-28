@@ -41,6 +41,16 @@ export const PageWrapper = styled.div`
   );
 `;
 
+export const BackIcon = styled.img`
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 10;
+`;
+
 export const Header = styled.header`
   display: flex;
   align-items: center;

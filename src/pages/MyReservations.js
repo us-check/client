@@ -40,14 +40,17 @@ import GoogleMapComponent from "./GoogleMapComponent"; // 구글 맵 컴포넌�
 function MyReservations() {
   const [qrCode, setQrCode] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
+  const [travelDate, setTravelDate] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const qr = localStorage.getItem("travelQR");
     const items = localStorage.getItem("selectedTravelItems");
+    const date = localStorage.getItem("travelDate");
 
     if (qr) setQrCode(qr);
     if (items) setSelectedItems(JSON.parse(items));
+    if (date) setTravelDate(new Date(date));
   }, []);
 
   const getTypeIcon = (type) => {
@@ -89,8 +92,15 @@ function MyReservations() {
     <PageWrapper>
       <Container>
         <Header>
-          <BackButton onClick={() => navigate("/")}>← 홈으로</BackButton>
-          <Title>👤 마이페이지</Title>
+          <BackButton onClick={() => navigate("/")}>
+            <img
+              src="/뒤로가는화살표.svg"
+              alt="뒤로가기"
+              style={{ width: "32px", height: "32px" }}
+            />
+          </BackButton>
+
+          <Title>🧾 예매내역</Title>
         </Header>
 
         <ContentGrid>
@@ -127,6 +137,17 @@ function MyReservations() {
                 <InfoLabel>예약 일시</InfoLabel>
                 <InfoValue>{new Date().toLocaleDateString("ko-KR")}</InfoValue>
               </InfoItem>
+
+              {travelDate && (
+                <InfoItem style={{ background: "#fef9c3" }}>
+                  <InfoLabel>여행 날짜</InfoLabel>
+                  <InfoValue style={{ color: "#92400e" }}>
+                    {travelDate.toLocaleDateString("ko-KR")}
+                  </InfoValue>
+                </InfoItem>
+              )}
+
+
             </InfoContent>
           </InfoCard>
         </ContentGrid>
@@ -185,18 +206,20 @@ function MyReservations() {
                       <TravelName>{item.name}</TravelName>
                       <TravelDesc>{item.description}</TravelDesc>
                       <TravelPrice>
-                        {/* 인원수 반영 가격 표시 */}
-                        {["restaurant", "accommodation"].includes(type) &&
-                        item.count > 1
-                          ? `${(
-                              item.price * item.count
-                            ).toLocaleString()}원 (${item.price.toLocaleString()}원 × ${
-                              item.count
-                            }명)`
+                        {["restaurant", "accommodation"].includes(type) && item.count > 1
+                          ? `${(item.price * item.count).toLocaleString()}원 `
                           : item.price === 0
-                          ? "무료"
-                          : `${item.price.toLocaleString()}원`}
+                            ? "무료"
+                            : `${item.price.toLocaleString()}원`}
+
+                        {/* 인원수 표시 */}
+                        {["restaurant", "accommodation"].includes(type) && item.count > 1 && (
+                          <span style={{ fontSize: "12px", color: "#6b7280", marginLeft: "4px" }}>
+                            ({item.count}명)
+                          </span>
+                        )}
                       </TravelPrice>
+
                     </TravelInfo>
                   </TravelItem>
                 ))}

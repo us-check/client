@@ -19,17 +19,13 @@ export const Header = styled.div`
 `;
 
 export const BackButton = styled.button`
+  position: absolute;
+  top: 22px;
+  left: 22px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
-  border-radius: 6px;
-  color: #6b7280;
-  transition: background-color 0.2s;
-  
-  &:hover {
-    background: #f3f4f6;
-  }
+  z-index: 10;
 `;
 
 export const Title = styled.h1`

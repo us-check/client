@@ -88,6 +88,26 @@ export const BackIcon = styled.img`
   cursor: pointer;
 `;
 
+export const SubtitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0 24px;
+`;
+
+export const Subtitle = styled.p`
+  font-size: 14px;
+  color: #888;
+  margin: 0 12px;
+  white-space: nowrap;
+`;
+
+export const Divider = styled.hr`
+  flex: 1;
+  border: none;
+  border-top: 1px solid #ddd;
+`;
 
 export const Footer = styled.div`
   position: fixed;
