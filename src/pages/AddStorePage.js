@@ -29,7 +29,7 @@ import {
 function AddStorePage() {
   const [form, setForm] = useState({
     name: "",
-    type: "accommodation", // 숙박시설이 기본값
+    type: "accommodation",
     address: "",
     price: "",
     businessNumber: "",
@@ -45,7 +45,6 @@ function AddStorePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const navigate = useNavigate();
 
-  // 예시 데이터 (실제 위치 대신)
   const exampleStores = [
     {
       id: 1,
@@ -110,7 +109,6 @@ function AddStorePage() {
       formData.append("price", form.price);
       formData.append("overview", form.overview);
       formData.append("image", form.image || "");
-      // 실제 서버 요청 예시
       await fetch(`${process.env.REACT_APP_API_URL}/api/store`, {
         method: "POST",
         body: formData,
@@ -171,7 +169,6 @@ function AddStorePage() {
 
           {error && <StoreError>{error}</StoreError>}
 
-          {/* 주변 가게 리스트 표시 */}
           {nearbyStores.length > 0 && (
             <>
               <StoreLabel>근처 가게를 선택하세요</StoreLabel>
@@ -193,7 +190,6 @@ function AddStorePage() {
             </>
           )}
 
-          {/*입력 폼 */}
           <StoreFormGroup>
             <StoreLabel htmlFor="name">가게 이름</StoreLabel>
             <GradientWrapper>
