@@ -45,10 +45,10 @@ const LoginPage = () => {
             <Card>
                 <LogoWrapper>
                     <LogoImage src="로고마늘.svg" alt="로고마늘" />
-                    <LogoText>Us:Check</LogoText>
+                    <LogoText>의성:Check</LogoText>
                 </LogoWrapper>
                 <LoginButtonWrapper onClick={handleLogin}>
-                    <FcGoogle style={{ marginRight: '8px' }} />
+                    <FcGoogle />
                     구글로 로그인하기
                 </LoginButtonWrapper>
             </Card>
@@ -61,6 +61,7 @@ const LoginPage = () => {
                 </InUscodeContainer>
             </Footer>
         </Container>
+
     );
 };
 

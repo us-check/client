@@ -32,7 +32,7 @@ const pulse = keyframes`
 
 export const PageWrapper = styled.div`
   min-height: 100vh;
-    background: linear-gradient(
+  background: linear-gradient(
     180deg,
     #ffffff 0%,
     #f3ffff 27%,

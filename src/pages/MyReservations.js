@@ -26,7 +26,6 @@ import {
   TravelCard,
   TravelHeader,
   TravelTitle,
-  TravelGrid,
   TravelItem,
   TravelImage,
   TravelInfo,
@@ -79,7 +78,7 @@ function MyReservations() {
 
   const getTotalPrice = () => {
     const subtotal = Object.values(selectedItems).reduce(
-      (sum, item) => sum + item.price,
+      (sum, item) => sum + (Number(item.price) || 0) * (item.count || 1),
       0
     );
     const fee = Math.floor(subtotal * 0.05);

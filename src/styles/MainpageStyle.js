@@ -1,95 +1,142 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 
 export const FrameWrapper = styled.div`
   width: 100%;
-  position: relative;
-  background: linear-gradient(180deg, #fff, #f3ffff 27.4%, #e9feff 70.67%, #c6fdff);
-  height: 1053px;
-  overflow: hidden;
-  text-align: left;
-  font-size: 36px;
-  color: #000;
-`;
-
-export const TopBar = styled.div`
-  position: absolute;
-  top: 468px;
-  left: 536px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 500px;
-  background-color: #fff;
-  border: 4px solid #00f6ff;
-  box-sizing: border-box;
-  width: 847px;
-  height: 105px;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f3ffff 27%,
+    #e9feff 71%,
+    #c6fdff 100%
+  );
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 33px;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
-export const GarlicIcon = styled.img`
-  width: 63px;
-  position: relative;
-  max-height: 100%;
-  object-fit: cover;
-`;
-
-export const SearchInputWrapper = styled.div`
-  width: 780px;
-  height: 50px;
-  position: relative;
+export const Header = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px 60px 0;
   display: flex;
-  align-items: center;
-  border-radius: 8px;
-  padding: 0 10px;
-  //background: #f5f5f5;
-`;
-
-export const SearchInput = styled.input`
-  flex: 1;
-  border: none;
-  background: transparent;
-  font-size: 25px;
-  outline: none;
-  color: #333;
-`;
-
-export const SearchIcon = styled.img`
-  width: 40px;
-  height: 40px;
-  margin-left: 8px;
-`;
-
-export const LogoSection = styled.div`
-  position: absolute;
-  top: 15px;
-  left: 213px;
-  width: 1494px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+`;
+
+export const LogoGroup = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const LogoImage = styled.img`
-  width: 51px;
-  height: 62px;
-  object-fit: cover;
-  position: relative;
+  width: 50px;
+  height: auto;
+  margin-right: 8px;
 `;
 
 export const LogoText = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 64px;
-  line-height: 22px;
-  -webkit-text-stroke: 1px #000;
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
 `;
 
 export const MenuIcon = styled.img`
   width: 50px;
   height: 50px;
-  object-fit: contain;
+`;
+
+export const MainContent = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -100px;
+`;
+
+export const TitleText = styled.h1`
+  font-size: 50px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  background: linear-gradient(90deg, #00f6ff, #009499);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: floatText 3s ease-in-out infinite;
+
+  @keyframes floatText {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+`;
+
+export const SearchBox = styled.div`
+  padding: 3px;
+  background: linear-gradient(90deg, #00f6ff, #009499);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  width: 700px;
+  max-width: 90vw;
+  height: 70px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+`;
+
+export const SearchInnerBox = styled.div`
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  background: white;
+  padding: 0 24px;
+  width: 100%;
+  height: 100%;
+`;
+
+export const GarlicIcon = styled.img`
+  width: 55px;
+  height: 55px;
+  margin-right: 12px;
+`;
+
+export const SearchInput = styled.input`
+  flex: 1;
+  font-size: 21px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #333;
+
+  &::placeholder {
+    color: #b5b5b5;
+  }
+`;
+
+export const SearchIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+`;
+
+export const FooterContainer = styled.div`
+  padding: 20px 0;
+  text-align: center;
+`;
+
+export const FooterTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+export const FooterText = styled.p`
+  font-size: 14px;
+  color: #b5b5b5;
+  margin: 0;
 `;

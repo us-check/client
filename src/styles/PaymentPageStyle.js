@@ -1,9 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const spin = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-`;
+import styled from "styled-components";
 
 export const PageWrapper = styled.div`
   min-height: 100vh;
@@ -31,7 +26,7 @@ export const BackButton = styled.button`
   border-radius: 6px;
   color: #6b7280;
   transition: background-color 0.2s;
-  
+
   &:hover {
     background: #f3f4f6;
   }
@@ -81,12 +76,12 @@ export const PriceInfo = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   span:first-child {
     font-weight: 500;
     color: #1f2937;
   }
-  
+
   span:last-child {
     font-size: 20px;
     font-weight: bold;
@@ -117,10 +112,10 @@ export const Input = styled.input`
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 14px;
-  
+
   &:focus {
     outline: none;
-    border-color: #06b6d4;
+    border-color: #009499;
     box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
   }
 `;
@@ -136,11 +131,11 @@ export const PayButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
-  
+
   &:hover:not(:disabled) {
     background: #0891b2;
   }
-  
+
   &:disabled {
     background: #9ca3af;
     cursor: not-allowed;
@@ -151,7 +146,7 @@ export const InfoText = styled.div`
   text-align: center;
   font-size: 14px;
   color: #6b7280;
-  
+
   p {
     margin: 4px 0;
   }
@@ -198,13 +193,13 @@ export const CompletedPrice = styled.div`
   padding: 16px;
   border-radius: 8px;
   margin-bottom: 24px;
-  
+
   p:first-child {
     font-size: 14px;
     color: #6b7280;
     margin-bottom: 4px;
   }
-  
+
   p:last-child {
     font-size: 20px;
     font-weight: bold;
