@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
+// 전체 배경 그라데이션 (RoutePage와 통일)
 export const PageWrapper = styled.div`
   min-height: 100vh;
   background: #f9fafb;
@@ -8,7 +9,7 @@ export const PageWrapper = styled.div`
 export const Container = styled.div`
   max-width: 1024px;
   margin: 0 auto;
-  padding: 32px 16px;
+  padding: 0 16px 32px;
 `;
 
 export const Header = styled.div`
@@ -42,16 +43,15 @@ export const ContentGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 32px;
   margin-bottom: 32px;
-  
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
   }
 `;
 
 export const QRCard = styled.div`
-  background: white;
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   overflow: hidden;
 `;
 
@@ -74,12 +74,11 @@ export const QRContent = styled.div`
 `;
 
 export const QRDisplay = styled.div`
-  background: white;
+  background: #fff;
   padding: 32px;
   border-radius: 8px;
   border: 2px dashed #d1d5db;
   margin-bottom: 16px;
-  
   div:last-child {
     font-family: monospace;
     font-size: 14px;
@@ -111,16 +110,15 @@ export const SaveButton = styled.button`
   padding: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  
   &:hover {
     background: #f9fafb;
   }
 `;
 
 export const InfoCard = styled.div`
-  background: white;
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   overflow: hidden;
 `;
 
@@ -150,15 +148,12 @@ export const InfoItem = styled.div`
   align-items: center;
   padding: 12px;
   border-radius: 8px;
-  
   &:nth-child(1) {
     background: #dbeafe;
   }
-  
   &:nth-child(2) {
     background: #dcfce7;
   }
-  
   &:nth-child(3) {
     background: #f3f4f6;
   }
@@ -185,9 +180,9 @@ export const Badge = styled.span`
 `;
 
 export const TravelCard = styled.div`
-  background: white;
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   margin-bottom: 32px;
   overflow: hidden;
 `;
@@ -211,53 +206,93 @@ export const TravelGrid = styled.div`
 
 export const TravelItem = styled.div`
   display: flex;
-  gap: 12px;
-  padding: 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  gap: 16px;
+  padding: 18px 20px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.95);
+  align-items: center;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.07);
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  &:hover {
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.13);
+    transform: translateY(-2px) scale(1.01);
+  }
 `;
 
 export const TravelImage = styled.div`
-  width: 64px;
-  height: 64px;
-  border-radius: 8px;
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
   overflow: hidden;
   flex-shrink: 0;
-  
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.08);
+  background: #f3f4f6;
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    border-radius: 12px;
   }
 `;
 
 export const TravelInfo = styled.div`
   flex: 1;
-  
-  div:first-child {
-    font-size: 12px;
-    color: #6b7280;
-    margin-bottom: 4px;
-  }
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+
+export const TravelBadge = styled.span`
+  display: inline-block;
+  background: #f3f4f6;
+  color: #009499;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 4px;
+  padding: 3px 10px;
+  margin-bottom: 2px;
+  width: fit-content;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const TravelName = styled.h3`
-  font-weight: 500;
-  font-size: 14px;
-  margin-bottom: 4px;
-  color: #1f2937;
+  font-weight: 700;
+  font-size: 17px;
+  margin-bottom: 2px;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const TravelDesc = styled.p`
-  font-size: 12px;
+  font-size: 13px;
   color: #6b7280;
-  margin-bottom: 4px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const TravelPrice = styled.p`
-  font-size: 14px;
-  font-weight: 500;
-  color: #2563eb;
+  font-size: 15px;
+  font-weight: 600;
+  color: #009499;
+  margin-top: 2px;
+  margin-bottom: 0;
+  span {
+    font-size: 12px;
+    color: #6b7280;
+    margin-left: 6px;
+    font-weight: 400;
+  }
 `;
 
 export const NewTripSection = styled.div`
@@ -265,7 +300,6 @@ export const NewTripSection = styled.div`
 `;
 
 export const NewTripButton = styled.button`
-  //background: linear-gradient(135deg, #10b981 0%, #2563eb 100%);
   background-color: #009499;
   color: white;
   border: none;
@@ -275,10 +309,36 @@ export const NewTripButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  
   &:hover {
-    //background: linear-gradient(135deg, #059669 0%, #1d4ed8 100%);
     background-color: #009499;
     transform: translateY(-1px);
   }
+`;
+
+// 지도에서 보기 버튼
+export const ViewOnMapButton = styled.button`
+  background: #fff;
+  color: #009499;
+  border: 1.5px solid #009499;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background: #f0fdfa;
+  }
+`;
+
+// Map 영역 스타일
+export const MapArea = styled.div`
+  width: 100%;
+  height: 340px;
+  margin-bottom: 20px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  background: #f8fafc;
 `;

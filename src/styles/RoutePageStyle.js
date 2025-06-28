@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
+// 전체 배경 그라데이션 (PachinkoPage와 통일)
 export const PageWrapper = styled.div`
   min-height: 100vh;
   background: #f9fafb;
@@ -8,7 +9,7 @@ export const PageWrapper = styled.div`
 export const Container = styled.div`
   max-width: 1536px;
   margin: 0 auto;
-  padding: 32px 16px;
+  padding: 0 16px 32px;
 `;
 
 export const Header = styled.div`
@@ -38,16 +39,17 @@ export const ContentGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
-  
+
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
   }
 `;
 
+// 카드류 스타일: 투명도, 그림자, radius 등 PachinkoPage와 통일
 export const MapCard = styled.div`
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   height: fit-content;
 `;
@@ -66,42 +68,10 @@ export const MapContent = styled.div`
   padding: 24px;
 `;
 
-export const MapSimulation = styled.div`
-  aspect-ratio: 1;
-  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const MapOverlay = styled.div`
-  text-align: center;
-  z-index: 10;
-`;
-
-export const MapIcon = styled.div`
-  font-size: 48px;
-  margin-bottom: 8px;
-`;
-
-export const MapText = styled.p`
-  color: #374151;
-  font-weight: 500;
-  margin-bottom: 4px;
-`;
-
-export const MapSubtext = styled.p`
-  font-size: 14px;
-  color: #6b7280;
-`;
-
 export const ItemsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 `;
 
 export const SectionTitle = styled.h2`
@@ -112,71 +82,94 @@ export const SectionTitle = styled.h2`
 `;
 
 export const ItemCard = styled.div`
-  background: white;
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   overflow: hidden;
+  border: 1.5px solid #e5e7eb;
 `;
 
 export const ItemContent = styled.div`
-  padding: 12px 16px;
+  padding: 18px 22px;
   display: flex;
   gap: 16px;
-  align-items: flex-start;
+  align-items: center;
+  border-left: 5px solid #e5e7eb;
+`;
+
+// 동적 borderLeft를 위한 ItemContentWithBorder
+export const ItemContentWithBorder = styled(ItemContent)`
+  border-left: 5px solid ${({ bordercolor }) => bordercolor || "#e5e7eb"};
+  min-height: 90px;
+  align-items: center;
 `;
 
 export const ItemImage = styled.div`
   width: 80px;
-  height: auto; 
-  border-radius: 8px;
+  height: 80px;
+  border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
 
   img {
     width: 100%;
-    height: auto; /* ✅ 이미지 비율 유지 */
+    height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: 10px;
   }
 `;
 
 export const ItemInfo = styled.div`
   flex: 1;
-  gap: 4px;
+  min-width: 0;
+  margin-left: 14px;
 `;
 
 export const ItemBadge = styled.div`
   display: inline-block;
   background: #f3f4f6;
-  color: #374151;
-  padding: 4px 8px;
+  color: #009499;
+  padding: 4px 12px;
   border-radius: 4px;
-  font-size: 12px;
-  margin-bottom: 8px;
-  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  border: none;
 `;
 
 export const ItemName = styled.h3`
   font-weight: 600;
-  margin-bottom: 4px;
-  color: #1f2937;
+  font-size: 17px;
+  margin-bottom: 2px;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ItemDescription = styled.p`
-  font-size: 14px;
+  font-size: 13px;
   color: #6b7280;
-  margin-bottom: 8px;
-  margin: 4px 0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ItemPrice = styled.p`
-  font-weight: 500;
-  color: #2563eb;
+  font-weight: 600;
+  font-size: 14px;
+  color: #009499;
+  margin-top: 2px;
 `;
 
 export const PriceCard = styled.div`
   border-radius: 12px;
   padding: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 `;
 
 export const PriceHeader = styled.div`
@@ -184,7 +177,7 @@ export const PriceHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  
+
   span {
     font-size: 18px;
     font-weight: 600;
@@ -210,8 +203,11 @@ export const PaymentButton = styled.button`
   justify-content: center;
   gap: 6px;
 
-  background: ${(props) => (props.kakao ? '#fee500' : '#2563eb')};
-  color: ${(props) => (props.kakao ? '#000' : '#fff')};
+  background: ${(props) =>
+    props.kakao
+      ? "#fee500"
+      : "linear-gradient(135deg, #009499 0%, #007c81 100%)"};
+  color: ${(props) => (props.kakao ? "#000" : "#fff")};
   border: none;
   border-radius: 8px;
   padding: 12px;
@@ -219,9 +215,10 @@ export const PaymentButton = styled.button`
   font-size: 18px;
   cursor: pointer;
   transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: ${(props) => (props.kakao ? '#fde047' : '#1d4ed8')};
+    background: ${(props) => (props.kakao ? "#fde047" : "#006669")};
   }
 
   img {
@@ -238,13 +235,13 @@ export const CountControlWrapper = styled.div`
 `;
 
 export const CountButton = styled.button`
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border: none;
   background: none;
   color: #374151;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
   font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
   display: flex;
@@ -253,18 +250,130 @@ export const CountButton = styled.button`
   cursor: pointer;
 
   span {
-    transform: translateY(-1px); /* 수직 정렬 보정 */
+    transform: translateY(-1px);
   }
 
   &:hover {
-    color: #1f2937; /* 호버 시 진한 회색 */
+    color: #1f2937;
   }
 `;
 
 export const CountText = styled.span`
-  min-width: 32px;
+  min-width: 24px;
   text-align: center;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
   color: #111827;
+`;
+
+// 지도에서 보기 버튼
+export const ViewOnMapButton = styled.button`
+  background: #fff;
+  color: #009499;
+  border: 1.5px solid #009499;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background: #f0fdfa;
+  }
+`;
+
+// DatePicker 커스텀 버튼
+export const DatePickerButton = styled.button`
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #374151;
+`;
+
+// 모달 오버레이
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+`;
+
+// 모달 컨텐츠
+export const ModalContent = styled.div`
+  background: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 320px;
+`;
+
+export const ModalText = styled.p`
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 16px;
+`;
+
+export const ModalButton = styled.button`
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #009499;
+  color: #fff;
+  cursor: pointer;
+`;
+
+// TossPay 아이콘 스타일
+export const TossPayIcon = styled.img`
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  margin-right: 6px;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
+`;
+
+// Map 영역 스타일
+export const MapArea = styled.div`
+  width: 100%;
+  height: 520px;
+  margin-bottom: 20px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  background: #f8fafc;
+`;
+
+// 상단 flex row
+export const FlexRowBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const FlexRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const AddressText = styled.span`
+  color: #bdbdbd;
+  font-size: 12px;
+`;
+
+export const CountLabel = styled.span`
+  margin-left: 8px;
+  font-size: 12px;
+  color: #888;
 `;

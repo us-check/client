@@ -30,6 +30,20 @@ const pulse = keyframes`
   50% { opacity: 0.5; }
 `;
 
+const bounceIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
 export const PageWrapper = styled.div`
   min-height: 100vh;
   background: linear-gradient(
@@ -115,7 +129,7 @@ export const Subtitle = styled.p`
 `;
 
 export const SlotMachineCard = styled.div`
-  max-width: 1024px;
+  max-width: 1280px;
   margin: 0 auto 32px;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(4px);
@@ -138,7 +152,7 @@ export const SlotMachineScreen = styled.div`
 export const ReelGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 48px;
   margin-bottom: 32px;
 `;
 
@@ -158,15 +172,15 @@ export const ReelHeaderContent = styled.div`
   gap: 8px;
   color: #374151;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 20px;
 `;
 
 export const ReelScreen = styled.div`
   background: white;
   border-radius: 12px;
   height: ${({ $spinning, $showResults }) =>
-    $spinning ? "192px" : $showResults ? "auto" : "192px"};
-  min-height: 192px;
+    $spinning ? "430px" : $showResults ? "auto" : "430px"};
+  min-height:430px;
   overflow: ${({ $spinning }) => ($spinning ? "hidden" : "visible")};
   border: 2px solid #e5e7eb;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -209,7 +223,7 @@ export const SpinItem = styled.div`
 
 export const ResultContent = styled.div`
   padding: 16px;
-  min-height: 220px; /* 세로 길이 늘림 */
+  min-height: 220px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -217,6 +231,7 @@ export const ResultContent = styled.div`
   align-items: center;
   text-align: center;
   word-break: break-word;
+  animation: ${bounceIn} 0.5s ease-out;
 `;
 
 export const ResultEmoji = styled.div`
@@ -226,23 +241,23 @@ export const ResultEmoji = styled.div`
 
 export const ResultTitle = styled.h3`
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   margin-bottom: 4px;
   color: #1f2937;
 `;
 
 export const ResultDescription = styled.p`
-  font-size: 12px;
+  font-size: 14px;
   color: #6b7280;
   margin-bottom: 8px;
 `;
 
 export const ResultBadge = styled.span`
-  font-size: 12px;
+  font-size: 14px; 
   background: #ecfeff;
   color: #0e7490;
-  padding: 2px 8px;
-  border-radius: 4px;
+  padding: 4px 10px;
+  border-radius: 6px;
   border: 1px solid #a5f3fc;
 `;
 
@@ -342,53 +357,79 @@ export const MainSpinButton = styled.button`
   }
 `;
 
-export const PriceSection = styled.div`
-  background: linear-gradient(135deg, #009499 0%, #007c81 100%);
-  border-radius: 12px;
+/* export const PriceSection = styled.div`
+  background: white;
+  border-radius: 16px;
   padding: 24px;
-  color: white;
+  box-shadow: 0 8px 16px rgba(0, 148, 153, 0.1);
+  border: 1px solid #e0f7fa;
+  margin-top: 16px;
+`; */
+
+export const PriceSection = styled.div`
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0f7fa;
+  margin-top: 16px;
+  animation: ${bounceIn} 0.4s ease-out;
 `;
 
 export const PriceGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  text-align: center;
   margin-bottom: 24px;
 `;
 
-export const PriceItem = styled.div``;
+export const PriceItem = styled.div`
+  padding: 16px;
+  border: 1px dashed #d1f5f8;
+  border-radius: 12px;
+  background: #f9fdfd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const PriceLabel = styled.p`
   font-size: 14px;
-  opacity: 0.9;
+  color: #6b7280;
   margin-bottom: 4px;
 `;
 
 export const PriceValue = styled.p`
-  font-size: ${(props) => (props.$isTotal ? "32px" : "18px")};
+  font-size: ${(props) => (props.$isTotal ? "24px" : "18px")};
   font-weight: bold;
+  color: ${(props) => (props.$isTotal ? "#009499" : "#111827")};
 `;
+
 
 export const DecisionButton = styled.button`
   width: 100%;
-  background: white;
-  color: #0891b2;
+  background: linear-gradient(135deg, #009499, #007c81);
+  color: white;
   border: none;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 10px;
+  padding: 14px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 148, 153, 0.15);
 
   &:hover:not(:disabled) {
-    background: #f9fafb;
+    background: linear-gradient(135deg, #007c81, #006669);
+    transform: translateY(-1px);
   }
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
   }
 `;
 
@@ -457,8 +498,8 @@ export const OptionCard = styled.div`
 `;
 
 export const OptionImage = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 273px;
+  height: 160px;
   background: #f3f4f6;
   border-radius: 8px;
   display: flex;
@@ -486,6 +527,7 @@ export const OptionEmoji = styled.span`
 
 export const OptionName = styled.h3`
   font-weight: 600;
+  font-size: 18px;
   color: #1f2937;
   margin-bottom: 8px;
 `;
@@ -507,7 +549,7 @@ export const OptionBadge = styled.span`
   color: #0e7490;
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 14px;
   border: 1px solid #a5f3fc;
 `;
 
