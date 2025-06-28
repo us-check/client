@@ -45,27 +45,17 @@ function MyReservations() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const qr = localStorage.getItem("travelQR");
     const items = localStorage.getItem("selectedTravelItems");
+    const date = localStorage.getItem("travelDate");
+    const qrImg = localStorage.getItem("travelQRImage");
+    // travelQR 또는 qr 둘 다 체크
+    const qr = localStorage.getItem("travelQR") || localStorage.getItem("qr");
 
-    useEffect(() => {
-  const items = localStorage.getItem("selectedTravelItems");
-  const date = localStorage.getItem("travelDate");
-  const qrImg = localStorage.getItem("travelQRImage");
-  const qr = localStorage.getItem("qr"); // qr에 대한 처리도 기존대로 남겨둬야 한다면
-
-  if (qr) setQrCode(qr);
-
-  if (items) {
-    setSelectedItems(JSON.parse(items));
-  }
-  if (date) {
-    setTravelDate(new Date(date));
-  }
-  if (qrImg) {
-    setQrImage(qrImg);
-  }
-}, []);
+    if (qr) setQrCode(qr);
+    if (items) setSelectedItems(JSON.parse(items));
+    if (date) setTravelDate(new Date(date));
+    if (qrImg) setQrImage(qrImg);
+  }, []);
 
 
   const getTypeIcon = (type) => {
