@@ -137,9 +137,9 @@ function PaymentPage() {
 
             <PayButton onClick={handlePayment} disabled={isProcessing}>
               {isProcessing ? (
-                <>⏳ 결제 처리중...</>
+                <>결제 처리중...</>
               ) : (
-                <>💳 {totalAmount.toLocaleString()}원 결제하기</>
+                <>{totalAmount.toLocaleString()}원 결제하기</>
               )}
             </PayButton>
           </CardContent>
