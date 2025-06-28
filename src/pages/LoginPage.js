@@ -48,7 +48,7 @@ const LoginPage = () => {
                     <LogoText>Us:Check</LogoText>
                 </LogoWrapper>
                 <LoginButtonWrapper onClick={handleLogin}>
-                    <FcGoogle style={{ marginRight: '8px' }} />
+                    <FcGoogle />
                     구글로 로그인하기
                 </LoginButtonWrapper>
             </Card>
@@ -61,6 +61,7 @@ const LoginPage = () => {
                 </InUscodeContainer>
             </Footer>
         </Container>
+
     );
 };
 
