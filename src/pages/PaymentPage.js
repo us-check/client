@@ -69,7 +69,7 @@ function PaymentPage() {
 
     setIsProcessing(true);
 
-    setTimeout(() => {
+    setTimeout(async () => {
       setIsProcessing(false);
       setIsCompleted(true);
 
@@ -77,6 +77,19 @@ function PaymentPage() {
         .toString(36)
         .substr(2, 9)}`;
       localStorage.setItem("travelQR", qrCode);
+
+      // QR 이미지 주소 받아오기
+      try {
+        const res = await fetch("http://192.168.0.48:8000/api/qr/");
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.qr_code) {
+            localStorage.setItem("travelQRImage", data.qr_code);
+          }
+        }
+      } catch (e) {
+        // 실패 시 기존 QR 코드만 저장
+      }
 
       setTimeout(() => {
         navigate("/myreservation");

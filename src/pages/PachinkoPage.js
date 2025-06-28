@@ -131,6 +131,7 @@ function categorizeServerData(items) {
 // 서버 응답에서 recommended_spots만 추출해서 기존 데이터 변환 함수에 넘기도록 분기 추가
 function categorizeServerDataFromServerResponse(serverResponse) {
   // 서버 응답에서 recommended_spots만 추출해서 기존 구조로 변환
+  console.log("서버 응답:", serverResponse);
   if (!serverResponse || !Array.isArray(serverResponse.recommended_spots))
     return { attraction: [], restaurant: [], accommodation: [] };
   return categorizeServerData(serverResponse.recommended_spots);
@@ -213,119 +214,26 @@ function PachinkoPage() {
         // 서버 응답 형태면 recommended_spots만 추출해서 변환
         if (parsed.recommended_spots) {
           setDataByCategory(categorizeServerDataFromServerResponse(parsed));
-        } else {
+        } else if (Array.isArray(parsed)) {
           setDataByCategory(categorizeServerData(parsed));
+        } else {
+          // 잘못된 데이터면 빈 배열
+          setDataByCategory({
+            attraction: [],
+            restaurant: [],
+            accommodation: [],
+          });
         }
         return;
       } catch (e) {
-        // 파싱 실패시 fallback
+        // 파싱 실패시 빈 배열
+        setDataByCategory({
+          attraction: [],
+          restaurant: [],
+          accommodation: [],
+        });
       }
     }
-    // fallback: 기존 더미 데이터 사용
-    async function fetchData() {
-      const data = [
-        {
-          contentid: "2604657",
-          contenttypeid: "32",
-          title: "초해고택[한국관광 품질인증/Korea Quality]",
-          overview: "한옥스테이와 전통체험이 가능한 고택입니다.",
-          firstimage:
-            "http://tong.visitkorea.or.kr/cms/resource/59/3021359_image2_1.jpg",
-          price: 120000,
-          mapx: "128.7628960654",
-          mapy: "36.4245962361",
-        },
-        {
-          contentid: "2604658",
-          contenttypeid: "32",
-          title: "의성힐링펜션",
-          overview: "자연 속에서 쉴 수 있는 힐링 펜션.",
-          firstimage:
-            "http://tong.visitkorea.or.kr/cms/resource/00/3000001_image2_1.jpg",
-          price: 90000,
-          mapx: "128.7700000000",
-          mapy: "36.4200000000",
-        },
-        {
-          contentid: "2604659",
-          contenttypeid: "32",
-          title: "전통한옥스테이",
-          overview: "한국 전통미와 현대적 편의시설을 모두 갖춘 숙박시설.",
-          firstimage: "",
-          price: 150000,
-          mapx: "128.7800000000",
-          mapy: "36.4300000000",
-        },
-        {
-          contentid: "3000001",
-          contenttypeid: "39",
-          title: "의성마늘한우",
-          overview: "의성마늘과 한우를 함께 즐길 수 있는 음식점.",
-          firstimage:
-            "http://tong.visitkorea.or.kr/cms/resource/00/3000000_image2_1.jpg",
-          price: 35000,
-          mapx: "128.7000000000",
-          mapy: "36.3550000000",
-        },
-        {
-          contentid: "3000002",
-          contenttypeid: "39",
-          title: "전통 손두부집",
-          overview: "직접 만든 신선한 두부로 다양한 한식을 제공하는 맛집.",
-          firstimage: "",
-          price: 12000,
-          mapx: "128.7050000000",
-          mapy: "36.3600000000",
-        },
-        {
-          contentid: "3000003",
-          contenttypeid: "39",
-          title: "의성 마늘치킨",
-          overview: "의성 마늘을 듬뿍 사용한 특별한 치킨.",
-          firstimage:
-            "http://tong.visitkorea.or.kr/cms/resource/00/3000002_image2_1.jpg",
-          price: 18000,
-          mapx: "128.7100000000",
-          mapy: "36.3650000000",
-        },
-        {
-          contentid: "2629039",
-          contenttypeid: "14",
-          title: "의성 조문국박물관",
-          overview: "고대 조문국의 역사를 만날 수 있는 박물관.",
-          firstimage:
-            "http://tong.visitkorea.or.kr/cms/resource/86/3488486_image2_1.jpg",
-          price: 3000,
-          mapx: "128.6693835816",
-          mapy: "36.2767307586",
-        },
-        {
-          contentid: "2629040",
-          contenttypeid: "14",
-          title: "의성 빙계계곡",
-          overview: "여름에도 얼음이 녹지 않는 신비로운 계곡.",
-          firstimage: "",
-          price: 0,
-          mapx: "128.6800000000",
-          mapy: "36.4200000000",
-        },
-        {
-          contentid: "2629041",
-          contenttypeid: "14",
-          title: "의성 산수유마을",
-          overview: "봄에는 노란 산수유꽃, 가을에는 붉은 열매로 유명한 마을.",
-          firstimage:
-            "http://tong.visitkorea.or.kr/cms/resource/00/3000003_image2_1.jpg",
-          price: 2000,
-          mapx: "128.7100000000",
-          mapy: "36.3700000000",
-        },
-      ];
-
-      setDataByCategory(categorizeServerData(data));
-    }
-
-    fetchData();
   }, []);
 
   const startInitialSpin = () => {
@@ -572,9 +480,25 @@ function PachinkoPage() {
                               {item.description}
                             </ResultDescription>
                             <ResultBadge>
-                              {Number(item.price) === 0
-                                ? "무료"
-                                : `${Number(item.price).toLocaleString()}원`}
+                              {(() => {
+                                let priceNum = 0;
+                                console.log("item.price:", item.price);
+                                if (
+                                  item.price !== undefined &&
+                                  item.price !== null
+                                ) {
+                                  if (typeof item.price === "string") {
+                                    priceNum = Number(item.price.trim());
+                                  } else {
+                                    priceNum = Number(item.price);
+                                  }
+                                }
+                                console.log("priceNum:", priceNum);
+                                if (priceNum === 0) return "무료";
+                                if (!isNaN(priceNum))
+                                  return `${priceNum.toLocaleString()}원`;
+                                return "가격정보 없음";
+                              })()}
                             </ResultBadge>
                           </ResultContent>
                         ) : (
@@ -630,7 +554,9 @@ function PachinkoPage() {
                   </PriceItem>
                   <PriceItem>
                     <PriceLabel>총 결제금액</PriceLabel>
-                    <PriceValue isTotal>{total.toLocaleString()}원</PriceValue>
+                    <PriceValue $isTotal={true}>
+                      {total.toLocaleString()}원
+                    </PriceValue>
                   </PriceItem>
                 </PriceGrid>
 
@@ -683,9 +609,25 @@ function PachinkoPage() {
                       <OptionDesc>{option.description}</OptionDesc>
                       <OptionFooter>
                         <OptionBadge>
-                          {Number(option.price) === 0
-                            ? "무료"
-                            : `${Number(option.price).toLocaleString()}원`}
+                          {(() => {
+                            let priceNum = 0;
+                            console.log("option.price:", option.price);
+                            if (
+                              option.price !== undefined &&
+                              option.price !== null
+                            ) {
+                              if (typeof option.price === "string") {
+                                priceNum = Number(option.price.trim());
+                              } else {
+                                priceNum = Number(option.price);
+                              }
+                            }
+                            console.log("option priceNum:", priceNum);
+                            if (priceNum === 0) return "무료";
+                            if (!isNaN(priceNum))
+                              return `${priceNum.toLocaleString()}원`;
+                            return "가격정보 없음";
+                          })()}
                         </OptionBadge>
                         <SelectButton
                           onClick={(e) => {
