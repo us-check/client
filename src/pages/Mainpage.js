@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Component1 from '../components/MainpageModal';
+import MainpageModal from '../components/MainpageModal';
 import {
   FrameWrapper,
   Header,
@@ -23,7 +23,7 @@ import {
 function Mainpage() {
   const [searchText, setSearchText] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -58,7 +58,7 @@ function Mainpage() {
   };
 
   const handleLangClick = () => {
-    console.log('언어 변경 클릭');
+    alert('준비중입니다.');
     setIsMenuOpen(false);
   };
 
@@ -71,7 +71,7 @@ function Mainpage() {
   const handleStoreRegisterClick = () => {
     console.log('가게 등록 클릭');
     setIsMenuOpen(false);
-    navigate('/store/register');
+    navigate('/addstore');
   };
 
 
@@ -121,7 +121,7 @@ function Mainpage() {
 
       {/* 메뉴 모달 */}
       {isMenuOpen && (
-        <Component1
+        <MainpageModal
           isLoggedIn={isLoggedIn}
           onClose={() => setIsMenuOpen(false)}
           onLoginClick={handleLoginClick}

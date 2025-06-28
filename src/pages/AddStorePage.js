@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import MainpageModal from "../components/MainpageModal";
+import { useNavigate } from 'react-router-dom';
 import {
   StorePageWrapper,
   StoreHeader,
@@ -34,6 +36,9 @@ function AddStorePage() {
   const [nearbyStores, setNearbyStores] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const navigate = useNavigate();
 
   // 예시 데이터 (실제 위치 대신)
   const exampleStores = [
@@ -123,7 +128,7 @@ function AddStorePage() {
           />
           <StoreLogoText>의성:Check</StoreLogoText>
         </StoreLogoGroup>
-        <StoreMenuIcon src={process.env.PUBLIC_URL + "/menu.svg"} alt="메뉴" />
+        <StoreMenuIcon src={process.env.PUBLIC_URL + "/menu.svg"} alt="메뉴" onClick={() => setIsOpen(true)}/>
       </StoreHeader>
       <StoreFormCard>
         <StoreTitle>가게를 등록하시나요?</StoreTitle>
@@ -227,6 +232,19 @@ function AddStorePage() {
         <p>2025, in 의성 Us:Code 해커톤</p>
         <p>Us:Code Hackathon 2025, Uiseong</p>
       </StoreFooter>
+
+    {isOpen && (
+        <MainpageModal
+          isLoggedIn={isLoggedIn}
+          onClose={() => setIsOpen(false)}
+          onLoginClick={() => navigate('/login')}
+          onLogoutClick={() => setIsLoggedIn(false)}
+          onLangClick={() => alert('준비중입니다.')}
+          onMyPageClick={() => navigate('/mypage')}
+          onStoreRegisterClick={() => navigate('/addstore')}
+        />
+      )}
+
     </StorePageWrapper>
   );
 }
