@@ -575,35 +575,48 @@ function PachinkoPage() {
       )}
 
       {/* 상세 정보 모달 */}
-      {detailModal.open && detailModal.item && (
-        <ModalOverlay onClick={() => setDetailModal({ open: false, item: null })}>
-          <Modal onClick={e => e.stopPropagation()}>
-            <ModalContent>
-              <ModalHeader>
-                <ModalTitle>
-                  {detailModal.item.emoji} {detailModal.item.name}
-                </ModalTitle>
-              </ModalHeader>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
-                <img src={detailModal.item.image || '/placeholder.svg'} alt={detailModal.item.name} style={{ width: 240, borderRadius: 12 }} />
-                <div style={{ fontWeight: 500, fontSize: 18, margin: '8px 0' }}>{detailModal.item.overview}</div>
-                {/* 지도 표시 */}
-                <div style={{ width: 320, height: 200, margin: '12px 0' }}>
-                  <iframe
-                    title="지도"
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    style={{ border: 0, borderRadius: 8 }}
-                    src={`https://maps.google.com/maps?q=${detailModal.item.position.lat},${detailModal.item.position.lng}&z=15&output=embed`}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-            </ModalContent>
-          </Modal>
-        </ModalOverlay>
-      )}
+{detailModal.open && detailModal.item && (
+  <ModalOverlay onClick={() => setDetailModal({ open: false, item: null })}>
+    <Modal onClick={e => e.stopPropagation()}>
+      <ModalContent>
+        <ModalHeader>
+          <ModalTitle>
+            {detailModal.item.emoji} {detailModal.item.name}
+          </ModalTitle>
+        </ModalHeader>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {/* 설명 */}
+          <div style={{ fontWeight: 500, fontSize: 18 }}>
+            {detailModal.item.overview}
+          </div>
+
+          {/* 이미지와 지도 나란히 배치 */}
+          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            <img
+              src={detailModal.item.image || '/placeholder.svg'}
+              alt={detailModal.item.name}
+              style={{ width: 240, borderRadius: 12 }}
+            />
+
+            <div style={{ width: 320, height: 200 }}>
+              <iframe
+                title="지도"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                style={{ border: 0, borderRadius: 8 }}
+                src={`https://maps.google.com/maps?q=${detailModal.item.position.lat},${detailModal.item.position.lng}&z=15&output=embed`}
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </ModalContent>
+    </Modal>
+  </ModalOverlay>
+)}
+
     </PageWrapper>
   )
 }
