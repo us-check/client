@@ -336,14 +336,21 @@ export const MainSpinButton = styled.button`
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 12px 32px;
+  padding: 0 32px; /* 좌우 여백 */
+  height: 44px; /* 고정 높이로 균형 잡기 */
+
   font-size: 18px;
   font-weight: 600;
+
   cursor: pointer;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   transition: all 0.2s;
-  display: block;
-  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 중앙 정렬 */
+
+  margin: 0 auto; /* 가운데 배치 */
 
   &:hover:not(:disabled) {
     background: linear-gradient(135deg, #007c81 0%, #006669 100%);
@@ -356,15 +363,6 @@ export const MainSpinButton = styled.button`
     transform: none;
   }
 `;
-
-/* export const PriceSection = styled.div`
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 8px 16px rgba(0, 148, 153, 0.1);
-  border: 1px solid #e0f7fa;
-  margin-top: 16px;
-`; */
 
 export const PriceSection = styled.div`
   background: rgba(255, 255, 255, 0.8);
@@ -388,7 +386,7 @@ export const PriceItem = styled.div`
   padding: 16px;
   border: 1px dashed #d1f5f8;
   border-radius: 12px;
-  background: #f9fdfd;
+  background: #f9fdfd; 
   display: flex;
   flex-direction: column;
   align-items: center;
