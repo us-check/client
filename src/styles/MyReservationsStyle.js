@@ -314,7 +314,6 @@ export const NewTripButton = styled.button`
   }
 `;
 
-// 지도에서 보기 버튼
 export const ViewOnMapButton = styled.button`
   background: #fff;
   color: #009499;
@@ -331,7 +330,6 @@ export const ViewOnMapButton = styled.button`
   }
 `;
 
-// Map 영역 스타일
 export const MapArea = styled.div`
   width: 100%;
   height: 340px;

@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -53,6 +51,7 @@ import {
   OptionBadge,
   SelectButton,
 } from "../styles/PachinkoPageStyle";
+
 // 상세정보 모달 스타일 import
 import {
   DetailModalOverlay,
@@ -669,7 +668,7 @@ function PachinkoPage() {
         </ModalOverlay>
       )}
 
-      {/* 개선된 상세 정보 모달 */}
+      {/* 상세 정보 모달 */}
       {detailModal.open && detailModal.item && (
         <DetailModalOverlay
           onClick={() => setDetailModal({ open: false, item: null })}

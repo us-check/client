@@ -36,8 +36,6 @@ const containerStyle = {
   padding: "2rem",
 }
 
-
-
 const gridStyle = {
   position: "absolute",
   top: 0,

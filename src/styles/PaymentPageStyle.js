@@ -163,7 +163,6 @@ export const InfoText = styled.div`
   }
 `;
 
-// 완료 화면 스타일
 export const CompletedWrapper = styled.div`
   min-height: 100vh;
   background: linear-gradient(
