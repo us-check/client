@@ -35,13 +35,27 @@ import {
   CountControlWrapper,
   CountButton,
   CountText,
+  ItemContentWithBorder,
+  ViewOnMapButton,
+  DatePickerButton,
+  ModalOverlay,
+  ModalContent,
+  ModalText,
+  ModalButton,
+  TossPayIcon,
+  MapArea,
+  FlexRowBetween,
+  FlexRow,
+  AddressText,
+  CountLabel,
 } from "../styles/RoutePageStyle";
-import GoogleMapComponent from "./GoogleMapComponent"; // 구글 맵 컴포넌트 임포트
+import NaverMapComponent from "./NaverMapComponent"; // 네이버 맵 컴포넌트 임포트
 
 function RoutePage() {
   const [selectedItems, setSelectedItems] = useState({});
   const [travelDate, setTravelDate] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [focusMarkerId, setFocusMarkerId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -137,8 +151,8 @@ function RoutePage() {
               <MapTitle>여행 경로 지도</MapTitle>
             </MapHeader>
             <MapContent>
-              <div style={{ width: "100%", height: 400, marginBottom: 16 }}>
-                <GoogleMapComponent
+              <MapArea>
+                <NaverMapComponent
                   markers={Object.values(selectedItems)
                     .map((item, idx) => ({
                       id: item.id || item.name || idx,
@@ -158,21 +172,17 @@ function RoutePage() {
                         marker.position.lat !== 0 &&
                         marker.position.lng !== 0
                     )}
+                  mapHeight={520}
+                  focusMarkerId={focusMarkerId}
                 />
-              </div>
+              </MapArea>
             </MapContent>
           </MapCard>
 
           <ItemsList>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+            <FlexRowBetween>
               <SectionTitle>선택된 여행 코스</SectionTitle>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <FlexRow>
                 <DatePicker
                   selected={travelDate}
                   onChange={(date) => setTravelDate(date)}
@@ -181,32 +191,29 @@ function RoutePage() {
                   minDate={new Date()} // 오늘 이전은 비활성화됨
                   placeholderText="날짜 선택"
                   customInput={
-                    <button
-                      style={{
-                        background: "#f3f4f6",
-                        border: "1px solid #d1d5db",
-                        borderRadius: "6px",
-                        padding: "6px 12px",
-                        cursor: "pointer",
-                        color: "#374151",
-                      }}
-                    >
+                    <DatePickerButton>
                       {travelDate
                         ? `${travelDate.getFullYear()}년 ${
                             travelDate.getMonth() + 1
                           }월 ${travelDate.getDate()}일`
                         : "날짜 선택"}
-                    </button>
+                    </DatePickerButton>
                   }
                 />
-              </div>
-            </div>
+              </FlexRow>
+            </FlexRowBetween>
 
             {Object.entries(selectedItems).map(([type, item], index) => {
               if (!item) return null;
+              const borderColor =
+                type === "attraction"
+                  ? "#7dd3fc"
+                  : type === "restaurant"
+                  ? "#fbbf24"
+                  : "#a5b4fc";
               return (
                 <ItemCard key={type}>
-                  <ItemContent>
+                  <ItemContentWithBorder bordercolor={borderColor}>
                     <ItemImage>
                       <img
                         src={item.image ? item.image : "/placeholder.svg"}
@@ -214,13 +221,16 @@ function RoutePage() {
                       />
                     </ItemImage>
                     <ItemInfo>
-                      <ItemBadge>
-                        {getTypeIcon(type)} {getTypeName(type)} #{index + 1}
-                      </ItemBadge>
+                      <FlexRow style={{ marginBottom: 2 }}>
+                        <ItemBadge>
+                          {getTypeIcon(type)} {getTypeName(type)} #{index + 1}
+                        </ItemBadge>
+                        <AddressText>{item.address}</AddressText>
+                      </FlexRow>
                       <ItemName>{item.name}</ItemName>
                       <ItemDescription>{item.description}</ItemDescription>
                       {["restaurant", "accommodation"].includes(type) && (
-                        <CountControlWrapper>
+                        <CountControlWrapper style={{ margin: "4px 0 0 0" }}>
                           <CountButton
                             onClick={() => handleCountChange(type, -1)}
                           >
@@ -232,11 +242,9 @@ function RoutePage() {
                           >
                             <span>+</span>
                           </CountButton>
-
-                          <span style={{ marginLeft: 8 }}>명</span>
+                          <CountLabel>명</CountLabel>
                         </CountControlWrapper>
                       )}
-
                       <ItemPrice>
                         {["restaurant", "accommodation"].includes(type) &&
                         item.count > 1
@@ -250,7 +258,16 @@ function RoutePage() {
                           : `${item.price.toLocaleString()}원`}
                       </ItemPrice>
                     </ItemInfo>
-                  </ItemContent>
+                    <FlexRow style={{ marginLeft: 16 }}>
+                      <ViewOnMapButton
+                        onClick={() =>
+                          setFocusMarkerId(item.id || item.name || index)
+                        }
+                      >
+                        지도에서 보기
+                      </ViewOnMapButton>
+                    </FlexRow>
+                  </ItemContentWithBorder>
                 </ItemCard>
               );
             })}
@@ -268,19 +285,7 @@ function RoutePage() {
                 </PaymentButton>
 
                 <PaymentButton onClick={() => handlePayment("toss")}>
-                  <img
-                    src="/toss.png"
-                    alt="토스페이"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      objectFit: "cover",
-                      marginRight: "6px",
-                      borderRadius: "4px",
-                      display: "inline-block",
-                      verticalAlign: "middle",
-                    }}
-                  />
+                  <TossPayIcon src="/toss.png" alt="토스페이" />
                   토스페이
                 </PaymentButton>
               </PaymentGrid>
@@ -290,56 +295,14 @@ function RoutePage() {
 
         {/* 모달 */}
         {isModalOpen && (
-          <div
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100vw",
-              height: "100vh",
-              background: "rgba(0, 0, 0, 0.4)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              zIndex: 999,
-            }}
-            onClick={() => setIsModalOpen(false)}
-          >
-            <div
-              style={{
-                background: "#fff",
-                padding: "24px 32px",
-                borderRadius: "12px",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
-                textAlign: "center",
-                maxWidth: "320px",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <p
-                style={{
-                  marginBottom: "16px",
-                  fontWeight: 600,
-                  fontSize: "16px",
-                }}
-              >
-                여행 날짜를 선택해주세요.
-              </p>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                style={{
-                  padding: "8px 16px",
-                  border: "none",
-                  borderRadius: "6px",
-                  backgroundColor: "#009499",
-                  color: "#fff",
-                  cursor: "pointer",
-                }}
-              >
+          <ModalOverlay onClick={() => setIsModalOpen(false)}>
+            <ModalContent onClick={(e) => e.stopPropagation()}>
+              <ModalText>여행 날짜를 선택해주세요.</ModalText>
+              <ModalButton onClick={() => setIsModalOpen(false)}>
                 확인
-              </button>
-            </div>
-          </div>
+              </ModalButton>
+            </ModalContent>
+          </ModalOverlay>
         )}
       </Container>
     </PageWrapper>

@@ -34,14 +34,17 @@ import {
   TravelPrice,
   NewTripSection,
   NewTripButton,
+  ViewOnMapButton,
+  TravelBadge,
 } from "../styles/MyReservationsStyle";
-import GoogleMapComponent from "./GoogleMapComponent"; // 구글 맵 컴포넌트 임포트
+import NaverMapComponent from "./NaverMapComponent";
 
 function MyReservations() {
   const [qrCode, setQrCode] = useState("");
   const [qrImage, setQrImage] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
   const [travelDate, setTravelDate] = useState(null);
+  const [focusMarkerId, setFocusMarkerId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -177,34 +180,54 @@ function MyReservations() {
               flexDirection: "row",
               gap: 32,
               width: "100%",
+              alignItems: "flex-start",
             }}
           >
-            {/* 왼쪽: Google Map */}
-            <div style={{ flex: 1, minWidth: 350, maxWidth: 500 }}>
-              <GoogleMapComponent
-                markers={Object.values(selectedItems)
-                  .map((item) => ({
-                    id: item.id || item.name,
-                    name: item.name,
-                    position: item.position
-                      ? item.position
-                      : item.mapy && item.mapx
-                      ? { lat: Number(item.mapy), lng: Number(item.mapx) }
-                      : null,
-                  }))
-                  .filter(
-                    (marker) =>
-                      marker.position &&
-                      typeof marker.position.lat === "number" &&
-                      typeof marker.position.lng === "number" &&
-                      marker.position.lat !== 0 &&
-                      marker.position.lng !== 0
-                  )}
-                showRoute={true}
-              />
+            {/* 왼쪽: Naver Map */}
+            <div
+              style={{
+                flex: 1,
+                minWidth: 350,
+                maxWidth: 500,
+                padding: "8px 0 8px 8px",
+              }}
+            >
+              <div
+                style={{
+                  marginBottom: 16,
+                  borderRadius: 18,
+                  overflow: "hidden",
+                  boxShadow: "0 2px 12px 0 rgba(0,0,0,0.10)",
+                  background: "#f8fafc",
+                }}
+              >
+                <NaverMapComponent
+                  markers={Object.values(selectedItems)
+                    .map((item, idx) => ({
+                      id: item.id || item.name || idx,
+                      name: item.name,
+                      position: item.position
+                        ? item.position
+                        : item.mapy && item.mapx
+                        ? { lat: Number(item.mapy), lng: Number(item.mapx) }
+                        : null,
+                      address: item.address || "",
+                    }))
+                    .filter(
+                      (marker) =>
+                        marker.position &&
+                        typeof marker.position.lat === "number" &&
+                        typeof marker.position.lng === "number" &&
+                        marker.position.lat !== 0 &&
+                        marker.position.lng !== 0
+                    )}
+                  mapHeight={340}
+                  focusMarkerId={focusMarkerId}
+                />
+              </div>
             </div>
             {/* 오른쪽: 세로 여행 코스 */}
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 1, paddingLeft: 12 }}>
               <div
                 style={{
                   display: "flex",
@@ -213,13 +236,7 @@ function MyReservations() {
                 }}
               >
                 {Object.entries(selectedItems).map(([type, item], idx) => (
-                  <TravelItem
-                    key={type}
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
+                  <TravelItem key={type}>
                     <TravelImage>
                       <img
                         src={item.image || "/placeholder.svg"}
@@ -227,9 +244,9 @@ function MyReservations() {
                       />
                     </TravelImage>
                     <TravelInfo>
-                      <div>
+                      <TravelBadge>
                         {getTypeIcon(type)} {getTypeName(type)} #{idx + 1}
-                      </div>
+                      </TravelBadge>
                       <TravelName>{item.name}</TravelName>
                       <TravelDesc>{item.description}</TravelDesc>
                       <TravelPrice>
@@ -239,22 +256,20 @@ function MyReservations() {
                           : item.price === 0
                           ? "무료"
                           : `${item.price.toLocaleString()}원`}
-
                         {/* 인원수 표시 */}
                         {["restaurant", "accommodation"].includes(type) &&
-                          item.count > 1 && (
-                            <span
-                              style={{
-                                fontSize: "12px",
-                                color: "#6b7280",
-                                marginLeft: "4px",
-                              }}
-                            >
-                              ({item.count}명)
-                            </span>
-                          )}
+                          item.count > 1 && <span>({item.count}명)</span>}
                       </TravelPrice>
                     </TravelInfo>
+                    <div style={{ marginLeft: 16 }}>
+                      <ViewOnMapButton
+                        onClick={() =>
+                          setFocusMarkerId(item.id || item.name || idx)
+                        }
+                      >
+                        지도에서 보기
+                      </ViewOnMapButton>
+                    </div>
                   </TravelItem>
                 ))}
               </div>

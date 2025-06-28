@@ -7,8 +7,6 @@ import PachinkoPage from "./pages/PachinkoPage";
 import RoutePage from "./pages/RoutePage";
 import PaymentPage from "./pages/PaymentPage";
 import MyReservations from "./pages/MyReservations";
-import GoogleMapComponent from "./pages/GoogleMapComponent";
-import ResultPage from "./pages/ResultPage";
 import AddStorePage from "./pages/AddStorePage";
 
 function App() {
@@ -24,7 +22,6 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/myreservation" element={<MyReservations />} />
         <Route path="/addstore" element={<AddStorePage />} />
-        {/* <Route path="/map" element={<GoogleMapComponent />} /> */}
       </Routes>
     </Router>
   );
