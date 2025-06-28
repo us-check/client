@@ -203,7 +203,7 @@ export const PaymentButton = styled.button`
   background: ${(props) =>
     props.kakao
       ? "#fee500"
-      : "linear-gradient(135deg, #009499 0%, #007c81 100%)"};
+      : "#2563eb"};
   color: ${(props) => (props.kakao ? "#000" : "#fff")};
   border: none;
   border-radius: 8px;

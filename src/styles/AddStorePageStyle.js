@@ -1,17 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
-
-export const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
-    color: #374151;
-  }
-`;
+import styled from "styled-components";
 
 export const PageContainer = styled.div`
   min-height: 100vh;
@@ -37,8 +24,8 @@ export const BackIcon = styled.img`
   position: absolute;
   top: 23px;
   left: 23px;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   z-index: 10;
 `;
@@ -398,20 +385,20 @@ export const StoreLogoGroup = styled.div`
 `;
 
 export const StoreLogoImage = styled.img`
-  width: 50px;
+  width: 60px;
   height: auto;
   margin-right: 8px;
 `;
 
 export const StoreLogoText = styled.div`
-  font-size: 25px;
+  font-size: 32px;
   font-weight: bold;
   color: #333;
 `;
 
 export const StoreMenuIcon = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 56px;
+  height: 56px;
   cursor: pointer;
 `;
 
@@ -420,8 +407,8 @@ export const StoreFormCard = styled.div`
   border-radius: 1.25rem;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
   margin-top: 2.5rem;
-  padding: 2.5rem 2rem 2rem 2rem;
-  max-width: 420px;
+  padding: 3rem 2rem;
+  max-width: 640px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -433,25 +420,25 @@ export const StoreFormCard = styled.div`
 `;
 
 export const StoreTitle = styled.h2`
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #1f2937;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   text-align: center;
 `;
 
 export const StoreDesc = styled.p`
   color: #6b7280;
-  font-size: 1rem;
+  font-size: 1.25rem;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 `;
 
 export const StoreFormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 `;
 
 export const GradientWrapper = styled.div`
@@ -468,17 +455,17 @@ export const GradientInnerBox = styled.div`
 
 
 export const StoreLabel = styled.label`
-  font-size: 0.95rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: #374151;
 `;
 
 export const StoreInput = styled.input`
   width: 94%;
-  padding: 0.75rem;
+  padding: 1rem;
   border: 2px solid #a5f3fc;
-  border-radius: 0.75rem;
-  font-size: 1rem;
+  border-radius: 1rem;
+  font-size: 1.25rem;
   background: #f9fafb;
   transition: all 0.2s ease;
   outline: none;
@@ -494,11 +481,11 @@ export const StoreInput = styled.input`
 
 export const StoreSelect = styled.select`
   width: 96%;
-  height: 43px;
+  height: 54px;
   padding: 0 1rem;
   border: none;
-  font-size: 1rem;
-  border-radius: 12px;
+  font-size: 1.25rem;
+  border-radius: 1rem;
   background: transparent;
   box-sizing: border-box;
   outline: none;
@@ -516,10 +503,10 @@ export const StoreButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
   border: none;
-  border-radius: 0.75rem;
-  font-size: 1rem;
+  border-radius: 1rem;
+  font-size: 1.25rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -551,7 +538,7 @@ export const StoreError = styled.div`
   border: 1px solid #fecaca;
   border-radius: 0.5rem;
   color: #dc2626;
-  font-size: 0.95rem;
+  font-size: 1.125rem;
   margin-top: 0.5rem;
 `;
 
@@ -580,7 +567,8 @@ export const StoreNearbyList = styled.div`
 `;
 
 export const StoreNearbyItem = styled.div`
-  padding: 0.75rem;
+  padding: 1rem;
+  font-size: 1.125rem;
   background: white;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -611,7 +599,7 @@ export const StoreFooter = styled.footer`
   text-align: center;
   margin-top: 2rem;
   padding: 1rem;
-  font-size: 0.95rem;
+  font-size: 1.125rem;
   color: #6b7280;
   line-height: 1.4;
 `;
