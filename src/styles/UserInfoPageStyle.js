@@ -1,146 +1,123 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
-  height: 1080px;
-  position: relative;
+  min-height: 100vh;
   background-color: #fff;
-  overflow: hidden;
-  text-align: left;
-  font-size: 32px;
-  color: #000;
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  position: relative;
 `;
 
-export const UserName = styled.div`
+export const BackIcon = styled.img`
   position: absolute;
-  top: 367.82px;
-  left: 913px;
-  font-weight: 600;
+  top: 24px;
+  left: 24px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
 `;
 
-export const ProfileImage = styled.img`
-  position: absolute;
-  top: 203px;
-  left: 878px;
-  width: 151.8px;
-  height: 151.8px;
+export const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const LogoBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const LogoImage = styled.img`
+  width: 51px;
+  height: 62px;
   object-fit: cover;
 `;
 
-export const InfoWrapper = styled.div`
-  position: absolute;
-  top: 484px;
-  left: calc(50% - 222px);
-  width: 443px;
-  height: 301px;
-  font-size: 22px;
+export const LogoText = styled.div`
+  font-size: 30px;
+  font-weight: 500;
+  color: #484848;
+  line-height: 33px;
+  -webkit-text-stroke: 1px #484848;
 `;
 
 export const InfoCard = styled.div`
-  position: absolute;
-  top: 0;
-  left: calc(50% - 221.5px);
+  margin-top: 20px;
+  width: 443px;
+  height: 600px;
+  border-radius: 8px;
+  border: 1px solid #fff;
   box-shadow: 0 0.5px 3px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  border: 1px solid #fff;
-  width: 443px;
-  height: 301px;
   overflow: hidden;
-`;
-
-export const InfoBox = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 510px;
-  height: 76px;
-  padding: 16px 26px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  padding: 32px 0;
   box-sizing: border-box;
+  position: relative;
 `;
 
-export const InfoTitle = styled.div`
+export const ProfileImage = styled.img`
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+`;
+
+export const UserName = styled.div`
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 24px;
+`;
+
+export const InfoSectionTitle = styled.div`
   flex: 1;
-  font-weight: 600;
-  line-height: 15px;
-`;
-
-export const InfoContent = styled.div`
-  position: absolute;
-  left: 0;
-  width: 510px;
-  height: 76px;
+  font-size: 17px;
+  color: #333;
+  font-weight: 400;
   display: flex;
   align-items: center;
-  padding: 16px 75px;
-  font-weight: 500;
-  line-height: 15px;
+  width: 100%;
   box-sizing: border-box;
-
-  &:nth-child(2) { top: 75px; }
-  &:nth-child(3) { top: 150px; }
-  &:nth-child(4) { top: 225px; }
+  margin-left: 50px;
 `;
 
-export const MailIcon = styled.img`
-  position: absolute;
-  top: 173px;
-  left: 20px;
-  width: 29px;
-  height: 29px;
-`;
-
-export const CheckIcon = styled.img`
-  position: absolute;
-  top: 248px;
-  left: 20px;
-  width: 29px;
-  height: 29px;
-`;
-
-export const ArrowIcon = styled.img`
-  position: absolute;
-  top: 248px;
-  left: 391px;
-  width: 29px;
-  height: 29px;
-`;
-
-export const IDIcon = styled.img`
-  position: absolute;
-  top: 97px;
-  left: 20px;
-  width: 30px;
-  height: 31px;
-`;
-
-export const Line = styled.div`
-  position: absolute;
-  top: 74.5px;
-  left: 16.87px;
-  border-top: 1px solid #e2e2e2;
-  width: 404px;
+export const Divider = styled.div`
+  width: 90%;
   height: 1px;
+  background-color: #b0b0b0;
+  margin: 4px auto 12px;
+  border-radius: 1px;
 `;
 
-export const BorderBox = styled.div`
-  position: absolute;
-  top: 151px;
-  left: 738px;
-  width: 443px;
-  height: 306px;
-  border-radius: 8px;
-  border: 1px solid #fff;
+export const InfoRow = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 16px;
   box-sizing: border-box;
-  filter: drop-shadow(0 0.5px 3px rgba(0, 0, 0, 0.2));
+`;
+
+export const InfoIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+`;
+
+export const InfoText = styled.span`
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  font-weight: 400;
 `;
 
 export const LogoutButton = styled.div`
-  position: absolute;
-  top: 886px;
-  left: 848px;
   width: 218px;
   height: 53px;
   border-radius: 12px;
@@ -152,6 +129,8 @@ export const LogoutButton = styled.div`
   box-sizing: border-box;
   color: #fff;
   font-size: 18px;
+  cursor: pointer;
+  margin-top: 70px;
 `;
 
 export const LogoutText = styled.div`
@@ -161,64 +140,21 @@ export const LogoutText = styled.div`
 `;
 
 export const WithdrawBox = styled.div`
-  position: absolute;
-  top: 952px;
-  left: 934px;
-  width: 46px;
-  height: 24px;
-  font-size: 13px;
+  text-align: center;
   color: #717171;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 12px;
 `;
 
-export const WithdrawText = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  line-height: 24px;
-  letter-spacing: 0.2px;
-`;
+export const WithdrawText = styled.div``;
 
 export const WithdrawLine = styled.div`
-  position: absolute;
-  top: 21.5px;
-  left: 0.5px;
   width: 44px;
   height: 1px;
   border-top: 1px solid #717171;
-`;
-
-export const LogoBox = styled.div`
-  position: absolute;
-  top: 62px;
-  left: 738px;
-  width: 229px;
-  height: 62px;
-  font-size: 36px;
-  color: #484848;
-`;
-
-export const LogoImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 51px;
-  height: 62px;
-  object-fit: cover;
-`;
-
-export const LogoText = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 64px;
-  font-weight: 500;
-  line-height: 22px;
-  -webkit-text-stroke: 1px #484848;
-`;
-
-export const BackIcon = styled.img`
-  position: absolute;
-  top: 23px;
-  left: 23px;
-  width: 37px;
-  height: 37px;
+  margin-top: 2px;
 `;

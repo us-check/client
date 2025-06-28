@@ -1,76 +1,88 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {
-    Container,
-    UserName,
-    ProfileImage,
-    InfoCard,
-    InfoWrapper,
-    InfoBox,
-    InfoTitle,
-    InfoContent,
-    MailIcon,
-    CheckIcon,
-    ArrowIcon,
-    IDIcon,
-    Line,
-    LogoBox,
-    LogoImage,
-    LogoText,
-    BorderBox,
-    LogoutButton,
-    LogoutText,
-    WithdrawBox,
-    WithdrawText,
-    WithdrawLine,
-    BackIcon
-} from '../styles/UserInfoPageStyle';
+  Container,
+  BackIcon,
+  ContentWrapper,
+  LogoBox,
+  LogoImage,
+  LogoText,
+  InfoCard,
+  ProfileImage,
+  UserName,
+  InfoSectionTitle,
+  Divider,
+  InfoRow,
+  InfoIcon,
+  InfoText,
+  LogoutButton,
+  LogoutText,
+  WithdrawBox,
+  WithdrawText,
+  WithdrawLine,
+} from "../styles/UserInfoPageStyle";
 
 const UserInfoPage = () => {
-    const navigate = useNavigate(); // 👈 훅 호출
+  const navigate = useNavigate();
 
-    const handleGoHome = () => {
-        navigate('/'); // 👈 홈으로 이동
-    };
+  const handleGoHome = () => {
+    navigate("/");
+  };
 
-    return (
-        <Container>
-            <BackIcon src="뒤로가는화살표.svg" alt="뒤로가기" onClick={handleGoHome} style={{ cursor: 'pointer' }} />
+  return (
+    <Container>
+      <BackIcon
+        src="뒤로가는화살표.svg"
+        alt="뒤로가기"
+        onClick={handleGoHome}
+      />
 
-            <ProfileImage src="프로필.svg" alt="프로필" />
-            <UserName>홍길동</UserName>
+      <ContentWrapper>
+        <LogoBox>
+          <LogoImage src="로고마늘.svg" alt="로고" />
+          <LogoText>의성:Check</LogoText>
+        </LogoBox>
 
-            <InfoWrapper>
-                <InfoCard>
-                    <InfoBox>
-                        <InfoTitle>내 정보</InfoTitle>
-                    </InfoBox>
-                    <InfoContent>홍길동</InfoContent>
-                    <InfoContent>kkas123@gmail.com</InfoContent>
-                    <InfoContent>내 예약</InfoContent>
-                    <MailIcon src="메일-아이콘.svg" alt="메일" />
-                    <CheckIcon src="내예약-아이콘.svg" alt="예약 아이콘" />
-                    <ArrowIcon src="오른화살표.svg" alt="화살표" />
-                </InfoCard>
-                <IDIcon src="아이디-아이콘.svg" alt="아이디 아이콘" />
-                <Line />
-            </InfoWrapper>
+        <InfoCard>
+          <ProfileImage src="프로필.svg" alt="프로필" />
+          <UserName>홍길동</UserName>
 
-            <BorderBox />
-            <LogoutButton>
-                <LogoutText>로그아웃</LogoutText>
-            </LogoutButton>
+          <InfoSectionTitle>내 정보</InfoSectionTitle>
+          <Divider />
 
-            <WithdrawBox>
-                <WithdrawText>탈퇴하기</WithdrawText>
-                <WithdrawLine />
-            </WithdrawBox>
+          <InfoRow>
+            <InfoIcon src="아이디-아이콘.svg" alt="아이디" />
+            <InfoText>홍길동</InfoText>
+          </InfoRow>
 
-            <LogoBox>
-                <LogoImage src="로고마늘.svg" alt="로고" />
-                <LogoText>Us:Check</LogoText>
-            </LogoBox>
-        </Container>
-    );
+          <InfoRow>
+            <InfoIcon src="메일-아이콘.svg" alt="이메일" />
+            <InfoText>kkas123@gmail.com</InfoText>
+          </InfoRow>
+
+          <InfoRow>
+            <InfoIcon src="내예약-아이콘.svg" alt="예약" />
+            <InfoText>내 예약</InfoText>
+            <img
+              src="오른화살표.svg"
+              alt="화살표"
+              width="20"
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/myreservation")}
+            />
+          </InfoRow>
+
+          <LogoutButton>
+            <LogoutText>로그아웃</LogoutText>
+          </LogoutButton>
+
+          <WithdrawBox>
+            <WithdrawText>탈퇴하기</WithdrawText>
+            <WithdrawLine />
+          </WithdrawBox>
+        </InfoCard>
+      </ContentWrapper>
+    </Container>
+  );
 };
 
 export default UserInfoPage;

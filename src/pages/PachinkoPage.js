@@ -484,7 +484,7 @@ function PachinkoPage() {
                         </ReelHeaderContent>
                       </ReelHeader>
 
-                      <ReelScreen>
+                      <ReelScreen $spinning={spinning} $showResults={showResults}>
                         {spinning ? (
                           <SpinningContent>
                             {[...Array(30)].map((_, idx) => {
