@@ -57,7 +57,6 @@ function MyReservations() {
     if (qrImg) setQrImage(qrImg);
   }, []);
 
-
   const getTypeIcon = (type) => {
     switch (type) {
       case "attraction":
@@ -163,8 +162,6 @@ function MyReservations() {
                   </InfoValue>
                 </InfoItem>
               )}
-
-
             </InfoContent>
           </InfoCard>
         </ContentGrid>
@@ -185,15 +182,24 @@ function MyReservations() {
             {/* 왼쪽: Google Map */}
             <div style={{ flex: 1, minWidth: 350, maxWidth: 500 }}>
               <GoogleMapComponent
-                markers={Object.values(selectedItems).map((item) => ({
-                  id: item.id || item.name,
-                  name: item.name,
-                  position: item.position
-                    ? item.position
-                    : item.mapy && item.mapx
-                    ? { lat: Number(item.mapy), lng: Number(item.mapx) }
-                    : { lat: 0, lng: 0 },
-                }))}
+                markers={Object.values(selectedItems)
+                  .map((item) => ({
+                    id: item.id || item.name,
+                    name: item.name,
+                    position: item.position
+                      ? item.position
+                      : item.mapy && item.mapx
+                      ? { lat: Number(item.mapy), lng: Number(item.mapx) }
+                      : null,
+                  }))
+                  .filter(
+                    (marker) =>
+                      marker.position &&
+                      typeof marker.position.lat === "number" &&
+                      typeof marker.position.lng === "number" &&
+                      marker.position.lat !== 0 &&
+                      marker.position.lng !== 0
+                  )}
                 showRoute={true}
               />
             </div>
@@ -227,20 +233,27 @@ function MyReservations() {
                       <TravelName>{item.name}</TravelName>
                       <TravelDesc>{item.description}</TravelDesc>
                       <TravelPrice>
-                        {["restaurant", "accommodation"].includes(type) && item.count > 1
+                        {["restaurant", "accommodation"].includes(type) &&
+                        item.count > 1
                           ? `${(item.price * item.count).toLocaleString()}원 `
                           : item.price === 0
-                            ? "무료"
-                            : `${item.price.toLocaleString()}원`}
+                          ? "무료"
+                          : `${item.price.toLocaleString()}원`}
 
                         {/* 인원수 표시 */}
-                        {["restaurant", "accommodation"].includes(type) && item.count > 1 && (
-                          <span style={{ fontSize: "12px", color: "#6b7280", marginLeft: "4px" }}>
-                            ({item.count}명)
-                          </span>
-                        )}
+                        {["restaurant", "accommodation"].includes(type) &&
+                          item.count > 1 && (
+                            <span
+                              style={{
+                                fontSize: "12px",
+                                color: "#6b7280",
+                                marginLeft: "4px",
+                              }}
+                            >
+                              ({item.count}명)
+                            </span>
+                          )}
                       </TravelPrice>
-
                     </TravelInfo>
                   </TravelItem>
                 ))}
@@ -250,7 +263,11 @@ function MyReservations() {
         </TravelCard>
 
         <NewTripSection>
-          <NewTripButton onClick={() => navigate("/")}>
+          <NewTripButton
+            onClick={() => {
+              window.location.replace("/");
+            }}
+          >
             새로운 여행 계획하기
           </NewTripButton>
         </NewTripSection>

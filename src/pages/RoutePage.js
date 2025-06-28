@@ -34,7 +34,7 @@ import {
   PaymentButton,
   CountControlWrapper,
   CountButton,
-  CountText
+  CountText,
 } from "../styles/RoutePageStyle";
 import GoogleMapComponent from "./GoogleMapComponent"; // 구글 맵 컴포넌트 임포트
 
@@ -116,7 +116,6 @@ function RoutePage() {
     navigate(`/payment?method=${method}`);
   };
 
-
   return (
     <PageWrapper>
       <Container>
@@ -127,7 +126,6 @@ function RoutePage() {
             style={{ width: "32px", height: "32px" }}
           />
         </BackButton>
-
 
         <Header>
           <Title>여행 경로 확인</Title>
@@ -141,23 +139,38 @@ function RoutePage() {
             <MapContent>
               <div style={{ width: "100%", height: 400, marginBottom: 16 }}>
                 <GoogleMapComponent
-                  markers={Object.values(selectedItems).map((item, idx) => ({
-                    id: item.id || item.name || idx,
-                    name: item.name,
-                    position: item.position
-                      ? item.position
-                      : item.mapy && item.mapx
-                      ? { lat: Number(item.mapy), lng: Number(item.mapx) }
-                      : { lat: 0, lng: 0 },
-                    address: item.address || "",
-                  }))}
+                  markers={Object.values(selectedItems)
+                    .map((item, idx) => ({
+                      id: item.id || item.name || idx,
+                      name: item.name,
+                      position: item.position
+                        ? item.position
+                        : item.mapy && item.mapx
+                        ? { lat: Number(item.mapy), lng: Number(item.mapx) }
+                        : null,
+                      address: item.address || "",
+                    }))
+                    .filter(
+                      (marker) =>
+                        marker.position &&
+                        typeof marker.position.lat === "number" &&
+                        typeof marker.position.lng === "number" &&
+                        marker.position.lat !== 0 &&
+                        marker.position.lng !== 0
+                    )}
                 />
               </div>
             </MapContent>
           </MapCard>
 
           <ItemsList>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <SectionTitle>선택된 여행 코스</SectionTitle>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <DatePicker
@@ -179,12 +192,13 @@ function RoutePage() {
                       }}
                     >
                       {travelDate
-                        ? `${travelDate.getFullYear()}년 ${travelDate.getMonth() + 1}월 ${travelDate.getDate()}일`
+                        ? `${travelDate.getFullYear()}년 ${
+                            travelDate.getMonth() + 1
+                          }월 ${travelDate.getDate()}일`
                         : "날짜 선택"}
                     </button>
                   }
                 />
-
               </div>
             </div>
 
@@ -207,11 +221,15 @@ function RoutePage() {
                       <ItemDescription>{item.description}</ItemDescription>
                       {["restaurant", "accommodation"].includes(type) && (
                         <CountControlWrapper>
-                          <CountButton onClick={() => handleCountChange(type, -1)}>
+                          <CountButton
+                            onClick={() => handleCountChange(type, -1)}
+                          >
                             <span>−</span>
                           </CountButton>
                           <CountText>{item.count || 1}</CountText>
-                          <CountButton onClick={() => handleCountChange(type, 1)}>
+                          <CountButton
+                            onClick={() => handleCountChange(type, 1)}
+                          >
                             <span>+</span>
                           </CountButton>
 
@@ -220,12 +238,16 @@ function RoutePage() {
                       )}
 
                       <ItemPrice>
-                        {["restaurant", "accommodation"].includes(type) && item.count > 1
-                          ? `${(item.price * item.count).toLocaleString()}원 (${item.price.toLocaleString()}원 × ${item.count
-                          }명)`
+                        {["restaurant", "accommodation"].includes(type) &&
+                        item.count > 1
+                          ? `${(
+                              item.price * item.count
+                            ).toLocaleString()}원 (${item.price.toLocaleString()}원 × ${
+                              item.count
+                            }명)`
                           : item.price === 0
-                            ? "무료"
-                            : `${item.price.toLocaleString()}원`}
+                          ? "무료"
+                          : `${item.price.toLocaleString()}원`}
                       </ItemPrice>
                     </ItemInfo>
                   </ItemContent>
@@ -256,12 +278,11 @@ function RoutePage() {
                       marginRight: "6px",
                       borderRadius: "4px",
                       display: "inline-block",
-                      verticalAlign: "middle"
+                      verticalAlign: "middle",
                     }}
                   />
                   토스페이
                 </PaymentButton>
-
               </PaymentGrid>
             </PriceCard>
           </ItemsList>
@@ -295,7 +316,13 @@ function RoutePage() {
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              <p style={{ marginBottom: "16px", fontWeight: 600, fontSize: "16px" }}>
+              <p
+                style={{
+                  marginBottom: "16px",
+                  fontWeight: 600,
+                  fontSize: "16px",
+                }}
+              >
                 여행 날짜를 선택해주세요.
               </p>
               <button

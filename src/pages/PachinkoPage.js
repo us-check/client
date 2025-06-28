@@ -373,7 +373,8 @@ function PachinkoPage() {
   const getTotalPrice = () => {
     const subtotal = Object.values(selectedItems).reduce(
       (sum, item) =>
-        sum + (item && !isNaN(Number(item.price)) ? Number(item.price) : 0), 0
+        sum + (item && !isNaN(Number(item.price)) ? Number(item.price) : 0),
+      0
     );
     const fee = Math.floor(subtotal * 0.05);
     return { subtotal, fee, total: subtotal + fee };
@@ -386,7 +387,7 @@ function PachinkoPage() {
       <BackIcon
         src="뒤로가는화살표.svg"
         alt="뒤로가기"
-        onClick={() => navigate('/')}
+        onClick={() => navigate("/")}
       />
 
       <Header>
@@ -513,14 +514,44 @@ function PachinkoPage() {
                         <SpinButton
                           onClick={() => spinMachine(type)}
                           disabled={spinning || isAutoSpinning}
+                          style={{
+                            minWidth: 80,
+                            height: 36,
+                            fontSize: 15,
+                            fontWeight: 600,
+                            borderRadius: 8,
+                            background: "#009499",
+                            color: "#fff",
+                            border: "none",
+                            marginRight: 8,
+                            cursor:
+                              spinning || isAutoSpinning
+                                ? "not-allowed"
+                                : "pointer",
+                            opacity: spinning || isAutoSpinning ? 0.6 : 1,
+                            transition: "all 0.2s",
+                          }}
                         >
-                        {spinning ? "돌아가는 중" : "다시"}
+                          {spinning ? "돌아가는 중" : "재추첨"}
                         </SpinButton>
                         <MoreButton
                           onClick={() => setOpenModal(type)}
                           disabled={isAutoSpinning}
+                          style={{
+                            minWidth: 80,
+                            height: 36,
+                            fontSize: 15,
+                            fontWeight: 600,
+                            borderRadius: 8,
+                            background: "#f3f4f6",
+                            color: "#009499",
+                            border: "1px solid #009499",
+                            cursor: isAutoSpinning ? "not-allowed" : "pointer",
+                            opacity: isAutoSpinning ? 0.6 : 1,
+                            transition: "all 0.2s",
+                          }}
                         >
-                          ⋯
+                          직접 선택
                         </MoreButton>
                       </ReelControls>
                     </ReelContainer>
@@ -533,11 +564,31 @@ function PachinkoPage() {
                 disabled={
                   Object.values(isSpinning).some(Boolean) || isAutoSpinning
                 }
+                style={{
+                  minWidth: 160,
+                  height: 44,
+                  fontSize: 18,
+                  fontWeight: 700,
+                  borderRadius: 10,
+                  background: "#009499",
+                  color: "#fff",
+                  border: "none",
+                  margin: "24px auto 0",
+                  display: "block",
+                  cursor:
+                    Object.values(isSpinning).some(Boolean) || isAutoSpinning
+                      ? "not-allowed"
+                      : "pointer",
+                  opacity:
+                    Object.values(isSpinning).some(Boolean) || isAutoSpinning
+                      ? 0.6
+                      : 1,
+                  transition: "all 0.2s",
+                }}
               >
-                {" "}
                 {Object.values(isSpinning).some(Boolean) || isAutoSpinning
                   ? "돌아가는 중..."
-                  : "전부 다시 돌리기"}
+                  : "전부 재추첨"}
               </MainSpinButton>
             </SlotMachineScreen>
 
