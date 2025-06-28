@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/LoadingPage.css";
+import {
+  LoadingWrapper,
+  LoadingSpinner,
+  LoadingText,
+  LoadingSubtext,
+} from "../styles/LoadingPageStyle"; // 경로는 실제 폴더 구조에 맞게 수정
 
 function LoadingPage() {
   const navigate = useNavigate();
@@ -24,18 +29,17 @@ function LoadingPage() {
           navigate("/pachinko");
         }
       } catch (e) {
-        // 에러 시 홈으로 이동 또는 에러 안내
         navigate("/");
       }
     })();
   }, [navigate]);
 
   return (
-    <div className="loading-wrapper">
-      <div className="loading-spinner" />
-      <div className="loading-text">AI가 맞춤 여행 코스를 분석 중입니다...</div>
-      <div className="loading-subtext">잠시만 기다려주세요!</div>
-    </div>
+    <LoadingWrapper>
+      <LoadingSpinner />
+      <LoadingText>AI가 맞춤 여행 코스를 분석 중입니다...</LoadingText>
+      <LoadingSubtext>잠시만 기다려주세요!</LoadingSubtext>
+    </LoadingWrapper>
   );
 }
 
