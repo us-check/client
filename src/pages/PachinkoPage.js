@@ -127,6 +127,14 @@ function categorizeServerData(items) {
   return categorized;
 }
 
+// 서버 응답에서 recommended_spots만 추출해서 기존 데이터 변환 함수에 넘기도록 분기 추가
+function categorizeServerDataFromServerResponse(serverResponse) {
+  // 서버 응답에서 recommended_spots만 추출해서 기존 구조로 변환
+  if (!serverResponse || !Array.isArray(serverResponse.recommended_spots))
+    return { attraction: [], restaurant: [], accommodation: [] };
+  return categorizeServerData(serverResponse.recommended_spots);
+}
+
 // getTypeIcon, getTypeName 함수가 아래에서 사용되므로 함수 선언을 컴포넌트 함수 위로 이동
 function getTypeIcon(type) {
   switch (type) {
@@ -196,6 +204,23 @@ function PachinkoPage() {
   }, []); // startAutoSpin 의존성 경고 무시
 
   useEffect(() => {
+    // localStorage에서 pachinkoData를 불러와서 사용
+    const localData = localStorage.getItem("pachinkoData");
+    if (localData) {
+      try {
+        const parsed = JSON.parse(localData);
+        // 서버 응답 형태면 recommended_spots만 추출해서 변환
+        if (parsed.recommended_spots) {
+          setDataByCategory(categorizeServerDataFromServerResponse(parsed));
+        } else {
+          setDataByCategory(categorizeServerData(parsed));
+        }
+        return;
+      } catch (e) {
+        // 파싱 실패시 fallback
+      }
+    }
+    // fallback: 기존 더미 데이터 사용
     async function fetchData() {
       const data = [
         {
@@ -484,7 +509,10 @@ function PachinkoPage() {
                         </ReelHeaderContent>
                       </ReelHeader>
 
-                      <ReelScreen $spinning={spinning} $showResults={showResults}>
+                      <ReelScreen
+                        $spinning={spinning}
+                        $showResults={showResults}
+                      >
                         {spinning ? (
                           <SpinningContent>
                             {[...Array(30)].map((_, idx) => {

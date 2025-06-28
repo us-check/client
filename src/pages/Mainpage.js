@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FrameWrapper,
   Header,
@@ -17,29 +17,42 @@ import {
   FooterContainer,
   FooterTextWrapper,
   FooterText,
-} from '../styles/MainpageStyle';
+} from "../styles/MainpageStyle";
 
 function Mainpage() {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!searchText.trim()) return;
 
-    // 검색어를 저장하거나 상태관리 라이브러리 사용 가능
-    localStorage.setItem('searchText', searchText);
+    localStorage.setItem("searchText", searchText);
 
-    // 로딩 페이지로 이동
-    navigate('/loading');
+    // API에 POST 요청
+    try {
+      const res = await fetch("http://192.168.0.48/api/query/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: searchText }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        localStorage.setItem("pachinkoData", JSON.stringify(data));
+      }
+    } catch (e) {
+      console.error(e);
+    }
 
-    // 결과 페이지로 일정 시간 후 이동
+    navigate("/loading");
     setTimeout(() => {
-      navigate('/pachinko');
+      navigate("/pachinko");
     }, 2000);
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') handleSearch();
+    if (e.key === "Enter") handleSearch();
   };
 
   return (
@@ -64,17 +77,26 @@ function Mainpage() {
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               onKeyDown={handleKeyDown}
-              color='#b5b5b5'
+              color="#b5b5b5"
             />
-            <SearchIcon
-              src={
-                searchText.trim()
-                  ? '/검정돋보기.svg'
-                  : '/돋보기.svg'
-              }
-              alt="돋보기"
+            <button
+              type="button"
               onClick={handleSearch}
-            />
+              style={{
+                background: "none",
+                border: "none",
+                padding: 0,
+                margin: 0,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <SearchIcon
+                src={searchText.trim() ? "/검정돋보기.svg" : "/돋보기.svg"}
+                alt="돋보기"
+              />
+            </button>
           </SearchInnerBox>
         </SearchBox>
       </MainContent>
