@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   StorePageWrapper,
   StoreHeader,
+  BackIcon,
   StoreLogoGroup,
   StoreLogoImage,
   StoreLogoText,
@@ -121,6 +122,11 @@ function AddStorePage() {
   return (
     <StorePageWrapper>
       <StoreHeader>
+        <BackIcon
+          src={process.env.PUBLIC_URL + "/뒤로가는화살표.svg"}
+          alt="뒤로가기"
+          onClick={() => navigate("/")}
+        />
         <StoreLogoGroup>
           <StoreLogoImage
             src={process.env.PUBLIC_URL + "/로고마늘.svg"}
@@ -128,7 +134,7 @@ function AddStorePage() {
           />
           <StoreLogoText>의성:Check</StoreLogoText>
         </StoreLogoGroup>
-        <StoreMenuIcon src={process.env.PUBLIC_URL + "/menu.svg"} alt="메뉴" onClick={() => setIsOpen(true)}/>
+        <StoreMenuIcon src={process.env.PUBLIC_URL + "/menu.svg"} alt="메뉴" onClick={() => setIsOpen(true)} />
       </StoreHeader>
       <StoreFormCard>
         <StoreTitle>가게를 등록하시나요?</StoreTitle>
@@ -233,7 +239,7 @@ function AddStorePage() {
         <p>Us:Code Hackathon 2025, Uiseong</p>
       </StoreFooter>
 
-    {isOpen && (
+      {isOpen && (
         <MainpageModal
           isLoggedIn={isLoggedIn}
           onClose={() => setIsOpen(false)}

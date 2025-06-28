@@ -33,6 +33,16 @@ export const HeaderContent = styled.div`
   margin: 0 auto;
 `;
 
+export const BackIcon = styled.img`
+  position: absolute;
+  top: 23px;
+  left: 23px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 10;
+`;
+
 export const Logo = styled.div`
   display: flex;
   align-items: center;

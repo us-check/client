@@ -78,7 +78,7 @@ function Mainpage() {
   const handleMyPageClick = () => {
     console.log('내 정보 클릭');
     setIsMenuOpen(false);
-    navigate('/mypage');
+    navigate('/userinfo');
   };
 
   const handleStoreRegisterClick = () => {
