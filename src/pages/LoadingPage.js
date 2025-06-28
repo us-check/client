@@ -1,22 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const LoadingWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(180deg, #fff, #f3ffff, #c6fdff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 32px;
-  font-weight: bold;
-`;
+import '../styles/LoadingPage.css';
 
 function LoadingPage() {
   return (
-    <LoadingWrapper>
-      🔄 AI가 정보를 분석 중입니다...
-    </LoadingWrapper>
+    <div className="loading-wrapper">
+      <div className="loading-spinner" />
+      <div className="loading-text">AI가 맞춤 여행 코스를 분석 중입니다...</div>
+      <div className="loading-subtext">잠시만 기다려주세요!</div>
+    </div>
   );
 }
 
