@@ -14,6 +14,8 @@ import {
   StoreDesc,
   StoreForm,
   StoreFormGroup,
+  GradientWrapper,
+  GradientInnerBox,
   StoreLabel,
   StoreInput,
   StoreSelect,
@@ -67,11 +69,17 @@ function AddStorePage() {
   ];
 
   const handleFindNearby = () => {
-    // 실제 위치 대신 예시 데이터 사용
-    setNearbyStores(exampleStores);
-    setError("");
-    setLoading(false);
+    if (nearbyStores.length > 0) {
+      // 이미 목록이 있는 경우 -> 초기화(숨김)
+      setNearbyStores([]);
+    } else {
+      // 목록이 없는 경우 -> 예시 데이터로 표시
+      setNearbyStores(exampleStores);
+      setError("");
+      setLoading(false);
+    }
   };
+
 
   const handleSelectStore = (store) => {
     setForm((f) => ({
@@ -132,74 +140,21 @@ function AddStorePage() {
         <StoreTitle>가게를 등록하시나요?</StoreTitle>
         <StoreDesc>새로운 가게 정보를 추가해보세요</StoreDesc>
         <StoreForm onSubmit={handleSubmit}>
-          <StoreFormGroup>
-            <StoreLabel htmlFor="name">가게 이름</StoreLabel>
-            <StoreInput
-              id="name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="가게 이름을 입력하세요"
-              required
-            />
-          </StoreFormGroup>
-          <StoreFormGroup>
-            <StoreLabel htmlFor="type">가게 유형</StoreLabel>
-            <StoreSelect
-              id="type"
-              name="type"
-              value={form.type}
-              onChange={handleChange}
-            >
-              <option value="restaurant">🍽️ 음식점</option>
-              <option value="accommodation">🏨 숙박시설</option>
-            </StoreSelect>
-          </StoreFormGroup>
-          <StoreFormGroup>
-            <StoreLabel htmlFor="address">가게 주소</StoreLabel>
-            <StoreInput
-              id="address"
-              name="address"
-              value={form.address}
-              onChange={handleChange}
-              placeholder="주소를 입력하세요"
-              required
-            />
-          </StoreFormGroup>
-          <StoreFormGroup>
-            <StoreLabel htmlFor="price">1인당 가격 (원)</StoreLabel>
-            <StoreInput
-              id="price"
-              name="price"
-              type="number"
-              value={form.price}
-              onChange={handleChange}
-              placeholder="가격을 입력하세요"
-              required
-            />
-          </StoreFormGroup>
-          <StoreFormGroup>
-            <StoreLabel htmlFor="businessNumber">사업자 번호</StoreLabel>
-            <StoreInput
-              id="businessNumber"
-              name="businessNumber"
-              value={form.businessNumber}
-              onChange={handleChange}
-              placeholder="사업자 번호를 입력하세요"
-              required
-            />
-          </StoreFormGroup>
+          {/* 내 위치로 등록 먼저! */}
           <StoreButton
             type="button"
             onClick={handleFindNearby}
             disabled={loading}
           >
-            {loading ? "위치 찾는 중..." : "내 위치로 등록"}
+            {loading ? "위치 찾는 중..." : "📍 내 위치로 등록"}
           </StoreButton>
+
           {error && <StoreError>{error}</StoreError>}
+
+          {/* 주변 가게 리스트 표시 */}
           {nearbyStores.length > 0 && (
-            <div>
-              <StoreLabel>내 주변 가게</StoreLabel>
+            <>
+              <StoreLabel>근처 가게를 선택하세요</StoreLabel>
               <StoreNearbyList>
                 {nearbyStores.map((store) => (
                   <StoreNearbyItem
@@ -215,16 +170,107 @@ function AddStorePage() {
                   </StoreNearbyItem>
                 ))}
               </StoreNearbyList>
-            </div>
+            </>
           )}
+
+          {/* 아래는 수동 입력 폼 (가게가 자동으로 안 채워졌을 경우 입력) */}
+          <StoreFormGroup>
+            <StoreLabel htmlFor="name">가게 이름</StoreLabel>
+            <GradientWrapper>
+              <GradientInnerBox>
+                <StoreInput
+                  id="name"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="가게 이름을 입력하세요"
+                  required
+                  style={{ border: "none", background: "transparent" }}
+                />
+              </GradientInnerBox>
+            </GradientWrapper>
+          </StoreFormGroup>
+
+          <StoreFormGroup>
+            <StoreLabel htmlFor="address">가게 주소</StoreLabel>
+            <GradientWrapper>
+              <GradientInnerBox>
+                <StoreInput
+                  id="address"
+                  name="address"
+                  value={form.address}
+                  onChange={handleChange}
+                  placeholder="주소를 입력하세요"
+                  required
+                  style={{ border: "none", background: "transparent" }}
+                />
+              </GradientInnerBox>
+            </GradientWrapper>
+          </StoreFormGroup>
+
+          <StoreFormGroup>
+            <StoreLabel htmlFor="type">가게 유형</StoreLabel>
+            <GradientWrapper>
+              <GradientInnerBox>
+                <StoreSelect
+                  id="type"
+                  name="type"
+                  value={form.type}
+                  onChange={handleChange}
+                  style={{ border: "none", background: "transparent" }}
+                >
+                  <option value="restaurant">🍽️ 음식점</option>
+                  <option value="accommodation">🏨 숙박시설</option>
+                </StoreSelect>
+              </GradientInnerBox>
+            </GradientWrapper>
+          </StoreFormGroup>
+
+          <StoreFormGroup>
+            <StoreLabel htmlFor="price">1인당 가격 (원)</StoreLabel>
+            <GradientWrapper>
+              <GradientInnerBox>
+                <StoreInput
+                  id="price"
+                  name="price"
+                  type="number"
+                  value={form.price}
+                  onChange={handleChange}
+                  placeholder="가격을 입력하세요"
+                  required
+                  style={{ border: "none", background: "transparent" }}
+                />
+              </GradientInnerBox>
+            </GradientWrapper>
+          </StoreFormGroup>
+
+          <StoreFormGroup>
+            <StoreLabel htmlFor="businessNumber">사업자 번호</StoreLabel>
+            <GradientWrapper>
+              <GradientInnerBox>
+                <StoreInput
+                  id="businessNumber"
+                  name="businessNumber"
+                  value={form.businessNumber}
+                  onChange={handleChange}
+                  placeholder="사업자 번호를 입력하세요"
+                  required
+                  style={{ border: "none", background: "transparent" }}
+                />
+              </GradientInnerBox>
+            </GradientWrapper>
+          </StoreFormGroup>
+
+
           <StoreButton
             type="submit"
             disabled={loading}
             style={{ marginTop: 8 }}
           >
-            {loading ? "등록 중..." : "가게 등록하기"}
+            {loading ? "등록 중..." : "✅ 가게 등록하기"}
           </StoreButton>
         </StoreForm>
+
       </StoreFormCard>
       <StoreFooter>
         <p>2025, in 의성 Us:Code 해커톤</p>

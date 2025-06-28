@@ -454,6 +454,19 @@ export const StoreFormGroup = styled.div`
   margin-bottom: 0.75rem;
 `;
 
+export const GradientWrapper = styled.div`
+  padding: 2px;
+  background: linear-gradient(90deg, #00f6ff, #009499);
+  border-radius: 12px;
+`;
+
+export const GradientInnerBox = styled.div`
+  background: white;
+  border-radius: 12px;
+  padding: 0;
+`;
+
+
 export const StoreLabel = styled.label`
   font-size: 0.95rem;
   font-weight: 600;
@@ -461,6 +474,7 @@ export const StoreLabel = styled.label`
 `;
 
 export const StoreInput = styled.input`
+  width: 94%;
   padding: 0.75rem;
   border: 2px solid #a5f3fc;
   border-radius: 0.75rem;
@@ -479,18 +493,22 @@ export const StoreInput = styled.input`
 `;
 
 export const StoreSelect = styled.select`
-  padding: 0.75rem;
-  border: 2px solid #a5f3fc;
-  border-radius: 0.75rem;
+  width: 96%;
+  height: 43px;
+  padding: 0 1rem;
+  border: none;
   font-size: 1rem;
-  background: #f9fafb;
-  transition: all 0.2s ease;
+  border-radius: 12px;
+  background: transparent;
+  box-sizing: border-box;
   outline: none;
-  &:focus {
-    border-color: #06b6d4;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
-  }
+
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%239ca3af' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 0.65em auto;
+
+  cursor: pointer;
 `;
 
 export const StoreButton = styled.button`
