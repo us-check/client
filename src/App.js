@@ -10,6 +10,7 @@ import MyReservations from "./pages/MyReservations";
 import GoogleMapComponent from "./pages/GoogleMapComponent";
 import ResultPage from "./pages/ResultPage";
 import AddStorePage from "./pages/AddStorePage";
+import Qrtest from "./pages/qrtest";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/myreservation" element={<MyReservations />} />
         <Route path="/addstore" element={<AddStorePage />} />
+        <Route path="/qrtest" element={<Qrtest />} />
         {/* <Route path="/map" element={<GoogleMapComponent />} /> */}
       </Routes>
     </Router>

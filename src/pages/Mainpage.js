@@ -56,7 +56,7 @@ function Mainpage() {
   const handleMyPageClick = () => {
     console.log('내 정보 클릭');
     setIsMenuOpen(false);
-    navigate('/userinfo');
+    navigate('/qrtest');
   };
 
   const handleStoreRegisterClick = () => {
@@ -131,8 +131,6 @@ function Mainpage() {
           onStoreRegisterClick={handleStoreRegisterClick}
         />
       )}
-
-
     </FrameWrapper>
   );
 }
