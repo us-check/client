@@ -26,17 +26,14 @@ const QR_PATTERN = [
   [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
 ]
 
-const containerStyle = {
+const containerBase = {
   minHeight: "100vh",
-  background: " rgba(0, 0, 0, 1)",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
   padding: "2rem",
-}
-
-
+};
 
 const gridStyle = {
   position: "absolute",
@@ -49,26 +46,24 @@ const gridStyle = {
   gap: "1px",
   width: "420px",
   height: "420px",
-}
+};
 
 const gridCellStyle = {
-  border: "1px solid rgba(255, 255, 255, 0.2)",
-}
+  border: "1px solid rgba(0, 0, 0, 0.05)",
+};
 
 const qrContainerStyle = {
   position: "relative",
   width: "420px",
   height: "420px",
-}
+};
 
-const squareStyle = {
+const squareBase = {
   position: "absolute",
   width: "20px",
   height: "20px",
-  backgroundColor: "white",
   borderRadius: "2px",
-  boxShadow: "0 0 10px rgba(255, 255, 255, 0.5)",
-}
+};
 
 const glowStyle = {
   position: "absolute",
@@ -77,183 +72,177 @@ const glowStyle = {
   right: 0,
   bottom: 0,
   borderRadius: "8px",
-  boxShadow: "0 0 50px rgba(255, 255, 255, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)",
-  background: "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)",
-}
+  boxShadow:
+    "0 0 50px rgba(255, 255, 255, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)",
+  background:
+    "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)",
+};
 
 const textContainerStyle = {
   marginTop: "2rem",
   textAlign: "center",
-}
+};
 
 const titleStyle = {
   fontSize: "1.5rem",
   fontWeight: "bold",
-  color: "white",
   marginBottom: "0.5rem",
-}
+};
 
 const subtitleStyle = {
-  color: "#d1d5db",
-}
+  color: "#6b7280",
+};
 
 export default function QRAssembly() {
-  const [squares, setSquares] = useState([])
-  const [isAnimating, setIsAnimating] = useState(false)
-  const [showGrid, setShowGrid] = useState(false)
+  const [squares, setSquares] = useState([]);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [showGrid, setShowGrid] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      navigate("/myreservation");
-    }, 6000);
-
-    return () => clearTimeout(timeout);
-  }, []);
+    const to = setTimeout(() => navigate("/myreservation"), 6000);
+    return () => clearTimeout(to);
+  }, [navigate]);
 
   const generateSquares = () => {
-    const newSquares = []
-
-    QR_PATTERN.forEach((row, rowIndex) => {
-      row.forEach((cell, colIndex) => {
+    const newSquares = [];
+    QR_PATTERN.forEach((row, r) => {
+      row.forEach((cell, c) => {
         if (cell === 1) {
-          const side = Math.floor(Math.random() * 4) // 0: 위, 1: 오른쪽, 2: 아래, 3: 왼쪽
-          let startX, startY
-
+          const side = Math.floor(Math.random() * 4);
+          let startX, startY;
           switch (side) {
-            case 0: // 위쪽에서
-              startX = Math.random() * window.innerWidth
-              startY = -50
-              break
-            case 1: // 오른쪽에서
-              startX = window.innerWidth + 50
-              startY = Math.random() * window.innerHeight
-              break
-            case 2: // 아래쪽에서
-              startX = Math.random() * window.innerWidth
-              startY = window.innerHeight + 50
-              break
-            case 3: // 왼쪽에서
-              startX = -50
-              startY = Math.random() * window.innerHeight
-              break
+            case 0:
+              startX = Math.random() * window.innerWidth;
+              startY = -50;
+              break;
+            case 1:
+              startX = window.innerWidth + 50;
+              startY = Math.random() * window.innerHeight;
+              break;
+            case 2:
+              startX = Math.random() * window.innerWidth;
+              startY = window.innerHeight + 50;
+              break;
             default:
-              startX = 0
-              startY = 0
+              startX = -50;
+              startY = Math.random() * window.innerHeight;
           }
-
           newSquares.push({
-            id: `${rowIndex}-${colIndex}`,
-            row: rowIndex,
-            col: colIndex,
-            isBlack: true,
+            id: `${r}-${c}`,
+            row: r,
+            col: c,
             startX,
             startY,
-          })
+          });
         }
-      })
-    })
+      });
+    });
+    setSquares(newSquares);
+  };
 
-    setSquares(newSquares)
-  }
-
-  const startAnimation = () => {
-    setIsAnimating(false)
-    setShowGrid(false)
-    generateSquares()
+  const startSequence = () => {
+    setIsAnimating(false);
+    setShowGrid(false);
+    setIsFinished(false);
+    generateSquares();
 
     setTimeout(() => {
-      setIsAnimating(true)
+      setIsAnimating(true);
       setTimeout(() => {
-        setShowGrid(true)
-      }, 2000)
-    }, 100)
-  }
+        setShowGrid(true);
+        setTimeout(() => setIsFinished(true), 1000);
+      }, 2000);
+    }, 100);
+  };
 
-  useEffect(() => {
-    startAnimation()
-  }, [])
+  useEffect(startSequence, []);
 
   return (
     <motion.div
-      style={containerStyle}
+      style={containerBase}
       initial={{ backgroundColor: "rgba(0,0,0,0)" }}
-      animate={{ backgroundColor: "rgba(0,0,0,1)" }}
-      transition={{ duration: 1.2 }}
+      animate={{ backgroundColor: isFinished ? "#ffffff" : "#000000" }}
+      transition={{ duration: 1.2}}
     >
-      <div style={{ position: "relative" }}>
+      <motion.div
+        style={qrContainerStyle}
+        animate={{ scale: isFinished ? 0.7 : 1 }} // QR 전체 축소
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
         {showGrid && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.1 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
             style={gridStyle}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.07 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {Array.from({ length: 21 * 21 }).map((_, index) => (
-              <div key={index} style={gridCellStyle} />
+            {Array.from({ length: 21 * 21 }).map((_, i) => (
+              <div key={i} style={gridCellStyle} />
             ))}
           </motion.div>
         )}
 
-        {/* 날아오는 네모 */}
-        <div style={qrContainerStyle}>
-          {squares.map((square, index) => (
-            <motion.div
-              key={square.id}
-              style={squareStyle}
-              initial={{
-                x: square.startX - 210,
-                y: square.startY - 210,
-                scale: 0.3,
-                opacity: 1,
-                rotate: Math.random() * 360,
-              }}
-              animate={
-                isAnimating
-                  ? {
-                    x: square.col * 20,
-                    y: square.row * 20,
+        {squares.map((sq, idx) => (
+          <motion.div
+            key={sq.id}
+            style={{
+              ...squareBase,
+              backgroundColor: isFinished ? "#000000" : "#ffffff",
+              boxShadow: isFinished
+                ? "0 0 8px rgba(0,0,0,0.2)"
+                : "0 0 10px rgba(255,255,255,0.5)",
+            }}
+            initial={{
+              x: sq.startX - 210,
+              y: sq.startY - 210,
+              scale: 0.3,
+              rotate: Math.random() * 360,
+              opacity: 1,
+            }}
+            animate={
+              isAnimating
+                ? {
+                    x: sq.col * 20,
+                    y: sq.row * 20,
                     scale: 1,
-                    opacity: 1,
                     rotate: 0,
+                    transition: {
+                      duration: 2,
+                      delay: idx * 0.01,
+                      ease: "easeOut",
+                    },
                   }
-                  : {}
-              }
-              transition={{
-                duration: 2,
-                delay: index * 0.01,
-                ease: "easeOut",
-                scale: {
-                  duration: 2,
-                },
-                opacity: {
-                  duration: 0.1,
-                },
-              }}
-            />
-          ))}
-        </div>
+                : {}
+            }
+          />
+        ))}
 
-        {/* 글로우 효과 */}
         {showGrid && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
             style={glowStyle}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: isFinished ? 0 : 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
           />
         )}
-      </div>
+      </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: showGrid ? 1 : 0, y: showGrid ? 0 : 20 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
         style={textContainerStyle}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{
+          opacity: showGrid ? 1 : 0,
+          y: showGrid ? 0 : 20,
+        }}
+        transition={{ duration: 0.5, delay: 0.5 }}
       >
-        <h2 style={titleStyle}>QR 코드 생성 중!</h2>
+        <h2 style={{ ...titleStyle, color: isFinished ? "#000" : "#fff" }}>
+          QR 코드 생성 중!
+        </h2>
         <p style={subtitleStyle}>잠시만 기다려주세요.</p>
       </motion.div>
     </motion.div>
-  )
+  );
 }
