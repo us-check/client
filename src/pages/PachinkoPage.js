@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   PageWrapper,
+  BackIcon,
   Header,
   LogoSection,
   LogoIcon,
@@ -464,8 +465,7 @@ function PachinkoPage() {
   const getTotalPrice = () => {
     const subtotal = Object.values(selectedItems).reduce(
       (sum, item) =>
-        sum + (item && !isNaN(Number(item.price)) ? Number(item.price) : 0),
-      0
+        sum + (item && !isNaN(Number(item.price)) ? Number(item.price) : 0), 0
     );
     const fee = Math.floor(subtotal * 0.05);
     return { subtotal, fee, total: subtotal + fee };
@@ -475,6 +475,12 @@ function PachinkoPage() {
 
   return (
     <PageWrapper>
+      <BackIcon
+        src="뒤로가는화살표.svg"
+        alt="뒤로가기"
+        onClick={() => navigate('/')}
+      />
+
       <Header>
         <LogoSection>
           <LogoIcon></LogoIcon>

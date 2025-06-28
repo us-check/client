@@ -22,7 +22,7 @@ function App() {
         <Route path="/pachinko" element={<PachinkoPage />} />
         <Route path="/route" element={<RoutePage />} />
         <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/mypage" element={<MyReservations />} />
+        <Route path="/myreservation" element={<MyReservations />} />
         <Route path="/addstore" element={<AddStorePage />} />
         {/* <Route path="/map" element={<GoogleMapComponent />} /> */}
       </Routes>

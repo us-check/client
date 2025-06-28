@@ -1,5 +1,5 @@
-import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import {
     Container,
@@ -9,15 +9,18 @@ import {
     InUscodeText,
     Card,
     LoginButtonWrapper,
-    LoginText,
+    SubtitleContainer,
+    Subtitle,
+    Divider,
     LogoWrapper,
     LogoImage,
     LogoText,
     BackIcon,
-    GoogleButton,
 } from '../styles/LoginPageStyle';
 
 const LoginPage = () => {
+    const navigate = useNavigate();
+
     const handleLogin = async () => {
         try {
             window.location.href = ``;
@@ -39,14 +42,25 @@ const LoginPage = () => {
         }
     };
 
+    const handleGoHome = () => {
+        navigate('/');
+    };
+
     return (
         <Container>
-            <BackIcon src="뒤로가는화살표.svg" alt="뒤로가기" />
+            <BackIcon src="뒤로가는화살표.svg" alt="뒤로가기" onClick={handleGoHome} />
             <Card>
                 <LogoWrapper>
                     <LogoImage src="로고마늘.svg" alt="로고마늘" />
                     <LogoText>의성:Check</LogoText>
                 </LogoWrapper>
+
+                <SubtitleContainer>
+                    <Divider />
+                    <Subtitle>로그인/회원가입</Subtitle>
+                    <Divider />
+                </SubtitleContainer>
+
                 <LoginButtonWrapper onClick={handleLogin}>
                     <FcGoogle />
                     구글로 로그인하기
