@@ -37,13 +37,11 @@ function Mainpage() {
   };
 
   const handleLoginClick = () => {
-    console.log('로그인 클릭');
     setIsMenuOpen(false);
     navigate('/login');
   };
 
   const handleLogoutClick = () => {
-    console.log('로그아웃 클릭');
     setIsMenuOpen(false);
     setIsLoggedIn(false); // 수정 필요 
   };
@@ -54,13 +52,11 @@ function Mainpage() {
   };
 
   const handleMyPageClick = () => {
-    console.log('내 정보 클릭');
     setIsMenuOpen(false);
-    navigate('/qrtest');
+    navigate('/userinfo');
   };
 
   const handleStoreRegisterClick = () => {
-    console.log('가게 등록 클릭');
     setIsMenuOpen(false);
     navigate('/addstore');
   };

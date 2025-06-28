@@ -284,7 +284,7 @@ function AddStorePage() {
           onLoginClick={() => navigate("/login")}
           onLogoutClick={() => setIsLoggedIn(false)}
           onLangClick={() => alert("준비중입니다.")}
-          onMyPageClick={() => navigate("/mypage")}
+          onMyPageClick={() => navigate("/userinfo")}
           onStoreRegisterClick={() => navigate("/addstore")}
         />
       )}
