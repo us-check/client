@@ -412,6 +412,7 @@ export const StoreLogoText = styled.div`
 export const StoreMenuIcon = styled.img`
   width: 50px;
   height: 50px;
+  cursor: pointer;
 `;
 
 // Card for the form
