@@ -32,7 +32,7 @@
 ## 🎬 Demo Video
 
 <a href="https://www.youtube.com/watch?v=EjaPMB0wIrY" target="_blank">
-  <img src="uscheck_mainpage.png" alt="Project Demo Video" style="width:100%;">
+  <img src="public/uscheck_mainpage.png" alt="Project Demo Video" style="width:100%;">
 </a>
 
 [Watch the demo video on YouTube](https://www.youtube.com/watch?v=EjaPMB0wIrY)
