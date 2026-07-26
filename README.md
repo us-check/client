@@ -83,112 +83,52 @@ client/
 
 ## 🚀 시작하기
 
-### 📋 사전 요구사항
+### 요구 사항
 
-- Node.js 16.0.0 이상
-- npm 또는 yarn 패키지 매니저
-- 네이버 지도 API 키
-- 백엔드 API 서버 (환경변수 설정 필요)
+- Node.js와 npm
+- 네이버 클라우드 플랫폼 Maps API에서 발급한 클라이언트 ID
+- AI 추천, QR 생성, 사업자 등록 기능에 연결할 백엔드 API 서버
 
-### ⚙️ 환경 설정
+### 1. 프로젝트 디렉터리로 이동
 
-1. **저장소 클론**
+저장소 루트에서 다음 명령을 실행합니다.
 
-   ```bash
-   git clone [repository-url]
-   cd client
-   ```
+```bash
+cd client
+```
 
-2. **의존성 설치**
+### 2. 설정하기
 
-   ```bash
-   npm install
-   # 또는
-   yarn install
-   ```
+의존성을 설치한 뒤 `client/.env` 파일을 만들고, 실제 서비스 값을 설정합니다. 환경변수 값은 저장소에 커밋하지 않습니다.
 
-3. **환경변수 설정**
+```bash
+npm install
+```
 
-   프로젝트 루트에 `.env` 파일을 생성하고 다음 내용을 추가하세요:
+```env
+REACT_APP_API_URL=<API 서버 기본 URL>
+REACT_APP_NAVER_CLIENT_ID=<네이버 지도 클라이언트 ID>
+```
 
-   ```env
-   REACT_APP_NAVER_CLIENT_ID=your_naver_map_client_id
-   REACT_APP_API_URL=your_backend_api_url
-   PUBLIC_URL=/
-   ```
+`REACT_APP_API_URL`은 다음 엔드포인트를 제공하는 서버를 가리켜야 합니다.
 
-4. **API 키 발급**
-   - [네이버 클라우드 플랫폼](https://www.ncloud.com/)에서 Maps API 키 발급
+```text
+POST /api/query/
+GET  /api/qr/
+POST /api/business/
+```
 
-### 🏃‍♂️ 실행 방법
-
-**개발 서버 실행**
+### 3. 실행하기
 
 ```bash
 npm start
 ```
 
-브라우저에서 `http://localhost:3000`으로 접속
+개발 서버가 실행되면 [http://localhost:3000](http://localhost:3000)에서 확인할 수 있습니다.
 
-**프로덕션 빌드**
+### 4. 검증하기
 
 ```bash
+CI=true npm test -- --watchAll=false
 npm run build
 ```
-
-**테스트 실행**
-
-```bash
-npm test
-```
-
-### 🔧 주요 설정 파일
-
-- `package.json` - 프로젝트 의존성 및 스크립트
-- `public/index.html` - HTML 템플릿 (Kakao Maps SDK 포함)
-- `src/App.js` - 라우팅 설정
-- `src/styles/GlobalStyle.js` - 전역 스타일 설정
-
-## 📱 사용 방법
-
-### 1. 여행 계획 시작
-
-- 메인페이지에서 원하는 여행 스타일을 자연어로 입력
-- "가족과 함께하는 힐링 여행", "맛집 투어" 등
-
-### 2. AI 추천 확인
-
-- 로딩 페이지에서 AI가 분석한 추천 결과 대기
-- 파친코 페이지에서 재미있게 여행지 선택
-
-### 3. 상세 계획 수립
-
-- 경로 페이지에서 선택한 장소들의 위치 확인
-- 여행 날짜 설정 및 숙박/식당 수량 조정
-
-### 4. 결제 및 예약
-
-- 카카오페이/토스페이로 간편 결제
-- QR 코드 발급으로 현장 이용
-
-## 🎯 주요 기능 흐름
-
-```
-메인페이지 → AI 분석 → 파친코 선택 → 경로 확인 → 결제 → QR 발급
-    ↓           ↓          ↓          ↓        ↓       ↓
-  검색 입력   로딩 화면   게임 방식   지도 보기   간편결제  현장 이용
-```
-
-## 🏪 사업자 기능
-
-### 가맹점 등록
-
-- `/addstore` 경로에서 사업자 등록 가능
-- 사업자번호, 위치정보, 가격 정보 등록
-- 의성군 관광 네트워크 참여
-
-## 🛡️ 보안 및 개인정보
-
-- 구글 소셜 로그인을 통한 안전한 인증
-- 결제 정보는 외부 결제 서비스(카카오페이/토스페이)를 통해 처리
-- 개인정보는 여행 서비스 제공 목적으로만 사용
