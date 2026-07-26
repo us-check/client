@@ -7,6 +7,11 @@
   <a href="https://www.youtube.com/watch?v=EjaPMB0wIrY" target="_blank" rel="noopener noreferrer">▶ YouTube 데모 영상 보기</a>
 </p>
 
+<p align="center">
+  프로젝트가 해결한 지역 문제와 해결 과정, YouTube 데모는
+  <a href="https://us-check.github.io/" target="_blank" rel="noopener noreferrer"><strong>배포 페이지</strong></a>에서 확인할 수 있습니다.
+</p>
+
 # us-check Client
 
 > AI 추천과 파친코 방식의 선택 경험을 결합한 의성군 여행 코스 탐색 웹 애플리케이션입니다.
