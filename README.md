@@ -1,92 +1,84 @@
-# 의성:Check - 의성군 AI 여행 추천 플랫폼
-
-의성군의 관광지, 맛집, 숙박 시설을 AI 기반으로 추천하고 여행 패키지를 제공하는 웹 애플리케이션입니다.
-
-## 🌟 주요 기능
-
-### 🤖 AI 여행 추천
-
-- 사용자의 선호도에 따른 맞춤형 여행 코스 생성
-- 자연어 입력을 통한 직관적인 여행 계획 수립
-- 실시간 AI 분석을 통한 최적화된 루트 제안
-
-### 🎰 파친코 스타일 여행지 선택
-
-- 재미있는 파친코 게임 방식으로 여행지 탐색
-- 관광지, 음식점, 숙박시설 카테고리별 선택
-- 스핀을 통한 랜덤 추천으로 새로운 발견의 즐거움
-
-### 🗺️ 지도 통합 서비스
-
-- 네이버 지도 API를 활용한 위치 기반 서비스
-- 선택한 여행지들의 최적 경로 표시
-- 실시간 위치 정보와 상세 지도 보기
-
-### 💳 통합 결제 시스템
-
-- 카카오페이, 토스페이 연동
-- 여행 패키지 일괄 결제
-- QR 코드 생성으로 현장 결제 편의성 제공
-
-### 📱 QR 코드 예약 관리
-
-- 결제 완료 후 QR 코드 자동 생성
-- 현장에서 QR 스캔으로 간편 이용
-- 예약 내역 및 여행 일정 관리
-
-## 🎬 Demo Video
-
-<a href="https://www.youtube.com/watch?v=EjaPMB0wIrY" target="_blank">
-  <img src=".github/assets/uscheck_mainpage.png" alt="Project Demo Video" style="width:100%;">
+<!-- 대표 화면과 데모 영상: GitHub에서 재생 가능한 링크형 임베드 -->
+<a href="https://www.youtube.com/watch?v=EjaPMB0wIrY" target="_blank" rel="noopener noreferrer">
+  <img src=".github/assets/uscheck_mainpage.png" alt="us-check Client 데모 화면" width="100%" />
 </a>
 
-[Watch the demo video on YouTube](https://www.youtube.com/watch?v=EjaPMB0wIrY)
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=EjaPMB0wIrY" target="_blank" rel="noopener noreferrer">▶ YouTube 데모 영상 보기</a>
+</p>
 
-## 🛠️ 기술 스택
+# us-check Client
 
-### Frontend
+> AI 추천과 파친코 방식의 선택 경험을 결합한 의성군 여행 코스 탐색 웹 애플리케이션입니다.
 
-- **React 18.3.1** - 메인 프레임워크
-- **React Router Dom 6.30.1** - 라우팅
-- **Styled Components 6.1.19** - 스타일링
-- **Framer Motion 12.19.2** - 애니메이션
-- **React Icons 5.5.0** - 아이콘
+여행 취향을 자연어로 입력하면 추천 결과를 바탕으로 관광지·음식점·숙박시설을 골라 여행 코스를 구성합니다. 선택한 코스는 지도에서 확인하고, 여행일과 QR 확인 화면까지 이어서 관리할 수 있습니다.
 
-### 지도 & 외부 API
+## ✨ 주요 기능
 
-- **Naver Maps API** - 지도 서비스
-- **React DatePicker 8.4.0** - 날짜 선택
+| 기능 | 설명 |
+| --- | --- |
+| AI 여행 코스 요청 | 사용자가 입력한 여행 취향을 API로 전송해 추천 장소 데이터를 받아옵니다. |
+| 파친코식 코스 선택 | 관광지, 음식점, 숙박시설별 후보를 슬롯 방식으로 추천하거나 직접 선택합니다. |
+| 지도 기반 코스 확인 | 선택한 장소를 네이버 지도 마커로 표시하고, 장소별 상세 위치를 확인합니다. |
+| 여행일·인원·금액 설정 | 여행일을 지정하고 음식점·숙박시설의 수량을 조정해 총 금액을 확인합니다. |
+| QR 예약 확인 | 완료 화면에서 QR 코드를 확인하고 선택한 코스와 여행 정보를 다시 볼 수 있습니다. |
+| 사업자 정보 등록 | 가게 정보와 이미지를 입력해 사업자 등록 API로 전송합니다. |
 
-### 상태 관리 & 네트워킹
+## 🧭 설계 방향
 
-- **Axios 1.10.0** - HTTP 클라이언트
-- **LocalStorage** - 클라이언트 사이드 데이터 저장
+- **카테고리 기반 코스 구성:** API 추천 결과를 관광지·음식점·숙박시설로 분류해 각 카테고리에서 한 곳씩 선택합니다.
+- **브라우저 상태 전달:** 검색어, 추천 결과, 선택 코스, 여행일, QR 정보를 `localStorage`에 저장해 화면 전환 사이에서 사용합니다.
+- **환경변수로 외부 서비스 연결:** 백엔드 API 기본 URL과 네이버 지도 클라이언트 ID를 `REACT_APP_` 환경변수로 분리합니다.
 
-## 📂 프로젝트 구조
+## 🛠 기술 스택
 
+| Category | 기술 |
+| --- | --- |
+| Frontend | React 18.3.1, React DOM 18.3.1 |
+| Routing | React Router DOM 6.30.1 |
+| UI & Motion | styled-components 6.1.19, Framer Motion 12.19.2, React Icons 5.5.0 |
+| Map & Date | NAVER Maps JavaScript API, React Datepicker 8.4.0 |
+| Networking & State | Fetch API, Axios 1.10.0, Web Storage (`localStorage`) |
+| Testing & Build | React Scripts 5.0.1, Testing Library |
+
+## 🏗️ 시스템 아키텍처
+
+```mermaid
+flowchart LR
+    User["사용자"] --> App["React 웹 애플리케이션\nReact Router"]
+
+    subgraph Browser["브라우저"]
+        App <--> Storage[("localStorage\n검색어 · 추천 결과 · 선택 코스 · 여행일 · QR 정보")]
+    end
+
+    App -->|"POST /api/query/\n여행 추천 요청"| API["백엔드 API 서버\nREACT_APP_API_URL"]
+    App -->|"GET /api/qr/\nQR 이미지 요청"| API
+    App -->|"POST /api/business/\n사업자 정보 등록"| API
+    App -->|"Maps SDK 동적 로드\nREACT_APP_NAVER_CLIENT_ID"| Naver["NAVER Maps JavaScript API"]
+
+    classDef client fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e
+    classDef storage fill:#fef3c7,stroke:#d97706,color:#78350f
+    classDef external fill:#dcfce7,stroke:#16a34a,color:#14532d
+    class App client
+    class Storage storage
+    class API,Naver external
 ```
-src/
-├── components/              # 재사용 가능한 컴포넌트
-│   ├── MainpageModal.js    # 메인페이지 모달
-│   └── MainpageModalStyle.js
-├── pages/                   # 페이지 컴포넌트
-│   ├── Mainpage.js         # 메인 페이지 (검색)
-│   ├── LoginPage.js        # 구글 소셜 로그인
-│   ├── LoadingPage.js      # AI 분석 로딩
-│   ├── PachinkoPage.js     # 파친코 스타일 선택
-│   ├── RoutePage.js        # 경로 및 상세 정보
-│   ├── PaymentPage.js      # 결제 처리
-│   ├── MyReservations.js   # 예약 관리
-│   ├── UserInfoPage.js     # 사용자 정보
-│   ├── AddStorePage.js     # 사업자 등록
-│   ├── NaverMapComponent.js # 지도 컴포넌트
-│   └── qrtest.js           # QR 코드 생성/표시
-├── styles/                  # 스타일 컴포넌트
-│   ├── GlobalStyle.js      # 전역 스타일
-│   ├── MainpageStyle.js    # 각 페이지별 스타일
-│   └── ...
-├── App.js                   # 메인 앱 컴포넌트
-└── index.js                # 진입점
+
+클라이언트는 화면 전환에 필요한 상태를 브라우저에 보관하고, 추천·QR·사업자 등록 요청만 `REACT_APP_API_URL`의 API 서버로 전송합니다. 지도 SDK는 네이버 지도 API에서 브라우저로 직접 불러옵니다.
+
+## 📁 프로젝트 구조
+
+```text
+client/
+├── public/                 # 정적 이미지와 HTML 템플릿
+├── src/
+│   ├── components/         # 재사용 UI 컴포넌트
+│   ├── pages/              # 화면별 페이지와 지도·QR 컴포넌트
+│   ├── styles/             # styled-components 스타일 정의
+│   ├── App.js              # 라우팅 구성
+│   └── index.js            # 애플리케이션 진입점
+├── package.json            # 의존성 및 실행 스크립트
+└── README.md
 ```
 
 ## 🚀 시작하기
